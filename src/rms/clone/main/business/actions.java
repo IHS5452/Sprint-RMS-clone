@@ -20,12 +20,50 @@ import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import rms.clone.main.UI.RMS_Clone_CSR;
+import static rms.clone.main.UI.RMS_Clone_CSR.alerts_table;
+import static rms.clone.main.UI.RMS_Clone_CSR.customer_line_table;
+import static rms.clone.main.UI.RMS_Clone_CSR.services_table;
+import static rms.clone.main.UI.RMS_Clone_CSR.notes_table;
 
 /**
  *
  * @author ianschrauth
  */
 public class actions {
+    
+    
+    
+    
+    
+    public static void clearCustomerFromRMS() {
+                    DefaultTableModel model_cx_lines = (DefaultTableModel) customer_line_table.getModel();
+        DefaultTableModel model_alert = (DefaultTableModel) alerts_table.getModel();
+        DefaultTableModel model_services = (DefaultTableModel) services_table.getModel();
+        DefaultTableModel model_notes = (DefaultTableModel) notes_table.getModel();
+        
+        
+        
+        model_cx_lines.setRowCount(0);
+        model_alert.setRowCount(0);
+        model_services.setRowCount(0);
+        model_notes.setRowCount(0);
+        
+        
+        // clear the saved cx var
+        
+        vars.selectedCx.clearAllFields();
+
+        
+        
+    }
+    
+    
+    
+    
+    
+    
     
 
       

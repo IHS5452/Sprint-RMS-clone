@@ -31,8 +31,8 @@ public class login extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel2 = new javax.swing.JLabel();
-        passwd_txt = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        passwd_txt = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -45,12 +45,6 @@ public class login extends javax.swing.JFrame {
         });
 
         jLabel2.setText("Password");
-
-        passwd_txt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                passwd_txtActionPerformed(evt);
-            }
-        });
 
         jButton1.setText("Login");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -65,13 +59,13 @@ public class login extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(105, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addGap(111, 111, 111))
             .addGroup(layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(passwd_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(passwd_txt)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -121,10 +115,6 @@ Component frame = null;
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void passwd_txtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwd_txtActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_passwd_txtActionPerformed
-
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
 
 
@@ -171,7 +161,7 @@ Component frame = null;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JTextField passwd_txt;
+    private javax.swing.JPasswordField passwd_txt;
     // End of variables declaration//GEN-END:variables
 
 
