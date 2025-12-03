@@ -28,10 +28,10 @@ When I was a cell phone sales represanative at Sprint, we used thier older-style
 
 <h2 id="author">👤 Author & Contact</h2>
 <p>
-  <strong>Name:</strong> Your Name<br>
-  <strong>Email:</strong> <a href="mailto:youremail@example.com">contact@ianschrauth.com</a><br>
-  <strong>Website:</strong> <a href="https://yourwebsite.com" target="_blank">www.ianschrauth.com</a><br>
-  <strong>GitHub:</strong> <a href="https://github.com/yourusername" target="_blank">@IHS5452</a>
+  <strong>Name:</strong> Ian Schrauth<br>
+  <strong>Email:</strong> <a href="mailto:contact@ianschrauth.com">contact@ianschrauth.com</a><br>
+  <strong>Website:</strong> <a href="https://ianschrauth.com" target="_blank">www.ianschrauth.com</a><br>
+  <strong>GitHub:</strong> <a href="https://github.com/IHS5452" target="_blank">@IHS5452</a>
 </p>
 
 <hr>
