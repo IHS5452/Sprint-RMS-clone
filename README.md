@@ -60,6 +60,5 @@ When I was a cell phone sales represanative at Sprint, we used thier older-style
 
 <h2 id="license">📜 License</h2>
 <p>
-  This project is licensed under the <strong>MIT License</strong> (or whichever license applies).  
-  See the <code>LICENSE</code> file for more information.
+  This project is licensed under the <strong>MIT License</strong>.
 </p>
