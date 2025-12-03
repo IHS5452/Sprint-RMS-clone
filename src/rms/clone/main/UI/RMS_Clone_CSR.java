@@ -1651,7 +1651,9 @@ public static Boolean isLoggedIn = false;
     }//GEN-LAST:event_search_bttnActionPerformed
 
     private void recycle_bttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recycle_bttnActionPerformed
-    
+
+        
+        new recycle_device().setVisible(true);
 
         // TODO add your handling code here:
     }//GEN-LAST:event_recycle_bttnActionPerformed
