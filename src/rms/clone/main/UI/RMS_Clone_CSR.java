@@ -120,6 +120,7 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
         add_note_bttn = new javax.swing.JButton();
         main_menu = new javax.swing.JTabbedPane();
         home_pannel = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
         consent_pannnel = new javax.swing.JPanel();
         services_pannel = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
@@ -538,15 +539,24 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        jLabel2.setText("Home");
+
         javax.swing.GroupLayout home_pannelLayout = new javax.swing.GroupLayout(home_pannel);
         home_pannel.setLayout(home_pannelLayout);
         home_pannelLayout.setHorizontalGroup(
             home_pannelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 925, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, home_pannelLayout.createSequentialGroup()
+                .addContainerGap(457, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(420, 420, 420))
         );
         home_pannelLayout.setVerticalGroup(
             home_pannelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 699, Short.MAX_VALUE)
+            .addGroup(home_pannelLayout.createSequentialGroup()
+                .addGap(52, 52, 52)
+                .addComponent(jLabel2)
+                .addContainerGap(624, Short.MAX_VALUE))
         );
 
         main_menu.addTab("Home", home_pannel);
@@ -563,6 +573,8 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
         );
 
         main_menu.addTab("Consent", consent_pannnel);
+
+        jPanel5.setBackground(new java.awt.Color(204, 204, 204));
 
         services_table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1801,7 +1813,9 @@ public static Boolean isLoggedIn = false;
                         
            setEnabledRecursive(jPanel8, false);
         setEnabledRecursive(jPanel9, false);
-        setEnabledRecursive(jPanel10, false);             
+        setEnabledRecursive(jPanel10, false); 
+                setEnabledRecursive(jPanel3, false);
+                setEnabledRecursive(jPanel5, false); 
          
 
             
@@ -2375,6 +2389,7 @@ String input = dl_exp_txt.getText().trim();
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
