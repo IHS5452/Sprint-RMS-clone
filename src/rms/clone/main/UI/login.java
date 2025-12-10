@@ -5,6 +5,8 @@
 package rms.clone.main.UI;
 
 import java.awt.Component;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import rms.clone.main.business.vars;
 
@@ -107,6 +109,15 @@ Component frame = null;
         } else  {
             vars.isLoggedIn = true;
             RMS_Clone_CSR.isLoggedIn = true;
+            vars.loggedInUID = PID;
+            Date currentDate = new Date();
+                  SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                  String formatedDate = dateFormat.format(currentDate);
+                  vars.timeLoggedIn = formatedDate;
+            
+            
+            
+            
             this.dispose();
             
         }

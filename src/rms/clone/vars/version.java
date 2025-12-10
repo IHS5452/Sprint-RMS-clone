@@ -18,6 +18,10 @@ public class version {
     public static String VERISON_BUILD_NUMBER = "202512-1111";
     public static Boolean IS_IN_BETA = true;
     public static int BETA_NUMBER = 1;
+    public static String DATE_OF_LAST_BUILD = "12/10/2025";
+    public static String DATABASE_INSTANCE = "production";
+    
+    
     
 
      

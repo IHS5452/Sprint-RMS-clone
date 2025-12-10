@@ -30,6 +30,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.sql.Date;
 import java.text.ParseException;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Random;
 import javax.swing.AbstractAction;
 import javax.swing.ActionMap;
@@ -42,6 +44,10 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 import rms.clone.main.business.credit;
+import rms.clone.vars.version;
+
+import java.text.SimpleDateFormat;
+
 
 /**
  *
@@ -257,6 +263,7 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -1594,6 +1601,15 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
         jMenuBar1.add(jMenu3);
 
         jMenu4.setText("Help");
+
+        jMenuItem3.setText("About");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem3);
+
         jMenuBar1.add(jMenu4);
 
         setJMenuBar(jMenuBar1);
@@ -1641,6 +1657,8 @@ public String acctType = "postpaid_p";
 
    Component frame = null;
    
+                               Map<String,String> infoForAbout = new LinkedHashMap<>();
+
    
    
 public static Boolean isLoggedIn = false;
@@ -2296,6 +2314,43 @@ String input = dl_exp_txt.getText().trim();
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton6ActionPerformed
 
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+
+        
+        
+
+        
+                              Map<String,String> devs = new LinkedHashMap<>();
+                             devs.put("Ian Schrauth", "contact@ianschrauth.com");
+
+                            infoForAbout.put("App Name", version.APPLICATION_NAME);
+                            infoForAbout.put("App Version", "V" + version.VERSION_NUMBER);
+                            infoForAbout.put("App Build Number", version.VERISON_BUILD_NUMBER);
+                            infoForAbout.put("Last Build Date", version.DATE_OF_LAST_BUILD);
+                            infoForAbout.put("Database Instance", version.DATABASE_INSTANCE);
+                            
+                            if (isLoggedIn) {
+                            infoForAbout.put("Loggged in EID", vars.loggedInUID);
+                            infoForAbout.put("Time Logged in", vars.timeLoggedIn);                
+                            }
+                
+                            
+                        aboutApp w = new aboutApp( null, "",
+                   "",    // (subtitle is represented inside info map above)
+                    "",
+                    version.IS_IN_BETA,
+                    version.BETA_NUMBER,
+                    devs,
+                    infoForAbout);
+                        w.setVisible(true);
+                            
+
+
+
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -2441,6 +2496,7 @@ String input = dl_exp_txt.getText().trim();
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;

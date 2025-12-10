@@ -14,6 +14,8 @@ public class vars {
     
     
     public static boolean isLoggedIn = false;
+    public static String loggedInUID = "";
+    public static String timeLoggedIn = ""; 
     public static Connection conn;
     public static String typeOfSelectedAccount = "";
     public static Cx selectedCx;
