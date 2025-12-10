@@ -31,8 +31,8 @@ public class starter {
 
             for (String arg : args) {
                 switch (arg) {
-                    case "--dev-db":
-                        System.out.println("Using the JPOSS Developer Database...");
+                    case "--dev":
+                        System.out.println("Using the Developer Database...");
                         db.DB_NAME = "rms_clone_dev";
                         version.DATABASE_INSTANCE = "development";
                         new RMS_Clone_CSR().setVisible(true);
@@ -40,8 +40,8 @@ public class starter {
                         
                          // Exit after opening login window
                     case "--version":
-                        // viewing the icon from a web page and from the file is broken. 
                         //Add all new developers to the map below
+                        // Also add all the items to list on the about page below as well. 
                         // Note, only put the first and last name, and the email. 
                               Map<String,String> devs = new LinkedHashMap<>();
                              devs.put("Ian Schrauth", "contact@ianschrauth.com");

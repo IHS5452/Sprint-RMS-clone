@@ -5,9 +5,16 @@
 package rms.clone.main.UI;
 
 import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.swing.AbstractAction;
+import javax.swing.ActionMap;
+import javax.swing.InputMap;
+import javax.swing.JComponent;
 import javax.swing.JOptionPane;
+import javax.swing.KeyStroke;
 import rms.clone.main.business.vars;
 
 /**
@@ -21,8 +28,40 @@ public class login extends javax.swing.JFrame {
      */
     public login() {
         initComponents();
+        myPostInit();
     }
 
+    
+    
+    
+    
+    private void myPostInit() {
+    // 1) Disable default TAB focus behavior for this field
+    passwd_txt.setFocusTraversalKeysEnabled(false);
+
+    // 2) Bind TAB to a custom action
+    InputMap im = passwd_txt.getInputMap(JComponent.WHEN_FOCUSED);
+    ActionMap am = passwd_txt.getActionMap();
+
+    im.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "enterPressed");
+
+    am.put("enterPressed", new AbstractAction() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            
+            System.out.println("ENTER pressed.");
+            loginInitiated();
+       
+
+            // 🔹 Then manually move focus to next field
+            passwd_txt.transferFocus();
+        }
+    });
+}
+    
+    
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -96,31 +135,7 @@ Component frame = null;
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-        String login_msg = rms.clone.main.business.actions.login(PID, passwd_txt.getText().toString());
-        
-        if (login_msg == classes.Strings.NOT_ACTIVE_IN_PAYROLL_CORP) {
-            JOptionPane.showMessageDialog(frame, login_msg);
-        } else  if (login_msg == classes.Strings.NOT_ACTIVE_IN_PAYROLL_FRAN) {
-            JOptionPane.showMessageDialog(frame, login_msg);
-        } else  if (login_msg == classes.Strings.NO_PID) {
-            JOptionPane.showMessageDialog(frame, login_msg);
-        } else  if (login_msg == classes.Strings.PASSWD_WRONG) {
-            JOptionPane.showMessageDialog(frame, login_msg);
-        } else  {
-            vars.isLoggedIn = true;
-            RMS_Clone_CSR.isLoggedIn = true;
-            vars.loggedInUID = PID;
-            Date currentDate = new Date();
-                  SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-                  String formatedDate = dateFormat.format(currentDate);
-                  vars.timeLoggedIn = formatedDate;
-            
-            
-            
-            
-            this.dispose();
-            
-        }
+       loginInitiated();
 
 
         // TODO add your handling code here:
@@ -174,6 +189,34 @@ Component frame = null;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPasswordField passwd_txt;
     // End of variables declaration//GEN-END:variables
+
+    private void loginInitiated() {
+ String login_msg = rms.clone.main.business.actions.login(PID, passwd_txt.getText().toString());
+        
+        if (login_msg == classes.Strings.NOT_ACTIVE_IN_PAYROLL_CORP) {
+            JOptionPane.showMessageDialog(frame, login_msg);
+        } else  if (login_msg == classes.Strings.NOT_ACTIVE_IN_PAYROLL_FRAN) {
+            JOptionPane.showMessageDialog(frame, login_msg);
+        } else  if (login_msg == classes.Strings.NO_PID) {
+            JOptionPane.showMessageDialog(frame, login_msg);
+        } else  if (login_msg == classes.Strings.PASSWD_WRONG) {
+            JOptionPane.showMessageDialog(frame, login_msg);
+        } else  {
+            vars.isLoggedIn = true;
+            RMS_Clone_CSR.isLoggedIn = true;
+            vars.loggedInUID = PID;
+            Date currentDate = new Date();
+                  SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                  String formatedDate = dateFormat.format(currentDate);
+                  vars.timeLoggedIn = formatedDate;
+            
+            
+            
+            
+            this.dispose();
+            
+        }    }
+
 
 
 }

@@ -76,8 +76,8 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
     am.put("tabPressed", new AbstractAction() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            // 🔹 Your custom code here
-            System.out.println("TAB pressed in pid_txt_main!");
+            
+            System.out.println("TAB pressed.");
 
                     pid_txt_main.setEnabled(false);
                     login.PID = pid_txt_main.getText().toString();
@@ -148,6 +148,17 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
+        notes_pannel = new javax.swing.JPanel();
+        jPanel6 = new javax.swing.JPanel();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        notes_table = new javax.swing.JTable();
+        jLabel48 = new javax.swing.JLabel();
+        pid_entered_by_txt = new javax.swing.JTextField();
+        jLabel49 = new javax.swing.JLabel();
+        entered_date_txt = new javax.swing.JTextField();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        note_full_txt = new javax.swing.JTextArea();
+        jLabel50 = new javax.swing.JLabel();
         customer_pannel = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         minit_txt = new javax.swing.JTextField();
@@ -245,17 +256,6 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
         jLabel39 = new javax.swing.JLabel();
         jButton15 = new javax.swing.JButton();
         jTextField30 = new javax.swing.JTextField();
-        notes_pannel = new javax.swing.JPanel();
-        jPanel6 = new javax.swing.JPanel();
-        jScrollPane7 = new javax.swing.JScrollPane();
-        notes_table = new javax.swing.JTable();
-        jLabel48 = new javax.swing.JLabel();
-        pid_entered_by_txt = new javax.swing.JTextField();
-        jLabel49 = new javax.swing.JLabel();
-        entered_date_txt = new javax.swing.JTextField();
-        jScrollPane8 = new javax.swing.JScrollPane();
-        note_full_txt = new javax.swing.JTextArea();
-        jLabel50 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -764,6 +764,110 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
         );
 
         main_menu.addTab("Services", services_pannel);
+
+        notes_table.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Note ID", "Note", "PID Entered", "Date"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        notes_table.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                notes_tableMouseClicked(evt);
+            }
+        });
+        jScrollPane7.setViewportView(notes_table);
+        if (notes_table.getColumnModel().getColumnCount() > 0) {
+            notes_table.getColumnModel().getColumn(0).setResizable(false);
+            notes_table.getColumnModel().getColumn(1).setResizable(false);
+            notes_table.getColumnModel().getColumn(2).setResizable(false);
+            notes_table.getColumnModel().getColumn(3).setResizable(false);
+        }
+
+        jLabel48.setText("PID Entered by");
+
+        jLabel49.setText("Entered Date");
+
+        note_full_txt.setColumns(20);
+        note_full_txt.setRows(5);
+        jScrollPane8.setViewportView(note_full_txt);
+
+        jLabel50.setText("Note");
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jLabel49)
+                        .addComponent(jLabel50))
+                    .addComponent(jLabel48, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(pid_entered_by_txt)
+                    .addComponent(entered_date_txt)
+                    .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(71, Short.MAX_VALUE))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 677, Short.MAX_VALUE)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel48)
+                    .addComponent(pid_entered_by_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel49)
+                    .addComponent(entered_date_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel50))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout notes_pannelLayout = new javax.swing.GroupLayout(notes_pannel);
+        notes_pannel.setLayout(notes_pannelLayout);
+        notes_pannelLayout.setHorizontalGroup(
+            notes_pannelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(notes_pannelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(66, Short.MAX_VALUE))
+        );
+        notes_pannelLayout.setVerticalGroup(
+            notes_pannelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, notes_pannelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16))
+        );
+
+        main_menu.addTab("Notes", notes_pannel);
 
         jPanel8.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -1468,110 +1572,6 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
         );
 
         main_menu.addTab("Sales", sales_pannnel);
-
-        notes_table.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Note ID", "Note", "PID Entered", "Date"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        notes_table.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                notes_tableMouseClicked(evt);
-            }
-        });
-        jScrollPane7.setViewportView(notes_table);
-        if (notes_table.getColumnModel().getColumnCount() > 0) {
-            notes_table.getColumnModel().getColumn(0).setResizable(false);
-            notes_table.getColumnModel().getColumn(1).setResizable(false);
-            notes_table.getColumnModel().getColumn(2).setResizable(false);
-            notes_table.getColumnModel().getColumn(3).setResizable(false);
-        }
-
-        jLabel48.setText("PID Entered by");
-
-        jLabel49.setText("Entered Date");
-
-        note_full_txt.setColumns(20);
-        note_full_txt.setRows(5);
-        jScrollPane8.setViewportView(note_full_txt);
-
-        jLabel50.setText("Note");
-
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jLabel49)
-                        .addComponent(jLabel50))
-                    .addComponent(jLabel48, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(pid_entered_by_txt)
-                    .addComponent(entered_date_txt)
-                    .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(71, Short.MAX_VALUE))
-        );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 677, Short.MAX_VALUE)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel48)
-                    .addComponent(pid_entered_by_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel49)
-                    .addComponent(entered_date_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel50))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout notes_pannelLayout = new javax.swing.GroupLayout(notes_pannel);
-        notes_pannel.setLayout(notes_pannelLayout);
-        notes_pannelLayout.setHorizontalGroup(
-            notes_pannelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(notes_pannelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(66, Short.MAX_VALUE))
-        );
-        notes_pannelLayout.setVerticalGroup(
-            notes_pannelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, notes_pannelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(16, 16, 16))
-        );
-
-        main_menu.addTab("Notes", notes_pannel);
 
         jMenu1.setText("File");
 
