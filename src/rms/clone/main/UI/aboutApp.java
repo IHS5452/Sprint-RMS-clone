@@ -271,7 +271,7 @@ public class aboutApp extends JDialog {
             footer.add(Box.createVerticalStrut(8));
         }
 
-        JLabel small = new JLabel("© All Rights Reserved.");
+        JLabel small = new JLabel("This project is licensed under the MIT License");
         small.setFont(small.getFont().deriveFont(Font.PLAIN, 11f));
         small.setForeground(new Color(0x666666));
         small.setAlignmentX(Component.CENTER_ALIGNMENT);

@@ -45,8 +45,12 @@ import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 import rms.clone.main.business.credit;
 import rms.clone.vars.version;
+import java.sql.*;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 
 /**
@@ -214,6 +218,7 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
         biz_type_dd = new javax.swing.JComboBox<>();
         jLabel51 = new javax.swing.JLabel();
         search_zip_code_bttn = new javax.swing.JButton();
+        postapid_acct_bttn = new javax.swing.JButton();
         jLabel35 = new javax.swing.JLabel();
         jPanel10 = new javax.swing.JPanel();
         jLabel28 = new javax.swing.JLabel();
@@ -229,6 +234,7 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
         downpayment_perc = new javax.swing.JTextField();
         downpayment_needed = new javax.swing.JTextField();
         jLabel54 = new javax.swing.JLabel();
+        recheck_credit_bttn = new javax.swing.JButton();
         jLabel36 = new javax.swing.JLabel();
         sales_pannnel = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
@@ -266,6 +272,7 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
         jMenuItem3 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);
@@ -554,7 +561,7 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
         home_pannelLayout.setHorizontalGroup(
             home_pannelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, home_pannelLayout.createSequentialGroup()
-                .addContainerGap(457, Short.MAX_VALUE)
+                .addContainerGap(463, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addGap(420, 420, 420))
         );
@@ -572,7 +579,7 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
         consent_pannnel.setLayout(consent_pannnelLayout);
         consent_pannnelLayout.setHorizontalGroup(
             consent_pannnelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 925, Short.MAX_VALUE)
+            .addGap(0, 931, Short.MAX_VALUE)
         );
         consent_pannnelLayout.setVerticalGroup(
             consent_pannnelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -753,7 +760,7 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
             .addGroup(services_pannelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(73, Short.MAX_VALUE))
+                .addContainerGap(79, Short.MAX_VALUE))
         );
         services_pannelLayout.setVerticalGroup(
             services_pannelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -857,7 +864,7 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
             .addGroup(notes_pannelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(66, Short.MAX_VALUE))
+                .addContainerGap(72, Short.MAX_VALUE))
         );
         notes_pannelLayout.setVerticalGroup(
             notes_pannelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1130,6 +1137,13 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
             }
         });
 
+        postapid_acct_bttn.setText("Attach to Postpaid Account");
+        postapid_acct_bttn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                postapid_acct_bttnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
@@ -1161,15 +1175,15 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel9Layout.createSequentialGroup()
-                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(business_acct_bttn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(employee_acct_bttn, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
-                                .addComponent(prepaid_acct_bttn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(business_acct_bttn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(employee_acct_bttn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
+                            .addComponent(prepaid_acct_bttn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanel9Layout.createSequentialGroup()
                                 .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(employer_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(employer_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(postapid_acct_bttn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel9Layout.createSequentialGroup()
@@ -1205,7 +1219,8 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel23)
-                            .addComponent(state_dd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(state_dd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(postapid_acct_bttn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel26)
@@ -1232,7 +1247,7 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
                         .addComponent(employee_acct_bttn, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(prepaid_acct_bttn, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addGap(50, 50, 50))
         );
 
         jLabel35.setText("Address Information");
@@ -1258,6 +1273,13 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
 
         jLabel54.setText("Downpayment Perc. ");
 
+        recheck_credit_bttn.setText("Re-check credit");
+        recheck_credit_bttn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                recheck_credit_bttnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
@@ -1271,19 +1293,21 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
                         .addComponent(ssn_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(check_credit_bttn, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(34, 34, 34)
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel10Layout.createSequentialGroup()
-                        .addComponent(jLabel32)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(dateDateChecked_txt))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel10Layout.createSequentialGroup()
-                        .addComponent(jLabel29)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(creditClass_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel10Layout.createSequentialGroup()
-                        .addComponent(jLabel31)
-                        .addGap(27, 27, 27)
-                        .addComponent(approvedLines_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(recheck_credit_bttn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel10Layout.createSequentialGroup()
+                            .addComponent(jLabel32)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(dateDateChecked_txt))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel10Layout.createSequentialGroup()
+                            .addComponent(jLabel29)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(creditClass_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel10Layout.createSequentialGroup()
+                            .addComponent(jLabel31)
+                            .addGap(27, 27, 27)
+                            .addComponent(approvedLines_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel53)
@@ -1313,9 +1337,6 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
                             .addComponent(jLabel28, javax.swing.GroupLayout.Alignment.TRAILING))))
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(check_credit_bttn))
-                    .addGroup(jPanel10Layout.createSequentialGroup()
                         .addGap(4, 4, 4)
                         .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel31)
@@ -1326,8 +1347,13 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel32)
-                            .addComponent(dateDateChecked_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(41, Short.MAX_VALUE))
+                            .addComponent(dateDateChecked_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(check_credit_bttn)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(recheck_credit_bttn)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jLabel36.setText("Customer's Credit");
@@ -1346,7 +1372,7 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
                         .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jLabel36))
-                .addContainerGap(93, Short.MAX_VALUE))
+                .addContainerGap(99, Short.MAX_VALUE))
         );
         customer_pannelLayout.setVerticalGroup(
             customer_pannelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1481,7 +1507,7 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 90, Short.MAX_VALUE))
+                                .addGap(0, 96, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -1558,7 +1584,7 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
             sales_pannnelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, sales_pannnelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 913, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 919, Short.MAX_VALUE)
                 .addContainerGap())
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -1621,12 +1647,13 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(main_menu, javax.swing.GroupLayout.PREFERRED_SIZE, 925, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(22, 22, 22))
+                        .addComponent(main_menu, javax.swing.GroupLayout.PREFERRED_SIZE, 931, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1696,9 +1723,10 @@ public static Boolean isLoggedIn = false;
 
         acctType = "employee";
         
-        business_acct_bttn.setEnabled(false);
+             business_acct_bttn.setEnabled(true);
             employee_acct_bttn.setEnabled(false);
             prepaid_acct_bttn.setEnabled(true);
+            postapid_acct_bttn.setEnabled(true);
 
             employee_type_dd.setEnabled(true);
             biz_type_dd.setEnabled(false);
@@ -1738,15 +1766,30 @@ public static Boolean isLoggedIn = false;
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void email_not_provided_cbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_email_not_provided_cbActionPerformed
+
+        if (email_not_provided_cb.isSelected()) {
+           email_txt.setEnabled(false);
+            
+        } else {
+                      email_txt.setEnabled(true);
+ 
+            
+            
+        }
+
+
+
         // TODO add your handling code here:
     }//GEN-LAST:event_email_not_provided_cbActionPerformed
 
     private void prepaid_acct_bttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prepaid_acct_bttnActionPerformed
         acctType = "prepaid";
         
-          business_acct_bttn.setEnabled(true);
+               business_acct_bttn.setEnabled(true);
             employee_acct_bttn.setEnabled(true);
             prepaid_acct_bttn.setEnabled(false);
+            postapid_acct_bttn.setEnabled(true);
+            
             
             employee_type_dd.setEnabled(false);
             biz_type_dd.setEnabled(false);
@@ -1773,7 +1816,7 @@ public static Boolean isLoggedIn = false;
         
         
         
-         main_menu.setSelectedIndex(3);
+         main_menu.setSelectedIndex(4);
         //set the tabbed pane to be the 
 
 
@@ -1972,6 +2015,48 @@ new note(al.getAlertDesc(), al.getAlertId(), al.getAlertTitle());
             try {
                 SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
                 
+                boolean isInSystem = checkForCreditInSystem(ssn_txt.getText().toString());
+                
+                
+                if (isInSystem) {
+                    
+                                String SQL_insystem = "Select * from customer_info where ssn = ?";
+
+                    
+                    Statement stmt = rms.clone.business.database.actions.getStatement();
+                    
+                    
+                    ResultSet rs = stmt.executeQuery(SQL_insystem);
+                    
+                    
+                    while (rs.next()) {
+                        
+                               creditClass_txt.setText(rs.getString("creditClass"));
+                        approvedLines_txt.setText(rs.getString("approvedLines"));
+                        dateDateChecked_txt.setText(rs.getDate("lastDateChecked").toString());
+                        downpayment_perc.setText(rs.getString("downpay_perc"));
+                        downpayment_needed.setText(rs.getString("downpayment_needed"));
+                        
+                        
+                        
+                    }
+                    
+                    
+                    
+                    if (isDateInCurrentYear(dateDateChecked_txt.getText().toString())) {
+                        // give the option to run the credit again.
+                        // show a message to the user saying the option is there for them if the cx chooses.
+                        recheck_credit_bttn.setEnabled(true);
+                    }
+                    
+                    
+                    
+                    
+                    
+                    
+                }
+                
+                
                 
                 // if this is in a production enviroment, put an offical credit checking system in here
                 // Since this is only a demo, we will simulate a credit score.
@@ -2034,8 +2119,8 @@ String SQL =
     "streetNumber, streetName, addressLine2, city, state, zip, " +         // 16-21
     "employer, isNvp, assignToBusinessAccount, attachToHierarchy, " +      // 22-25
     "accountType, creditSsn, creditClass, approvedLines, lastDateChecked, "+// 26-30
-    "typeOfAccount, groupId, account_number" +                             // 31-33
-    ") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+    "typeOfAccount, groupId, account_number, downpay_perc, downpayment_needed" +                             // 31-33
+    ") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
                 
                 PreparedStatement ps = vars.conn.prepareStatement(SQL);
 
@@ -2130,6 +2215,8 @@ ps.setString(28, String.valueOf(creditClass));
 
 // 29: approvedLines
 ps.setInt(29, Integer.parseInt(approvedLines_txt.getText()));
+ps.setInt(30, Integer.parseInt(downpayment_perc.getText().toString()));
+ps.setBoolean(31, Boolean.valueOf(downpayment_needed.getText().toString()));
 
 // 30: lastDateChecked (datetime, now)
 ps.setTimestamp(30, new java.sql.Timestamp(System.currentTimeMillis()));
@@ -2170,9 +2257,10 @@ ps.close();
     private void business_acct_bttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_business_acct_bttnActionPerformed
         
         acctType = "postpaid_b";
-            business_acct_bttn.setEnabled(false);
+              business_acct_bttn.setEnabled(false);
             employee_acct_bttn.setEnabled(true);
             prepaid_acct_bttn.setEnabled(true);
+            postapid_acct_bttn.setEnabled(true);
             
             employee_type_dd.setEnabled(false);
             biz_type_dd.setEnabled(true);
@@ -2351,6 +2439,29 @@ String input = dl_exp_txt.getText().trim();
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
+    private void postapid_acct_bttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_postapid_acct_bttnActionPerformed
+       acctType = "postapid_p";
+        
+          business_acct_bttn.setEnabled(true);
+            employee_acct_bttn.setEnabled(true);
+            prepaid_acct_bttn.setEnabled(true);
+            postapid_acct_bttn.setEnabled(false);
+            
+            employee_type_dd.setEnabled(false);
+            biz_type_dd.setEnabled(false);
+
+
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_postapid_acct_bttnActionPerformed
+
+    private void recheck_credit_bttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recheck_credit_bttnActionPerformed
+        
+
+
+        // TODO: recheck credit code
+    }//GEN-LAST:event_recheck_credit_bttnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -2528,15 +2639,17 @@ String input = dl_exp_txt.getText().trim();
     private javax.swing.JTextField minit_txt;
     public static javax.swing.JButton new_bttn;
     private javax.swing.JTextArea note_full_txt;
-    private javax.swing.JTextArea note_txt;
+    public static javax.swing.JTextArea note_txt;
     private javax.swing.JPanel notes_pannel;
     public static javax.swing.JTable notes_table;
     public static javax.swing.JButton nss_token_bttn;
     private javax.swing.JTextField orderNumber_txt;
     private javax.swing.JTextField pid_entered_by_txt;
     public static javax.swing.JTextField pid_txt_main;
+    private javax.swing.JButton postapid_acct_bttn;
     private javax.swing.JComboBox<String> prefix_dd;
     private javax.swing.JButton prepaid_acct_bttn;
+    private javax.swing.JButton recheck_credit_bttn;
     public static javax.swing.JButton recycle_bttn;
     public static javax.swing.JButton reset_bttn;
     public static javax.swing.JButton sales_bttn;
@@ -2620,6 +2733,7 @@ public static void checkIfLoggedIn() {
         reset_bttn.setEnabled(false);
         pid_txt_main.setEditable(true);
         add_note_bttn.setEnabled(false);
+        note_txt.setEditable(false);
    
     } else {
                 pid_txt_main.setEditable(false);
@@ -2632,6 +2746,7 @@ public static void checkIfLoggedIn() {
         nss_token_bttn.setEnabled(true);
         tender_bttn.setEnabled(true);
                 reset_bttn.setEnabled(true);
+                note_txt.setEditable(true);
 
 
     }
@@ -3051,6 +3166,48 @@ public static String generateConfNumber(String transactionType) {
             }
         }
     }
+
+    private boolean checkForCreditInSystem(String ssn) {
+        try {
+            String SQL = "Select * from customer_info where ssn = ?";
+            
+            PreparedStatement ps = vars.conn.prepareStatement(SQL);            
+            ps.setString(1, ssn);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                
+                return true;
+                
+                
+            } else {
+               return false;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(RMS_Clone_CSR.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+        
+
+
+
+
+
+    }
+
+public boolean isDateInCurrentYear(String dateString) {
+    try {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDate inputDate = LocalDate.parse(dateString, formatter);
+
+        int currentYear = LocalDate.now().getYear();
+        return inputDate.getYear() == currentYear;
+
+    } catch (DateTimeParseException e) {
+        return false; // invalid date format or parse error
+    }
 }
+
+}
+
 
 

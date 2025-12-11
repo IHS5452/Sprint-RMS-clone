@@ -4,7 +4,7 @@
  */
 package rms.clone.business.database;
 
-import java.sql.Connection;
+import java.sql.*;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import rms.clone.vars.*;
@@ -21,5 +21,13 @@ public class actions {
         
         return DriverManager.getConnection(db.DB_URL + db.DB_NAME, db.DB_USER, db.DB_PASSWORD);
     }
+    
+    
+     public static Statement getStatement() throws SQLException {
+        
+        return getConnection().createStatement();
+    }
+    
+    
 }
 

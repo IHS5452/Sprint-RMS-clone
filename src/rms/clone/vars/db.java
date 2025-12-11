@@ -12,7 +12,7 @@ public class db {
        public static final String DB_URL = "jdbc:mysql://localhost:3306/";
     public static String DB_NAME = "rms_clone";
     public static final String DB_USER = "root";
-    public static final String DB_PASSWORD = "Polpper@1";
+    public static final String DB_PASSWORD = "passwd123";
  
    public static final String CLASS_FILE = "com.mysql.cj.jdbc.Driver";
 }

@@ -57,7 +57,7 @@ public class recycle_device extends javax.swing.JFrame {
         condition_txt1 = new javax.swing.JTextField();
         type_of_phone_dd = new javax.swing.JComboBox<>();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("IMEI");
 
