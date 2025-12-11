@@ -36,14 +36,9 @@ When I was a cell phone sales represanative at Sprint, we used thier older-style
 
 <hr>
 
-<h2 id="known-issues">⚠️ Known Issues and "Heads ups"</h2>
+<h2 id="known-issues">⚠️ Heads ups</h2>
 <ul>
-  <li>Issue 1: Many of the main features are not complete, as this is a work in progress.</li>
-  <li>Issue 2: When Reseting the program to close out of a profile, some fields are still populated, if a service or note is already clicked on.</li>
-<hr>
-  
-  <li>Heads up 1: When Registering a new cusotmer, some of the credit-related JTextFields are not filled in.</li>
-  <li>Heads Up 2:Right now, checking a cusomter's credit results in the program generating a random credit score. This is intentional.</li>
+  <li>Right now, checking a cusomter's credit results in the program generating a random credit score. This is intentional.</li>
 </ul>
 
 <hr>
