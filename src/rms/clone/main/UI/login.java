@@ -209,7 +209,7 @@ Component frame = null;
                   SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
                   String formatedDate = dateFormat.format(currentDate);
                   vars.timeLoggedIn = formatedDate;
-            
+                  RMS_Clone_CSR.getTheActiveNews();
             
             
             

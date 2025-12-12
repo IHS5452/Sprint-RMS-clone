@@ -130,7 +130,9 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
         add_note_bttn = new javax.swing.JButton();
         main_menu = new javax.swing.JTabbedPane();
         home_pannel = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        news_title = new javax.swing.JLabel();
+        jScrollPane9 = new javax.swing.JScrollPane();
+        news_content = new javax.swing.JTextArea();
         consent_pannnel = new javax.swing.JPanel();
         services_pannel = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
@@ -254,11 +256,11 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
         jLabel38 = new javax.swing.JLabel();
         jButton12 = new javax.swing.JButton();
         jButton13 = new javax.swing.JButton();
-        jTextField29 = new javax.swing.JTextField();
-        jTextField28 = new javax.swing.JTextField();
-        jTextField27 = new javax.swing.JTextField();
-        jTextField26 = new javax.swing.JTextField();
-        jTextField25 = new javax.swing.JTextField();
+        cx_zip = new javax.swing.JTextField();
+        cx_state = new javax.swing.JTextField();
+        cx_city = new javax.swing.JTextField();
+        cx_address_2 = new javax.swing.JTextField();
+        cx_address_1 = new javax.swing.JTextField();
         jLabel39 = new javax.swing.JLabel();
         jButton15 = new javax.swing.JButton();
         jTextField30 = new javax.swing.JTextField();
@@ -553,24 +555,34 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        jLabel2.setText("Home");
+        news_title.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        news_title.setText("Please login to see the news");
+
+        news_content.setColumns(20);
+        news_content.setRows(5);
+        jScrollPane9.setViewportView(news_content);
 
         javax.swing.GroupLayout home_pannelLayout = new javax.swing.GroupLayout(home_pannel);
         home_pannel.setLayout(home_pannelLayout);
         home_pannelLayout.setHorizontalGroup(
             home_pannelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, home_pannelLayout.createSequentialGroup()
-                .addContainerGap(463, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addGap(420, 420, 420))
+            .addGroup(home_pannelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(home_pannelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 913, Short.MAX_VALUE)
+                    .addGroup(home_pannelLayout.createSequentialGroup()
+                        .addComponent(news_title)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         home_pannelLayout.setVerticalGroup(
             home_pannelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(home_pannelLayout.createSequentialGroup()
                 .addGap(52, 52, 52)
-                .addComponent(jLabel2)
-                .addContainerGap(624, Short.MAX_VALUE))
+                .addComponent(news_title)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 498, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(120, Short.MAX_VALUE))
         );
 
         main_menu.addTab("Home", home_pannel);
@@ -579,7 +591,7 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
         consent_pannnel.setLayout(consent_pannnelLayout);
         consent_pannnelLayout.setHorizontalGroup(
             consent_pannnelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 931, Short.MAX_VALUE)
+            .addGap(0, 925, Short.MAX_VALUE)
         );
         consent_pannnelLayout.setVerticalGroup(
             consent_pannnelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -760,7 +772,7 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
             .addGroup(services_pannelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(79, Short.MAX_VALUE))
+                .addContainerGap(73, Short.MAX_VALUE))
         );
         services_pannelLayout.setVerticalGroup(
             services_pannelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -864,7 +876,7 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
             .addGroup(notes_pannelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(72, Short.MAX_VALUE))
+                .addContainerGap(66, Short.MAX_VALUE))
         );
         notes_pannelLayout.setVerticalGroup(
             notes_pannelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1217,10 +1229,11 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
                             .addComponent(jLabel25)
                             .addComponent(city_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel23)
-                            .addComponent(state_dd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(postapid_acct_bttn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(postapid_acct_bttn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel23)
+                                .addComponent(state_dd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel26)
@@ -1295,19 +1308,18 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
                 .addGap(34, 34, 34)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(recheck_credit_bttn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel10Layout.createSequentialGroup()
-                            .addComponent(jLabel32)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(dateDateChecked_txt))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel10Layout.createSequentialGroup()
-                            .addComponent(jLabel29)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(creditClass_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel10Layout.createSequentialGroup()
-                            .addComponent(jLabel31)
-                            .addGap(27, 27, 27)
-                            .addComponent(approvedLines_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addComponent(jLabel32)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(dateDateChecked_txt))
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addComponent(jLabel29)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(creditClass_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addComponent(jLabel31)
+                        .addGap(27, 27, 27)
+                        .addComponent(approvedLines_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel53)
@@ -1372,7 +1384,7 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
                         .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jLabel36))
-                .addContainerGap(99, Short.MAX_VALUE))
+                .addContainerGap(93, Short.MAX_VALUE))
         );
         customer_pannelLayout.setVerticalGroup(
             customer_pannelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1449,15 +1461,25 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
 
         jButton13.setText("EasyPay Accsesories");
 
-        jTextField29.setEditable(false);
+        cx_zip.setEditable(false);
+        cx_zip.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cx_zipActionPerformed(evt);
+            }
+        });
 
-        jTextField28.setEditable(false);
+        cx_state.setEditable(false);
 
-        jTextField27.setEditable(false);
+        cx_city.setEditable(false);
+        cx_city.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cx_cityActionPerformed(evt);
+            }
+        });
 
-        jTextField26.setEditable(false);
+        cx_address_2.setEditable(false);
 
-        jTextField25.setEditable(false);
+        cx_address_1.setEditable(false);
 
         jLabel39.setText("Customer");
 
@@ -1507,7 +1529,7 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 96, Short.MAX_VALUE))
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -1515,14 +1537,14 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField28, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField27, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField26, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField29, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(cx_state, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cx_city, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cx_address_2, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cx_zip, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jTextField30))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                .addComponent(jTextField25, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cx_address_1, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton15)))
                         .addGap(14, 14, 14))))
@@ -1551,20 +1573,20 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
                             .addComponent(jTextField20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cx_address_1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton12)
                     .addComponent(jButton15))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField26, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cx_address_2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField27, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cx_city, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jTextField28, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cx_state, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField29, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cx_zip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextField30, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton13)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
@@ -1584,7 +1606,7 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
             sales_pannnelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, sales_pannnelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 919, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 913, Short.MAX_VALUE)
                 .addContainerGap())
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -1647,27 +1669,26 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(main_menu, javax.swing.GroupLayout.PREFERRED_SIZE, 931, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(main_menu)))
+                .addGap(22, 22, 22))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(main_menu))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGap(0, 11, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(main_menu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
 
         main_menu.getAccessibleContext().setAccessibleName("Sales\nCustomer\nConsent\nServices\n");
@@ -1880,7 +1901,7 @@ public static Boolean isLoggedIn = false;
                 setEnabledRecursive(jPanel3, false);
                 setEnabledRecursive(jPanel5, false); 
          
-
+               
             
             
             // TODO add your handling code here:
@@ -2462,6 +2483,14 @@ String input = dl_exp_txt.getText().trim();
         // TODO: recheck credit code
     }//GEN-LAST:event_recheck_credit_bttnActionPerformed
 
+    private void cx_cityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cx_cityActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cx_cityActionPerformed
+
+    private void cx_zipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cx_zipActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cx_zipActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -2520,6 +2549,11 @@ String input = dl_exp_txt.getText().trim();
     private javax.swing.JTextField creditClass_txt;
     public static javax.swing.JTable customer_line_table;
     private javax.swing.JPanel customer_pannel;
+    private static javax.swing.JTextField cx_address_1;
+    private static javax.swing.JTextField cx_address_2;
+    private static javax.swing.JTextField cx_city;
+    private static javax.swing.JTextField cx_state;
+    private static javax.swing.JTextField cx_zip;
     private javax.swing.JTextField dateDateChecked_txt;
     public static javax.swing.JButton discounts_bttn;
     private javax.swing.JTextField dl_exp_txt;
@@ -2557,7 +2591,6 @@ String input = dl_exp_txt.getText().trim();
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
@@ -2624,13 +2657,9 @@ String input = dl_exp_txt.getText().trim();
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
+    private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTable jTable3;
     private javax.swing.JTextField jTextField20;
-    private javax.swing.JTextField jTextField25;
-    private javax.swing.JTextField jTextField26;
-    private javax.swing.JTextField jTextField27;
-    private javax.swing.JTextField jTextField28;
-    private javax.swing.JTextField jTextField29;
     private javax.swing.JTextField jTextField30;
     private javax.swing.JTextField jTextField31;
     private javax.swing.JTextField jTextField32;
@@ -2638,6 +2667,8 @@ String input = dl_exp_txt.getText().trim();
     private javax.swing.JTabbedPane main_menu;
     private javax.swing.JTextField minit_txt;
     public static javax.swing.JButton new_bttn;
+    private static javax.swing.JTextArea news_content;
+    private static javax.swing.JLabel news_title;
     private javax.swing.JTextArea note_full_txt;
     public static javax.swing.JTextArea note_txt;
     private javax.swing.JPanel notes_pannel;
@@ -2752,6 +2783,17 @@ public static void checkIfLoggedIn() {
     }
     
     
+    
+    
+}
+
+
+public static void fillInCXInfoInSalesTab() {
+    cx_address_1.setText(vars.selectedCx.getStreetNumber() + " " + vars.selectedCx.getStreetName());
+    cx_address_2.setText(vars.selectedCx.getAddressLine2());
+    cx_city.setText(vars.selectedCx.getCity());
+    cx_state.setText(vars.selectedCx.getState());
+    cx_zip.setText(vars.selectedCx.getZip());
     
     
 }
@@ -3152,7 +3194,7 @@ public static String generateConfNumber(String transactionType) {
 
 }
 
-   private static void setEnabledRecursive(Container container, boolean enabled) {
+   public static void setEnabledRecursive(Container container, boolean enabled) {
         for (Component c : container.getComponents()) {
 
             // Text fields and combo boxes are controlled by the flag
@@ -3194,7 +3236,7 @@ public static String generateConfNumber(String transactionType) {
 
     }
 
-public boolean isDateInCurrentYear(String dateString) {
+public  boolean isDateInCurrentYear(String dateString) {
     try {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDate inputDate = LocalDate.parse(dateString, formatter);
@@ -3206,6 +3248,28 @@ public boolean isDateInCurrentYear(String dateString) {
         return false; // invalid date format or parse error
     }
 }
+
+    public static void getTheActiveNews() {
+        try {
+            String SQL = "SELECT * FROM homepage_news where is_active=true;";
+            
+            
+            Statement stmt = rms.clone.business.database.actions.getStatement();
+            ResultSet rs = stmt.executeQuery(SQL);
+            
+            while (rs.next()) {
+                news_title.setText(rs.getString("title"));
+                news_content.setText(rs.getString("content"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(RMS_Clone_CSR.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+
+
+
+
+    }
 
 }
 
