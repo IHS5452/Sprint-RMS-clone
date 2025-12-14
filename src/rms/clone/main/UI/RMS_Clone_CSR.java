@@ -2013,6 +2013,7 @@ new note(al.getAlertDesc(), al.getAlertId(), al.getAlertTitle());
         
         
         
+        
         //disable  the customer field 
              setEnabledRecursive(jPanel8, false);
         setEnabledRecursive(jPanel9, false);
@@ -2561,14 +2562,14 @@ String input = dl_exp_txt.getText().trim();
     private javax.swing.JTextField downpayment_needed;
     private javax.swing.JTextField downpayment_perc;
     private javax.swing.JTextField driver_licenses_num_txt;
-    private javax.swing.JTextField effective_date_txt;
+    public static javax.swing.JTextField effective_date_txt;
     private javax.swing.JCheckBox email_not_provided_cb;
     private javax.swing.JTextField email_txt;
     private javax.swing.JButton employee_acct_bttn;
     private javax.swing.JComboBox<String> employee_type_dd;
     private javax.swing.JTextField employer_txt;
-    private javax.swing.JTextField entered_date_txt;
-    private javax.swing.JTextField falloff_date_txt;
+    public static javax.swing.JTextField entered_date_txt;
+    public static javax.swing.JTextField falloff_date_txt;
     public static javax.swing.JButton find_item_bttn;
     private javax.swing.JTextField fname_txt;
     private javax.swing.JComboBox<String> gender_dd;
@@ -2669,13 +2670,13 @@ String input = dl_exp_txt.getText().trim();
     public static javax.swing.JButton new_bttn;
     private static javax.swing.JTextArea news_content;
     private static javax.swing.JLabel news_title;
-    private javax.swing.JTextArea note_full_txt;
+    public static javax.swing.JTextArea note_full_txt;
     public static javax.swing.JTextArea note_txt;
     private javax.swing.JPanel notes_pannel;
     public static javax.swing.JTable notes_table;
     public static javax.swing.JButton nss_token_bttn;
     private javax.swing.JTextField orderNumber_txt;
-    private javax.swing.JTextField pid_entered_by_txt;
+    public static javax.swing.JTextField pid_entered_by_txt;
     public static javax.swing.JTextField pid_txt_main;
     private javax.swing.JButton postapid_acct_bttn;
     private javax.swing.JComboBox<String> prefix_dd;
@@ -2687,9 +2688,9 @@ String input = dl_exp_txt.getText().trim();
     private javax.swing.JPanel sales_pannnel;
     public static javax.swing.JButton search_bttn;
     private javax.swing.JButton search_zip_code_bttn;
-    private javax.swing.JTextArea service_desc_txt;
-    private javax.swing.JTextField service_id_txt;
-    private javax.swing.JTextField service_name_txt;
+    public static javax.swing.JTextArea service_desc_txt;
+    public static javax.swing.JTextField service_id_txt;
+    public static javax.swing.JTextField service_name_txt;
     private javax.swing.JPanel services_pannel;
     public static javax.swing.JTable services_table;
     private javax.swing.JTextField ssn_txt;

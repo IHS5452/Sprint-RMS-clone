@@ -51,6 +51,22 @@ public class actions {
         model_notes.setRowCount(0);
         
         
+        
+        //clear notes fields
+        
+      RMS_Clone_CSR.pid_entered_by_txt.setText("");
+      RMS_Clone_CSR.entered_date_txt.setText("");
+      RMS_Clone_CSR.note_full_txt.setText("");
+      
+      
+      //clear services fields
+      RMS_Clone_CSR.effective_date_txt.setText("");
+      RMS_Clone_CSR.falloff_date_txt.setText("");
+      RMS_Clone_CSR.service_desc_txt.setText("");
+      RMS_Clone_CSR.service_id_txt.setText("");
+      RMS_Clone_CSR.service_name_txt.setText("");
+        
+        
         // clear the saved cx var
         
         vars.selectedCx.clearAllFields();
@@ -256,10 +272,11 @@ public static List<Map.Entry<phoneNumbers, Cx>> searchCustomer(
             "    cp.forward_calls_number, cp.assigned_service_ids_csv, cp.is_active " +
             "FROM phone_numbers AS cp " +
             "JOIN customer_info AS ci " +
-            "  ON cp.account_number = ci.account_number " +
-            // also match where the phone is one of the contact phones (extra safety)
-            "   OR cp.phoneNumber IN (ci.contactPhone1, ci.contactPhone2, ci.contactPhone3) " +
-            "WHERE cp.phoneNumber = ?;";
+            "  ON cp.account_number = ci.account_number;";
+//                    +
+//            // also match where the phone is one of the contact phones (extra safety)
+//            "   OR cp.phoneNumber IN (ci.contactPhone1, ci.contactPhone2, ci.contactPhone3) " +
+//            "WHERE cp.phoneNumber = ?;";
 
             ps = vars.conn.prepareStatement(SQL);
             ps.setString(1, phoneNumber);

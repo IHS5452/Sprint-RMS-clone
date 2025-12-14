@@ -13,19 +13,6 @@
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-SET @MYSQLDUMP_TEMP_LOG_BIN = @@SESSION.SQL_LOG_BIN;
-SET @@SESSION.SQL_LOG_BIN= 0;
-
---
--- GTID state at the beginning of the backup 
---
-
-SET @@GLOBAL.GTID_PURGED=/*!80000 '+'*/ 'e936b2ec-d69a-11f0-ad36-7944e8bf04d5:1-78';
-
---
--- Table structure for table `account_notes`
---
 
 DROP TABLE IF EXISTS `account_notes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -71,7 +58,7 @@ CREATE TABLE `company_logins` (
   `is_leadership` tinyint(1) NOT NULL DEFAULT '0',
   `can_access_RMS_lite` tinyint(1) NOT NULL,
   `is_franchise_employee` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+);
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -412,7 +399,7 @@ CREATE TABLE `recycled_devices_table` (
   `status_desc` varchar(200) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `trade_in_date` datetime DEFAULT NULL,
   PRIMARY KEY (`rid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+);
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -533,15 +520,3 @@ LOCK TABLES `user_info` WRITE;
 INSERT INTO `user_info` VALUES (1,NULL,'John','A.','Doe','','john.doe@example.com',0,'123-45-6789','1985-06-15','D1234567','CA','2028-04-15','555-1234',NULL,NULL,'123','Main St',NULL,'Los Angeles','CA','90001','TechCorp',1,0,'123-45-6789','A',3,'2025-03-20','Personal','GROUP123'),(2,NULL,'Jane','B.','Smith','','jane.smith@example.com',0,'987-65-4321','1992-08-22','S9876543','TX','2030-09-30','555-5678',NULL,NULL,'456','Elm St','Apt 2B','Dallas','TX','75201','FinanceCo',0,1,'987-65-4321','B',2,'2025-03-18','Business','GROUP123'),(3,'Dr.','Emily','C.','Johnson','PhD','emily.johnson@example.com',0,'654-32-1987','1979-12-05','J6543210','NY','2029-06-25','555-9876',NULL,NULL,'789','Broadway','Suite 101','New York','NY','10001','EduInstitute',0,0,'654-32-1987','C',1,'2025-03-15','Prepaid','GROUP456');
 /*!40000 ALTER TABLE `user_info` ENABLE KEYS */;
 UNLOCK TABLES;
-SET @@SESSION.SQL_LOG_BIN = @MYSQLDUMP_TEMP_LOG_BIN;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
-
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2025-12-14 13:01:56
