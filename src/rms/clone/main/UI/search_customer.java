@@ -316,6 +316,8 @@ for (Map.Entry<phoneNumbers, Cx> entry : cxList) {
         RMS_Clone_CSR.getServices(vars.selectedCx.getContactPhone1());
         RMS_Clone_CSR.fillInCXInfoInSalesTab();
         RMS_Clone_CSR.add_note_bttn.setEnabled(true);
+                        RMS_Clone_CSR.setEnabledRecursive(jPanel3, false);
+
         
         
         
