@@ -12,9 +12,12 @@ import java.util.Date;
  *
  * @author ischrauth
  */
+
 public class Cx {
+
     private int id;
-     private String prefix;
+
+    private String prefix;
     private String firstName;
     private String middleName;
     private String lastName;
@@ -23,67 +26,42 @@ public class Cx {
     private boolean emailNotProvided;
     private String ssn;
     private Date birthDate;
+
     private String dlNumber;
     private String dlState;
     private Date dlExp;
+
     private String contactPhone1;
     private String contactPhone2;
     private String contactPhone3;
+
     private String streetNumber;
     private String streetName;
     private String addressLine2;
     private String city;
     private String state;
     private String zip;
+
     private String employer;
     private boolean isNvp;
     private boolean assignToBusinessAccount;
     private boolean attachToHierarchy;
+
     private String accountType;
     private String creditSsn;
     private String creditClass;
     private int approvedLines;
     private Date lastDateChecked;
-    private String typeOfAccount; // ENUM type as String
-    private String groupId;
+
+    private String typeOfAccount;
+    private String accountNumber;
+    private Integer downpayPerc;
+    private Boolean downpaymentNeeded;
 
     public Cx() {
     }
 
-    public Cx(String prefix, String firstName, String middleName, String lastName, String suffix, String email, boolean emailNotProvided, String ssn, Date birthDate, String dlNumber, String dlState, Date dlExp, String contactPhone1, String contactPhone2, String contactPhone3, String streetNumber, String streetName, String addressLine2, String city, String state, String zip, String employer, boolean isNvp, boolean assignToBusinessAccount, boolean attachToHierarchy, String accountType, String creditSsn, String creditClass, int approvedLines, Date lastDateChecked, String typeOfAccount, String groupId) {
-        this.prefix = prefix;
-        this.firstName = firstName;
-        this.middleName = middleName;
-        this.lastName = lastName;
-        this.suffix = suffix;
-        this.email = email;
-        this.emailNotProvided = emailNotProvided;
-        this.ssn = ssn;
-        this.birthDate = birthDate;
-        this.dlNumber = dlNumber;
-        this.dlState = dlState;
-        this.dlExp = dlExp;
-        this.contactPhone1 = contactPhone1;
-        this.contactPhone2 = contactPhone2;
-        this.contactPhone3 = contactPhone3;
-        this.streetNumber = streetNumber;
-        this.streetName = streetName;
-        this.addressLine2 = addressLine2;
-        this.city = city;
-        this.state = state;
-        this.zip = zip;
-        this.employer = employer;
-        this.isNvp = isNvp;
-        this.assignToBusinessAccount = assignToBusinessAccount;
-        this.attachToHierarchy = attachToHierarchy;
-        this.accountType = accountType;
-        this.creditSsn = creditSsn;
-        this.creditClass = creditClass;
-        this.approvedLines = approvedLines;
-        this.lastDateChecked = lastDateChecked;
-        this.typeOfAccount = typeOfAccount;
-        this.groupId = groupId;
-    }
+    /* ================= GETTERS / SETTERS ================= */
 
     public int getId() {
         return id;
@@ -93,12 +71,6 @@ public class Cx {
         this.id = id;
     }
 
-    
-    
-    
-    
-    
-    
     public String getPrefix() {
         return prefix;
     }
@@ -275,12 +247,12 @@ public class Cx {
         this.employer = employer;
     }
 
-    public boolean isIsNvp() {
+    public boolean isNvp() {
         return isNvp;
     }
 
-    public void setIsNvp(boolean isNvp) {
-        this.isNvp = isNvp;
+    public void setNvp(boolean nvp) {
+        isNvp = nvp;
     }
 
     public boolean isAssignToBusinessAccount() {
@@ -347,19 +319,35 @@ public class Cx {
         this.typeOfAccount = typeOfAccount;
     }
 
-    public String getGroupId() {
-        return groupId;
+    public String getAccountNumber() {
+        return accountNumber;
     }
 
-    public void setGroupId(String groupId) {
-        this.groupId = groupId;
+    public void setAccountNumber(String accountNumber) {
+        this.accountNumber = accountNumber;
     }
-    
 
+    public Integer getDownpayPerc() {
+        return downpayPerc;
+    }
+
+    public void setDownpayPerc(Integer downpayPerc) {
+        this.downpayPerc = downpayPerc;
+    }
+
+    public Boolean getDownpaymentNeeded() {
+        return downpaymentNeeded;
+    }
+
+    public void setDownpaymentNeeded(Boolean downpaymentNeeded) {
+        this.downpaymentNeeded = downpaymentNeeded;
+    }
+
+    /* ================= UTIL ================= */
 
    public static Cx retainOnlyMatching(List<Cx> cxList, String groupIdToKeep) {
     for (Cx cx : cxList) {
-        String groupId = cx.getGroupId();
+        String groupId = cx.getAccountNumber();
 
         boolean matchesGroupId = groupIdToKeep != null && groupIdToKeep.equals(groupId);
 
@@ -370,43 +358,42 @@ public class Cx {
     }
     return null; // return null if no match is found
 }
-
-public void clearAllFields() {
-    this.prefix = null;
-    this.firstName = null;
-    this.middleName = null;
-    this.lastName = null;
-    this.suffix = null;
-    this.email = null;
-    this.emailNotProvided = false;
-    this.ssn = null;
-    this.birthDate = null;
-    this.dlNumber = null;
-    this.dlState = null;
-    this.dlExp = null;
-    this.contactPhone1 = null;
-    this.contactPhone2 = null;
-    this.contactPhone3 = null;
-    this.streetNumber = null;
-    this.streetName = null;
-    this.addressLine2 = null;
-    this.city = null;
-    this.state = null;
-    this.zip = null;
-    this.employer = null;
-    this.isNvp = false;
-    this.assignToBusinessAccount = false;
-    this.attachToHierarchy = false;
-    this.accountType = null;
-    this.creditSsn = null;
-    this.creditClass = null;
-    this.approvedLines = 0;
-    this.lastDateChecked = null;
-    this.typeOfAccount = null;
-    this.groupId = null;
-}
-
-    
+    public void clearAllFields() {
+        prefix = null;
+        firstName = null;
+        middleName = null;
+        lastName = null;
+        suffix = null;
+        email = null;
+        emailNotProvided = false;
+        ssn = null;
+        birthDate = null;
+        dlNumber = null;
+        dlState = null;
+        dlExp = null;
+        contactPhone1 = null;
+        contactPhone2 = null;
+        contactPhone3 = null;
+        streetNumber = null;
+        streetName = null;
+        addressLine2 = null;
+        city = null;
+        state = null;
+        zip = null;
+        employer = null;
+        isNvp = false;
+        assignToBusinessAccount = false;
+        attachToHierarchy = false;
+        accountType = null;
+        creditSsn = null;
+        creditClass = null;
+        approvedLines = 0;
+        lastDateChecked = null;
+        typeOfAccount = null;
+        accountNumber = null;
+        downpayPerc = null;
+        downpaymentNeeded = null;
+    }
     
     
 }

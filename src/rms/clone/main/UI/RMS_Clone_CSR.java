@@ -49,6 +49,7 @@ import java.sql.*;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
@@ -1856,19 +1857,21 @@ public static Boolean isLoggedIn = false;
         
         int PID = Integer.parseInt(pid_txt_main.getText());
         
-        String SQL = "INSERT INTO account_notes (created_by_pid, assigned_to_group_id, note_content) VALUES (?, ?, ?)";;
+        String SQL = "INSERT INTO account_notes VALUES (?, ?, ?, NOW(), ?)";
         
         try {
              PreparedStatement pstmt = vars.conn.prepareStatement(SQL);
-
-            pstmt.setInt(1, PID);
-            pstmt.setString(2, vars.selectedCx.getGroupId());
+java.util.Date date = new java.util.Date();
+java.sql.Timestamp sqlNow = new java.sql.Timestamp(date.getTime());
+            
+            pstmt.setInt(2, PID);
             pstmt.setString(3, note);
+                        pstmt.setString(4, vars.selectedCx.getAccountNumber());
 
             int rowsInserted = pstmt.executeUpdate();
 
             if (rowsInserted > 0) {
-                getNotes();
+                getNotes(vars.selectedCx.getAccountNumber());
                 note_txt.setText("");
                 System.out.println("A new note was inserted successfully!");
             }
@@ -2876,15 +2879,15 @@ public static void switchLines(String LinePhoneNumber) {
 
 
 
-public static void getNotes() {
+public static void getNotes(String accountNumber) {
     try {
         DefaultTableModel model = (DefaultTableModel) notes_table.getModel();
         model.setRowCount(0); // Clear existing rows
         
         PreparedStatement stmt = vars.conn.prepareStatement(
-            "SELECT * FROM account_notes WHERE assigned_to_group_id = ?"
+            "SELECT * FROM account_notes WHERE account_number = ?"
         );
-        stmt.setString(1, vars.selectedCx.getGroupId());
+        stmt.setString(1, accountNumber);
         ResultSet rs = stmt.executeQuery();
         
         while (rs.next()) {
@@ -2921,7 +2924,7 @@ public static void getNotes() {
 
 
 
-public static void getAlerts() {
+public static void getAlerts(String accountNumber) {
     try {
         DefaultTableModel model = (DefaultTableModel) alerts_table.getModel();
         model.setRowCount(0); // Clear existing rows in the table
@@ -2929,9 +2932,9 @@ public static void getAlerts() {
         alertList.clear(); // Clear existing alerts in the list
 
         PreparedStatement stmt = vars.conn.prepareStatement(
-            "SELECT * FROM customer_alerts WHERE assigned_to_group = ? AND is_active = true"
+            "SELECT * FROM customer_alerts WHERE account_number = ? AND is_active = true"
         );
-        stmt.setString(1, vars.selectedCx.getGroupId());
+        stmt.setString(1, accountNumber);
         ResultSet rs = stmt.executeQuery();
         
         while (rs.next()) {
@@ -3054,7 +3057,7 @@ public  boolean checkIfRequiredFieldsAreFilledIn_NewCustomer() {
 
 
 
-public static void fillInPhoneNumbersTable() {
+public static void fillInPhoneNumbersTable(String accountNumber) {
     
  
         try {
@@ -3063,9 +3066,9 @@ public static void fillInPhoneNumbersTable() {
             
             
             PreparedStatement stmt = vars.conn.prepareStatement(
-                    "Select phoneNumber from phone_numbers where assigned_to_group_id = ?"
+                    "Select phoneNumber from phone_numbers where account_number = ?"
             );
-            stmt.setString(1, vars.selectedCx.getGroupId());
+            stmt.setString(1, accountNumber);
                     ResultSet rs = stmt.executeQuery();
 
                     
@@ -3098,9 +3101,9 @@ public static void fillActivePhoneNumbers() {
     
          try {
         // 1. Count active phone numbers
-        String countQuery = "SELECT COUNT(*) AS line_count FROM phone_numbers WHERE assigned_to_group_id = ? AND is_active = TRUE";
+        String countQuery = "SELECT COUNT(*) AS line_count FROM phone_numbers WHERE account_number = ? AND is_active = TRUE";
         try (PreparedStatement countStmt = vars.conn.prepareStatement(countQuery)) {
-            countStmt.setString(1, vars.selectedCx.getGroupId());
+            countStmt.setString(1, vars.selectedCx.getAccountNumber());
             ResultSet countRs = countStmt.executeQuery();
             if (countRs.next()) {
                 int count = countRs.getInt("line_count");

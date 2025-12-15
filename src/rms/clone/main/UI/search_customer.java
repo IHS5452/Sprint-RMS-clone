@@ -161,14 +161,14 @@ public class search_customer extends javax.swing.JFrame {
 
             },
             new String [] {
-                "RMSID", "Phone Number", "Account Number", "First & Last name", "Acct. Status"
+                "Phone Number", "Account Number", "First & Last name", "Acct. Status"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -180,10 +180,6 @@ public class search_customer extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(sleectCustomer_tbl);
-        if (sleectCustomer_tbl.getColumnModel().getColumnCount() > 0) {
-            sleectCustomer_tbl.getColumnModel().getColumn(0).setResizable(false);
-            sleectCustomer_tbl.getColumnModel().getColumn(3).setResizable(false);
-        }
 
         jButton2.setText("Select Customer");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -282,9 +278,8 @@ for (Map.Entry<phoneNumbers, Cx> entry : cxList) {
     Cx cx = entry.getValue();
 
     Object[] rowData = {
-        cx.getId(),
         ph.getPhoneNumber(), // show phoneNumber from phoneNumbers
-        cx.getGroupId(),
+        cx.getAccountNumber(),
         cx.getFirstName() + " " + cx.getLastName(),
         cx.getAccountType()
     };
@@ -298,22 +293,26 @@ for (Map.Entry<phoneNumbers, Cx> entry : cxList) {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         
-        int column = 0;
         int row = sleectCustomer_tbl.getSelectedRow();
-        String valueOfColumn = sleectCustomer_tbl.getModel().getValueAt(row, column).toString();
-      
-        System.out.println(valueOfColumn);
+        String phoneNumberFromTable = sleectCustomer_tbl.getModel().getValueAt(row, 0).toString();
+        String acctNumberFromTable = sleectCustomer_tbl.getModel().getValueAt(row, 1).toString();
+        System.out.println(phoneNumberFromTable);
         
        
-        rms.clone.main.business.vars.selectedCx = actions.selectCustomer(valueOfColumn);
+        rms.clone.main.business.vars.selectedCx = actions.selectCustomer(phoneNumberFromTable);
         
         System.out.println("RMS ID: " + rms.clone.main.business.vars.selectedCx.getFirstName());
         
-        RMS_Clone_CSR.fillInPhoneNumbersTable();
-        RMS_Clone_CSR.getAlerts();
-        RMS_Clone_CSR.getNotes();
+        
+        
+        
+        
+        
+        RMS_Clone_CSR.fillInPhoneNumbersTable(acctNumberFromTable);
+        RMS_Clone_CSR.getAlerts(acctNumberFromTable);
+        RMS_Clone_CSR.getNotes(acctNumberFromTable);
         RMS_Clone_CSR.fillActivePhoneNumbers();
-        RMS_Clone_CSR.getServices(vars.selectedCx.getContactPhone1());
+        RMS_Clone_CSR.getServices(phoneNumberFromTable);
         RMS_Clone_CSR.fillInCXInfoInSalesTab();
         RMS_Clone_CSR.add_note_bttn.setEnabled(true);
                         RMS_Clone_CSR.setEnabledRecursive(jPanel3, false);

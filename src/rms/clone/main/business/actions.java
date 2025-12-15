@@ -180,8 +180,8 @@ public static Cx selectCustomer(String id) {
             cx.setCreditClass(rs.getString("creditClass"));
             cx.setApprovedLines(rs.getInt("approvedLines"));
             cx.setLastDateChecked(rs.getDate("lastDateChecked"));
-            cx.setGroupId(rs.getString("groupId"));
-            cx.setAccountType(rs.getString("account_number")); // Add if applicable
+            cx.setAccountNumber(rs.getString("account_number")); // Add if applicable
+            cx.setAccountType(rs.getString("accountType")); // Add if applicable
         }
          
          
@@ -216,32 +216,32 @@ public static List<Map.Entry<phoneNumbers, Cx>> searchCustomer(
         // ------------------------------
         if (searchType.equals("ACC")) {
 
-            SQL =
-            "SELECT " +
-            "    ci.id AS customer_id, " +
-            "    ci.prefix, ci.firstName, ci.middleName, ci.lastName, ci.suffix, " +
-            "    ci.email, ci.emailNotProvided, ci.ssn, ci.birthDate, " +
-            "    ci.dlNumber, ci.dlState, ci.dlExp, " +
-            "    ci.contactPhone1, ci.contactPhone2, ci.contactPhone3, " +
-            "    ci.streetNumber, ci.streetName, ci.addressLine2, " +
-            "    ci.city, ci.state, ci.zip, ci.employer, " +
-            "    ci.isNvp, ci.assignToBusinessAccount, ci.attachToHierarchy, " +
-            "    ci.accountType, ci.creditSsn, ci.creditClass, ci.approvedLines, " +
-            "    ci.lastDateChecked, ci.typeOfAccount, ci.groupId, ci.account_number, " +
-            "    cp.id AS phone_id, " +
-            "    cp.assigned_to_group_id, cp.type_of_line, cp.phoneNumber, " +
-            "    cp.date_time_added_to_acct, cp.caller_id_fname, cp.caller_id_lname, " +
-            "    cp.is_unlimited_talk, cp.is_unlimited_text, cp.is_unlimited_data, " +
-            "    cp.ammt_of_priority_data_gb, cp.plan_name, cp.plan_code, " +
-            "    cp.can_inbound, cp.can_outbound, cp.is_forwarding_calls, " +
-            "    cp.forward_calls_number, cp.assigned_service_ids_csv, cp.is_active " +
-            "FROM customer_info AS ci " +
-            "LEFT JOIN phone_numbers AS cp " +
-            "  ON cp.account_number = ci.account_number " +
-            "WHERE TRIM(ci.account_number) = TRIM(?);";
+SQL =
+"SELECT " +
+"  ci.id AS customer_id, " +
+"  ci.prefix, ci.firstName, ci.middleName, ci.lastName, ci.suffix, " +
+"  ci.email, ci.emailNotProvided, ci.ssn, ci.birthDate, " +
+"  ci.dlNumber, ci.dlState, ci.dlExp, " +
+"  ci.contactPhone1, ci.contactPhone2, ci.contactPhone3, " +
+"  ci.streetNumber, ci.streetName, ci.addressLine2, " +
+"  ci.city, ci.state, ci.zip, ci.employer, " +
+"  ci.isNvp, ci.assignToBusinessAccount, ci.attachToHierarchy, " +
+"  ci.accountType, ci.creditSsn, ci.creditClass, ci.approvedLines, " +
+"  ci.lastDateChecked, ci.typeOfAccount, ci.account_number, " +
+"  cp.id AS phone_id, " +
+"  cp.type_of_line, cp.phoneNumber, " +
+"  cp.date_time_added_to_acct, cp.caller_id_fname, cp.caller_id_lname, " +
+"  cp.is_unlimited_talk, cp.is_unlimited_text, cp.is_unlimited_data, " +
+"  cp.ammt_of_priority_data_gb, cp.plan_name, cp.plan_code, " +
+"  cp.can_inbound, cp.can_outbound, cp.is_forwarding_calls, " +
+"  cp.forward_calls_number, cp.assigned_service_ids_csv, cp.is_active " +
+"FROM customer_info ci " +
+"LEFT JOIN phone_numbers cp " +
+"  ON cp.account_number = ci.account_number " +
+"WHERE TRIM(ci.account_number) = TRIM(?);";
 
-            ps = vars.conn.prepareStatement(SQL);
-            ps.setString(1, accountNumber);
+ps = vars.conn.prepareStatement(SQL);
+ps.setString(1, accountNumber);
 
             System.out.println("Running ACC search for account " + accountNumber);
         }
@@ -250,36 +250,37 @@ public static List<Map.Entry<phoneNumbers, Cx>> searchCustomer(
         // SEARCH BY PHONE NUMBER (PHO)
         // ------------------------------
         else if (searchType.equals("PHO")) {
+SQL =
+"SELECT " +
+"  ci.id AS customer_id, " +
+"  ci.prefix, ci.firstName, ci.middleName, ci.lastName, ci.suffix, " +
+"  ci.email, ci.emailNotProvided, ci.ssn, ci.birthDate, " +
+"  ci.dlNumber, ci.dlState, ci.dlExp, " +
+"  ci.contactPhone1, ci.contactPhone2, ci.contactPhone3, " +
+"  ci.streetNumber, ci.streetName, ci.addressLine2, " +
+"  ci.city, ci.state, ci.zip, ci.employer, " +
+"  ci.isNvp, ci.assignToBusinessAccount, ci.attachToHierarchy, " +
+"  ci.accountType, ci.creditSsn, ci.creditClass, ci.approvedLines, " +
+"  ci.lastDateChecked, ci.typeOfAccount, ci.account_number, " +
+"  cp.id AS phone_id, " +
+"  cp.type_of_line, cp.phoneNumber, " +
+"  cp.date_time_added_to_acct, cp.caller_id_fname, cp.caller_id_lname, " +
+"  cp.is_unlimited_talk, cp.is_unlimited_text, cp.is_unlimited_data, " +
+"  cp.ammt_of_priority_data_gb, cp.plan_name, cp.plan_code, " +
+"  cp.can_inbound, cp.can_outbound, cp.is_forwarding_calls, " +
+"  cp.forward_calls_number, cp.assigned_service_ids_csv, cp.is_active " +
+"FROM phone_numbers cp " +
+"LEFT JOIN customer_info ci " +
+"  ON ci.account_number = cp.account_number " +
+"WHERE TRIM(cp.phoneNumber) = TRIM(?) " +
+"   OR TRIM(?) IN (TRIM(ci.contactPhone1), TRIM(ci.contactPhone2), TRIM(ci.contactPhone3));";
 
-            SQL = 
-            "SELECT " +
-            "    ci.id AS customer_id, " +
-            "    ci.prefix, ci.firstName, ci.middleName, ci.lastName, ci.suffix, " +
-            "    ci.email, ci.emailNotProvided, ci.ssn, ci.birthDate, " +
-            "    ci.dlNumber, ci.dlState, ci.dlExp, " +
-            "    ci.contactPhone1, ci.contactPhone2, ci.contactPhone3, " +
-            "    ci.streetNumber, ci.streetName, ci.addressLine2, " +
-            "    ci.city, ci.state, ci.zip, ci.employer, " +
-            "    ci.isNvp, ci.assignToBusinessAccount, ci.attachToHierarchy, " +
-            "    ci.accountType, ci.creditSsn, ci.creditClass, ci.approvedLines, " +
-            "    ci.lastDateChecked, ci.typeOfAccount, ci.groupId, ci.account_number, " +
-            "    cp.id AS phone_id, " +
-            "    cp.assigned_to_group_id, cp.type_of_line, cp.phoneNumber, " +
-            "    cp.date_time_added_to_acct, cp.caller_id_fname, cp.caller_id_lname, " +
-            "    cp.is_unlimited_talk, cp.is_unlimited_text, cp.is_unlimited_data, " +
-            "    cp.ammt_of_priority_data_gb, cp.plan_name, cp.plan_code, " +
-            "    cp.can_inbound, cp.can_outbound, cp.is_forwarding_calls, " +
-            "    cp.forward_calls_number, cp.assigned_service_ids_csv, cp.is_active " +
-            "FROM phone_numbers AS cp " +
-            "JOIN customer_info AS ci " +
-            "  ON cp.account_number = ci.account_number;";
-//                    +
-//            // also match where the phone is one of the contact phones (extra safety)
-//            "   OR cp.phoneNumber IN (ci.contactPhone1, ci.contactPhone2, ci.contactPhone3) " +
-//            "WHERE cp.phoneNumber = ?;";
+ps = vars.conn.prepareStatement(SQL);
+ps.setString(1, phoneNumber);
+ps.setString(2, phoneNumber);
 
-            ps = vars.conn.prepareStatement(SQL);
-            ps.setString(1, phoneNumber);
+
+
 
             System.out.println("Running PHO search for phone " + phoneNumber);
         }
@@ -288,34 +289,34 @@ public static List<Map.Entry<phoneNumbers, Cx>> searchCustomer(
         // SEARCH BY FIRST + LAST NAME (FAL)
         // ------------------------------
         else if (searchType.equals("FAL")) {
+SQL =
+"SELECT " +
+"  ci.id AS customer_id, " +
+"  ci.prefix, ci.firstName, ci.middleName, ci.lastName, ci.suffix, " +
+"  ci.email, ci.emailNotProvided, ci.ssn, ci.birthDate, " +
+"  ci.dlNumber, ci.dlState, ci.dlExp, " +
+"  ci.contactPhone1, ci.contactPhone2, ci.contactPhone3, " +
+"  ci.streetNumber, ci.streetName, ci.addressLine2, " +
+"  ci.city, ci.state, ci.zip, ci.employer, " +
+"  ci.isNvp, ci.assignToBusinessAccount, ci.attachToHierarchy, " +
+"  ci.accountType, ci.creditSsn, ci.creditClass, ci.approvedLines, " +
+"  ci.lastDateChecked, ci.typeOfAccount, ci.account_number, " +
+"  cp.id AS phone_id, " +
+"  cp.type_of_line, cp.phoneNumber, " +
+"  cp.date_time_added_to_acct, cp.caller_id_fname, cp.caller_id_lname, " +
+"  cp.is_unlimited_talk, cp.is_unlimited_text, cp.is_unlimited_data, " +
+"  cp.ammt_of_priority_data_gb, cp.plan_name, cp.plan_code, " +
+"  cp.can_inbound, cp.can_outbound, cp.is_forwarding_calls, " +
+"  cp.forward_calls_number, cp.assigned_service_ids_csv, cp.is_active " +
+"FROM customer_info ci " +
+"LEFT JOIN phone_numbers cp " +
+"  ON cp.account_number = ci.account_number " +
+"WHERE ci.firstName LIKE ? AND ci.lastName LIKE ?;";
 
-            SQL = 
-            "SELECT " +
-            "    ci.id AS customer_id, " +
-            "    ci.prefix, ci.firstName, ci.middleName, ci.lastName, ci.suffix, " +
-            "    ci.email, ci.emailNotProvided, ci.ssn, ci.birthDate, " +
-            "    ci.dlNumber, ci.dlState, ci.dlExp, " +
-            "    ci.contactPhone1, ci.contactPhone2, ci.contactPhone3, " +
-            "    ci.streetNumber, ci.streetName, ci.addressLine2, " +
-            "    ci.city, ci.state, ci.zip, ci.employer, " +
-            "    ci.isNvp, ci.assignToBusinessAccount, ci.attachToHierarchy, " +
-            "    ci.accountType, ci.creditSsn, ci.creditClass, ci.approvedLines, " +
-            "    ci.lastDateChecked, ci.typeOfAccount, ci.groupId, ci.account_number, " +
-            "    cp.id AS phone_id, " +
-            "    cp.assigned_to_group_id, cp.type_of_line, cp.phoneNumber, " +
-            "    cp.date_time_added_to_acct, cp.caller_id_fname, cp.caller_id_lname, " +
-            "    cp.is_unlimited_talk, cp.is_unlimited_text, cp.is_unlimited_data, " +
-            "    cp.ammt_of_priority_data_gb, cp.plan_name, cp.plan_code, " +
-            "    cp.can_inbound, cp.can_outbound, cp.is_forwarding_calls, " +
-            "    cp.forward_calls_number, cp.assigned_service_ids_csv, cp.is_active " +
-            "FROM customer_info AS ci " +
-            "LEFT JOIN phone_numbers AS cp " +
-            "  ON cp.account_number = ci.account_number " +
-            "WHERE ci.firstName LIKE ? AND ci.lastName LIKE ?;";
+ps = vars.conn.prepareStatement(SQL);
+ps.setString(1, firstName.trim() + "%");
+ps.setString(2, lastName.trim() + "%");
 
-            ps = vars.conn.prepareStatement(SQL);
-            ps.setString(1, firstName);
-            ps.setString(2, lastName);
 
             System.out.println("Running FAL search for name " + firstName + " " + lastName);
         }
@@ -362,7 +363,6 @@ public static List<Map.Entry<phoneNumbers, Cx>> searchCustomer(
             cx.setState(rs.getString("state"));
             cx.setZip(rs.getString("zip"));
             cx.setEmployer(rs.getString("employer"));
-            cx.setIsNvp(rs.getBoolean("isNvp"));
             cx.setAssignToBusinessAccount(rs.getBoolean("assignToBusinessAccount"));
             cx.setAttachToHierarchy(rs.getBoolean("attachToHierarchy"));
             cx.setAccountType(rs.getString("accountType"));
@@ -371,12 +371,12 @@ public static List<Map.Entry<phoneNumbers, Cx>> searchCustomer(
             cx.setApprovedLines(rs.getInt("approvedLines"));
             cx.setLastDateChecked(rs.getDate("lastDateChecked"));
             cx.setTypeOfAccount(rs.getString("typeOfAccount"));
-            cx.setGroupId(rs.getString("groupId"));
+                        cx.setAccountNumber(rs.getString("account_number")); // Add if applicable
+
 
             // --- phoneNumbers object ---
             if (!searchType.equals("FAL")) {
                 phnos.setId(rs.getInt("phone_id"));
-                phnos.setAssignedToGroupId(rs.getString("assigned_to_group_id"));
                 phnos.setTypeOfLine(rs.getString("type_of_line"));
                 phnos.setPhoneNumber(rs.getString("phoneNumber"));
                 phnos.setDateTimeAddedToAcct(rs.getTimestamp("date_time_added_to_acct"));
