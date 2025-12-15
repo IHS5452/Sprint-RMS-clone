@@ -642,7 +642,7 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace pref="716" max="32767" attributes="0"/>
+                          <EmptySpace pref="730" max="32767" attributes="0"/>
                           <Component id="jButton2" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -704,7 +704,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                           <Component id="jButton2" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="597" max="32767" attributes="0"/>
+                          <EmptySpace pref="599" max="32767" attributes="0"/>
                       </Group>
                       <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
@@ -2174,7 +2174,7 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
@@ -2194,8 +2194,12 @@
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jLabel40" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="jTextField32" min="-2" pref="127" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="add_to_cart_bttn" max="32767" attributes="0"/>
+                                      <Component id="jTextField32" pref="127" max="32767" attributes="0"/>
+                                      <Component id="lookup_accessory_btn" alignment="0" max="32767" attributes="0"/>
+                                  </Group>
                               </Group>
                           </Group>
                           <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
@@ -2218,17 +2222,8 @@
                                   <EmptySpace min="-2" pref="157" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" attributes="0">
-                                          <Component id="jButton12" min="-2" pref="209" max="-2" attributes="0"/>
-                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" alignment="1" attributes="0">
-                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                          <Component id="jButton13" min="-2" pref="168" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="jButton12" min="-2" pref="209" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" pref="126" max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                       <Group type="102" alignment="0" attributes="0">
                                           <Group type="103" groupAlignment="0" attributes="0">
@@ -2299,7 +2294,6 @@
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="cx_zip" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="jTextField30" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jButton13" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
@@ -2314,7 +2308,11 @@
                                   </Group>
                               </Group>
                           </Group>
-                          <EmptySpace pref="67" max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="add_to_cart_bttn" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="lookup_accessory_btn" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace pref="16" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -2388,12 +2386,12 @@
                 </Component>
                 <Component class="javax.swing.JButton" name="jButton12">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Conformation Lookup"/>
+                    <Property name="text" type="java.lang.String" value="Order Number Lookup"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JButton" name="jButton13">
+                <Component class="javax.swing.JButton" name="add_to_cart_bttn">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="EasyPay Accsesories"/>
+                    <Property name="text" type="java.lang.String" value="Add to Cart"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="cx_zip">
@@ -2455,6 +2453,11 @@
                 <Component class="javax.swing.JTextField" name="jTextField30">
                   <Properties>
                     <Property name="editable" type="boolean" value="false"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JButton" name="lookup_accessory_btn">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Lookup Accessory"/>
                   </Properties>
                 </Component>
               </SubComponents>

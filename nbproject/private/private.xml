@@ -3,21 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/ianschrauth/Documents/GitHub/Sprint-RMS-clone/src/rms/clone/business/database/actions.java</file>
-            <file>file:/Users/ianschrauth/Documents/GitHub/Sprint-RMS-clone/src/rms/clone/main/UI/recycle_device.java</file>
-            <file>file:/Users/ianschrauth/Documents/GitHub/Sprint-RMS-clone/src/rms/clone/main/UI/RMS_Clone_CSR.java</file>
-            <file>file:/Users/ianschrauth/Documents/GitHub/Sprint-RMS-clone/src/rms/clone/main/UI/login.java</file>
-            <file>file:/Users/ianschrauth/Documents/GitHub/Sprint-RMS-clone/src/rms/clone/main/UI/note.java</file>
-            <file>file:/Users/ianschrauth/Documents/GitHub/Sprint-RMS-clone/src/rms/clone/main/UI/phone_conditions.java</file>
-            <file>file:/Users/ianschrauth/Documents/GitHub/Sprint-RMS-clone/src/rms/clone/main/UI/search_customer.java</file>
-            <file>file:/Users/ianschrauth/Documents/GitHub/Sprint-RMS-clone/src/rms/clone/main/business/actions.java</file>
-            <file>file:/Users/ianschrauth/Documents/GitHub/Sprint-RMS-clone/src/rms/clone/main/business/vars.java</file>
-            <file>file:/Users/ianschrauth/Documents/GitHub/Sprint-RMS-clone/src/rms/clone/softphone/UI/UI.java</file>
-            <file>file:/Users/ianschrauth/Documents/GitHub/Sprint-RMS-clone/src/rms/clone/softphone/UI/softphone_settings.java</file>
-            <file>file:/Users/ianschrauth/Documents/GitHub/Sprint-RMS-clone/src/rms/clone/vars/db.java</file>
-            <file>file:/Users/ianschrauth/Documents/GitHub/Sprint-RMS-clone/src/rms/clone/main/UI/starter.java</file>
-            <file>file:/Users/ianschrauth/Documents/GitHub/Sprint-RMS-clone/src/rms/clone/main/UI/aboutApp.java</file>
-            <file>file:/Users/ianschrauth/Documents/GitHub/Sprint-RMS-clone/src/classes/Cx.java</file>
+            <file>file:/C:/Users/ian/Documents/GitHub/Sprint-RMS-clone/src/rms/clone/main/UI/recycle_device.java</file>
+            <file>file:/C:/Users/ian/Documents/GitHub/Sprint-RMS-clone/src/rms/clone/resources/lists.java</file>
+            <file>file:/C:/Users/ian/Documents/GitHub/Sprint-RMS-clone/src/rms/clone/vars/version.java</file>
+            <file>file:/C:/Users/ian/Documents/GitHub/Sprint-RMS-clone/src/rms/clone/vars/db.java</file>
         </group>
     </open-files>
 </project-private>

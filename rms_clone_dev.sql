@@ -227,14 +227,14 @@ CREATE TABLE `homepage_news` (
   `content` text,
   `is_active` tinyint(1) DEFAULT NULL,
   `date_added` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 
-DROP TABLE IF EXISTS `recycled_devices_table`;
+DROP TABLE IF EXISTS `recycled_devices`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `recycled_devices_table` (
+CREATE TABLE `recycled_devices` (
   `rid` int NOT NULL AUTO_INCREMENT,
   `imei` varchar(200) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `type` varchar(200) COLLATE utf8mb4_general_ci DEFAULT NULL,
@@ -244,8 +244,10 @@ CREATE TABLE `recycled_devices_table` (
   `trade_in_value` decimal(10,2) DEFAULT NULL,
   `status_desc` varchar(200) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `trade_in_date` datetime DEFAULT NULL,
+  `notes` varchar(200) COLLATE utf8mb4_general_ci DEFAULT NULL,
   PRIMARY KEY (`rid`)
 );
+
 
 
 DROP TABLE IF EXISTS `user_info`;

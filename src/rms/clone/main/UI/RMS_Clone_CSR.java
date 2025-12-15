@@ -256,7 +256,7 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
         jLabel37 = new javax.swing.JLabel();
         jLabel38 = new javax.swing.JLabel();
         jButton12 = new javax.swing.JButton();
-        jButton13 = new javax.swing.JButton();
+        add_to_cart_bttn = new javax.swing.JButton();
         cx_zip = new javax.swing.JTextField();
         cx_state = new javax.swing.JTextField();
         cx_city = new javax.swing.JTextField();
@@ -265,6 +265,7 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
         jLabel39 = new javax.swing.JLabel();
         jButton15 = new javax.swing.JButton();
         jTextField30 = new javax.swing.JTextField();
+        lookup_accessory_btn = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -679,7 +680,7 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap(716, Short.MAX_VALUE)
+                .addContainerGap(730, Short.MAX_VALUE)
                 .addComponent(jButton2)
                 .addContainerGap())
             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -726,7 +727,7 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addComponent(jButton2)
-                .addContainerGap(597, Short.MAX_VALUE))
+                .addContainerGap(599, Short.MAX_VALUE))
             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel5Layout.createSequentialGroup()
                     .addContainerGap()
@@ -1458,9 +1459,9 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
 
         jLabel38.setText("Conf. Number");
 
-        jButton12.setText("Conformation Lookup");
+        jButton12.setText("Order Number Lookup");
 
-        jButton13.setText("EasyPay Accsesories");
+        add_to_cart_bttn.setText("Add to Cart");
 
         cx_zip.setEditable(false);
         cx_zip.addActionListener(new java.awt.event.ActionListener() {
@@ -1488,6 +1489,8 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
 
         jTextField30.setEditable(false);
 
+        lookup_accessory_btn.setText("Lookup Accessory");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -1509,8 +1512,11 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
                         .addComponent(jTextField31, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel40)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextField32, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(add_to_cart_bttn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jTextField32, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
+                            .addComponent(lookup_accessory_btn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(62, 62, 62)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
@@ -1527,14 +1533,8 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
                         .addComponent(jLabel39)
                         .addGap(157, 157, 157))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 126, Short.MAX_VALUE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1588,8 +1588,7 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cx_zip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField30, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton13)))
+                            .addComponent(jTextField30, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel41)
@@ -1598,7 +1597,11 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel40)
                             .addComponent(jTextField32, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(67, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(add_to_cart_bttn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lookup_accessory_btn)
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout sales_pannnelLayout = new javax.swing.GroupLayout(sales_pannnel);
@@ -2537,6 +2540,7 @@ String input = dl_exp_txt.getText().trim();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JLabel active_lines;
     public static javax.swing.JButton add_note_bttn;
+    private javax.swing.JButton add_to_cart_bttn;
     public static javax.swing.JTable alerts_table;
     private javax.swing.JTextField approvedLines_txt;
     private javax.swing.JTextField ate_apt_txt;
@@ -2578,7 +2582,6 @@ String input = dl_exp_txt.getText().trim();
     private javax.swing.JComboBox<String> gender_dd;
     private javax.swing.JPanel home_pannel;
     private javax.swing.JButton jButton12;
-    private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -2668,6 +2671,7 @@ String input = dl_exp_txt.getText().trim();
     private javax.swing.JTextField jTextField31;
     private javax.swing.JTextField jTextField32;
     private javax.swing.JTextField lname_txt;
+    private javax.swing.JButton lookup_accessory_btn;
     private javax.swing.JTabbedPane main_menu;
     private javax.swing.JTextField minit_txt;
     public static javax.swing.JButton new_bttn;
