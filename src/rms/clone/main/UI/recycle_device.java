@@ -44,9 +44,7 @@ public class recycle_device extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
-        brand_txt = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        model_txt = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jCheckBox1 = new javax.swing.JCheckBox();
         questionaire_condition_bttn = new javax.swing.JButton();
@@ -56,6 +54,9 @@ public class recycle_device extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         condition_txt1 = new javax.swing.JTextField();
         type_of_phone_dd = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
+        manuf_dd = new javax.swing.JComboBox<>();
+        model_dd = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -92,7 +93,7 @@ public class recycle_device extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTable1);
 
-        jLabel2.setText("Brand");
+        jLabel2.setText("Manuf.");
 
         jLabel4.setText("Model");
 
@@ -126,7 +127,33 @@ public class recycle_device extends javax.swing.JFrame {
 
         jLabel7.setText("Trade in Value");
 
-        type_of_phone_dd.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Android", "iPhone", "Flip Phone", "Other" }));
+        type_of_phone_dd.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Android", "iOS", "KaiOS", "Other" }));
+        type_of_phone_dd.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                type_of_phone_ddItemStateChanged(evt);
+            }
+        });
+        type_of_phone_dd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                type_of_phone_ddActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("OS");
+
+        manuf_dd.setEnabled(false);
+        manuf_dd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                manuf_ddActionPerformed(evt);
+            }
+        });
+
+        model_dd.setEnabled(false);
+        model_dd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                model_ddActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -148,7 +175,7 @@ public class recycle_device extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(14, 14, 14)
                                         .addComponent(jCheckBox1)))
-                                .addGap(0, 6, Short.MAX_VALUE))
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGap(6, 6, 6)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -159,27 +186,26 @@ public class recycle_device extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel6)
                                         .addGap(12, 12, 12)
-                                        .addComponent(condition_txt))))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addComponent(condition_txt)))))
+                        .addGap(132, 132, 132))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton2))
+                            .addGroup(layout.createSequentialGroup()
                                 .addGap(10, 10, 10)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel4)
-                                    .addComponent(jLabel2))
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3))
                                 .addGap(12, 12, 12)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(model_txt)
-                                        .addGap(6, 6, 6))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addComponent(type_of_phone_dd, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(brand_txt, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
-                                        .addGap(0, 0, Short.MAX_VALUE)))))
-                        .addGap(132, 132, 132))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2)))
+                                    .addComponent(type_of_phone_dd, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(manuf_dd, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(model_dd, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -195,15 +221,17 @@ public class recycle_device extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jCheckBox1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(type_of_phone_dd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(type_of_phone_dd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(brand_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
+                            .addComponent(jLabel2)
+                            .addComponent(manuf_dd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
-                            .addComponent(model_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(model_dd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(questionaire_condition_bttn)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -240,29 +268,29 @@ public class recycle_device extends javax.swing.JFrame {
     }//GEN-LAST:event_imei_txtFocusLost
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-String imei_db_url = "https://alpha.imeicheck.com/api/modelBrandName?imei=" + imei_txt.getText().toString() + "&format=json";
-
-
-if (imei_txt.getText().toString().length() >= 15) {
-
-    try {
-
-
-
-
-        IMEI r = fetch(imei_db_url);
-
-        brand_txt.setText(r.brand);
-        model_txt.setText(r.modelName);
-
-
-    } catch (Exception ex) {
-        Logger.getLogger(recycle_device.class.getName()).log(Level.SEVERE, null, ex);
-    }
-    
-    
-}
-        // TODO add your handling code here:
+//String imei_db_url = "https://alpha.imeicheck.com/api/modelBrandName?imei=" + imei_txt.getText().toString() + "&format=json";
+//
+//
+//if (imei_txt.getText().toString().length() >= 15) {
+//
+//    try {
+//
+//
+//
+//
+//        IMEI r = fetch(imei_db_url);
+//
+//        brand_txt.setText(r.brand);
+//        model_txt.setText(r.modelName);
+//
+//
+//    } catch (Exception ex) {
+//        Logger.getLogger(recycle_device.class.getName()).log(Level.SEVERE, null, ex);
+//    }
+//    
+//    
+//}
+//        // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
@@ -276,6 +304,27 @@ if (imei_txt.getText().toString().length() >= 15) {
 
         // TODO add your handling code here:
     }//GEN-LAST:event_questionaire_condition_bttnActionPerformed
+
+    private void type_of_phone_ddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_type_of_phone_ddActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_type_of_phone_ddActionPerformed
+
+    private void manuf_ddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manuf_ddActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_manuf_ddActionPerformed
+
+    private void model_ddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_model_ddActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_model_ddActionPerformed
+
+    private void type_of_phone_ddItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_type_of_phone_ddItemStateChanged
+
+       
+
+
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_type_of_phone_ddItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -313,7 +362,6 @@ if (imei_txt.getText().toString().length() >= 15) {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField brand_txt;
     public static javax.swing.JTextField condition_txt;
     public static javax.swing.JTextField condition_txt1;
     private javax.swing.JTextField imei_txt;
@@ -322,12 +370,14 @@ if (imei_txt.getText().toString().length() >= 15) {
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField model_txt;
+    private javax.swing.JComboBox<String> manuf_dd;
+    private javax.swing.JComboBox<String> model_dd;
     private javax.swing.JButton questionaire_condition_bttn;
     private javax.swing.JComboBox<String> type_of_phone_dd;
     // End of variables declaration//GEN-END:variables
