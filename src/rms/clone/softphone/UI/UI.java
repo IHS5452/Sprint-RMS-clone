@@ -4,6 +4,23 @@
  */
 package rms.clone.softphone.UI;
 
+import classes.Softphone;
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import webphone.*;
+import java.sql.*;
+import java.text.SimpleDateFormat;
+import java.util.TimerTask;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.Timer;
+import rms.clone.main.business.vars;
+import java.util.TimerTask;
+import rms.clone.main.UI.RMS_Clone_CSR;
+import rms.clone.main.UI.search_customer;
+
+
 /**
  *
  * @author ischrauth
@@ -26,92 +43,304 @@ public class UI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        online_offline_bttn = new javax.swing.JButton();
+        online_pannel = new javax.swing.JPanel();
+        offline_online_txt = new javax.swing.JLabel();
+        timeInStatus_txt = new javax.swing.JLabel();
+        status_dd = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        disconect_bttn_txt = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        falName_txt = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        phoneNumber_txt = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        acctNumber_txt = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
-        jButton1.setText("Go online");
+        online_offline_bttn.setText("Go Online");
+        online_offline_bttn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                online_offline_bttnActionPerformed(evt);
+            }
+        });
 
-        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
+        online_pannel.setBackground(new java.awt.Color(204, 204, 204));
 
-        jLabel4.setFont(new java.awt.Font("Helvetica Neue", 0, 36)); // NOI18N
-        jLabel4.setText("Offline");
+        offline_online_txt.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
 
-        jLabel5.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        jLabel5.setText("00:00:00");
+        timeInStatus_txt.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        timeInStatus_txt.setText("00:00:00");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Online", "Offline - Lunch", "Offline - Break", "Offline - ACW", "Offline - Training", "Offline - Nesting Training", "Offline - Mentoring", "Offline - Other Task", "Offline - Supervisor" }));
+        status_dd.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lunch", "Break", "ACW", "Training", "Nesting Training", "Mentoring", "Other Task", "Supervisor", "Initial Launch" }));
+        status_dd.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                status_ddItemStateChanged(evt);
+            }
+        });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        jLabel1.setText("Offline reason");
+
+        javax.swing.GroupLayout online_pannelLayout = new javax.swing.GroupLayout(online_pannel);
+        online_pannel.setLayout(online_pannelLayout);
+        online_pannelLayout.setHorizontalGroup(
+            online_pannelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(online_pannelLayout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addComponent(jLabel4)
-                .addGap(30, 30, 30)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(offline_online_txt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(online_pannelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(online_pannelLayout.createSequentialGroup()
+                        .addComponent(timeInStatus_txt)
+                        .addGap(193, 193, 193))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, online_pannelLayout.createSequentialGroup()
+                        .addGroup(online_pannelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(status_dd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(online_pannelLayout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(22, 22, 22)))
+                        .addGap(54, 54, 54))))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        online_pannelLayout.setVerticalGroup(
+            online_pannelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(online_pannelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addGroup(online_pannelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(online_pannelLayout.createSequentialGroup()
+                        .addGroup(online_pannelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(offline_online_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(timeInStatus_txt))
+                        .addGap(0, 35, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, online_pannelLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(status_dd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
 
         jButton2.setText("Place on hold");
-
-        jButton3.setText("Disconect");
+        jButton2.setEnabled(false);
 
         jButton4.setText("Redial");
+        jButton4.setEnabled(false);
+
+        disconect_bttn_txt.setText("Disconect");
+        disconect_bttn_txt.setEnabled(false);
+        disconect_bttn_txt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                disconect_bttn_txtActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Customer information");
+
+        jLabel3.setText("Phone Number");
+
+        jLabel4.setText("First & Last name");
+
+        jLabel5.setText("Account number");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(online_pannel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(disconect_bttn_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
+                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addComponent(jLabel5)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(acctNumber_txt))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel4)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(falName_txt))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel3)
+                            .addGap(18, 18, 18)
+                            .addComponent(phoneNumber_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(online_offline_bttn, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(21, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(online_pannel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 123, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE, false)
+                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(online_offline_bttn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(disconect_bttn_txt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(39, 39, 39)
+                .addComponent(jLabel2)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(phoneNumber_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(falName_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(acctNumber_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    webphone wobj = new webphone();
+        private long startTime;
+        ClockListener clock = new ClockListener();
+    Timer timer = new Timer(53, clock);
+    boolean isOnline = false;
+
+
+    
+    
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+
+        
+        
+   
+       firstLaunch();
+        changeCallUIElements("off");
+           
+
+       
+        
+        
+    }//GEN-LAST:event_formWindowOpened
+
+    private void online_offline_bttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_online_offline_bttnActionPerformed
+
+
+
+if (!isOnline) {
+      //stop the offline counter
+            isOnline = true;
+              phoneNumber_txt.setText("");
+        falName_txt.setText("");
+               if (vars.selectedCx != null) {
+                      RMS_Clone_CSR.reset();
+               }
+            
+            // subscribe once (or guard so you don’t set it multiple times)
+wobj.API_SetNotificationListener(new RingNotificationListener()); // required to get events :contentReference[oaicite:1]{index=1}
+
+// disable JVoIP’s own GUI/dialogs (prevents accept/decline popup)
+wobj.API_SetParameter("iscommandline", "true");                   // disables GUI :contentReference[oaicite:2]{index=2}
+
+// auto-answer ALL incoming calls (no popup needed)
+wobj.API_SetParameter("enableautoaccept", "3");      
+            
+            
+            wobj.API_Start();
+            updateClock();
+            startTime = System.currentTimeMillis();
+
+            timer.stop();
+
+            online_pannel.setBackground(Color.GREEN);
+            offline_online_txt.setText("ONLINE");
+
+            // start the online counter
+            startTime = System.currentTimeMillis();
+            timer.start();
+    online_offline_bttn.setText("Go Offline");
+} else {
+    
+    
+    isOnline = false;
+     //stop the online counter
+            wobj.API_Stop();
+            updateClock();
+            startTime = 0;
+            timer.stop();
+            online_pannel.setBackground(Color.RED);
+            offline_online_txt.setText("OFFLINE");
+
+            // start the offline counter
+            startTime = System.currentTimeMillis();
+            timer.start();
+   
+    online_offline_bttn.setText("Go Online");
+}
+
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_online_offline_bttnActionPerformed
+
+    private void status_ddItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_status_ddItemStateChanged
+//
+//        if (status_dd.getSelectedItem() == "Online") {
+//            online_pannel.setBackground(Color.RED);
+//
+//            wobj.API_Start();
+//            startTime = System.currentTimeMillis();
+//            timer.start();
+//            offline_online_txt.setText("ONLINE");
+//
+//        } else if (status_dd.getSelectedItem().toString().contains("Offline")) {
+//            //stop the online counter
+//            wobj.API_Stop();
+//            updateClock();
+//            startTime = 0;
+//            timer.stop();
+//            online_pannel.setBackground(Color.RED);
+//            offline_online_txt.setText("OFFLINE");
+//
+//            // start the offline counter
+//            startTime = System.currentTimeMillis();
+//            timer.start();
+//        }
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_status_ddItemStateChanged
+
+    private void disconect_bttn_txtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_disconect_bttn_txtActionPerformed
+
+        
+        
+        
+    if (activeLine != -1) {
+        wobj.API_Hangup(activeLine);
+    } else {
+        wobj.API_Hangup(-1); // fallback: hangup current
+    }
+    
+    disconect_bttn_txt.setEnabled(false);
+        changeCallUIElements("acw");
+        isOnline = false;
+     //stop the online counter
+            wobj.API_Stop();
+        
+
+// TODO add your handling code here:
+    }//GEN-LAST:event_disconect_bttn_txtActionPerformed
 
     /**
      * @param args the command line arguments
@@ -150,13 +379,238 @@ public class UI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JTextField acctNumber_txt;
+    private javax.swing.JButton disconect_bttn_txt;
+    private javax.swing.JTextField falName_txt;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel offline_online_txt;
+    private javax.swing.JButton online_offline_bttn;
+    private javax.swing.JPanel online_pannel;
+    private javax.swing.JTextField phoneNumber_txt;
+    private javax.swing.JComboBox<String> status_dd;
+    private javax.swing.JLabel timeInStatus_txt;
     // End of variables declaration//GEN-END:variables
+
+public void firstLaunch() {
+         // get the variables
+        try {
+            String SQL = "Select * from csr_extensions where csr_id = ?;";
+            
+            PreparedStatement pstmt = vars.conn.prepareStatement(SQL);
+            pstmt.setInt(1, Integer.parseInt(vars.loggedInUID));
+            
+            
+            ResultSet rs = pstmt.executeQuery();
+            
+            Softphone s = new Softphone();
+            
+            while (rs.next()) {
+//                s.setSevrer_sip_address("#");
+//                s.setSip_username("#");
+                s.setSip_extension(Integer.toString(rs.getInt("csr_ext")));
+                s.setSip_password(rs.getString("csr_extension_password"));
+            }
+            
+  
+            wobj.API_SetNotificationListener(new RingNotificationListener());
+
+                    wobj.API_SetParameter("serveraddress", s.getSevrer_sip_address());
+                    wobj.API_SetParameter("username", s.getSip_username() + s.getSip_extension());
+                    wobj.API_SetParameter("password", s.getSip_password());
+                                 wobj.API_SetParameter("autoaccept", 1);
+wobj.API_SetParameter("showincomingcall", 0);
+                    status_dd.setSelectedIndex(8);
+        
+           
+            
+        } catch (Exception ex) {
+            Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+}
+
+
+
+
+    private void updateClock() {
+      SimpleDateFormat date = new SimpleDateFormat("mm:ss");
+
+        Date elapsed = new Date(System.currentTimeMillis() - startTime);
+        timeInStatus_txt.setText(date.format(elapsed));
+    }
+
+    private class ClockListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            updateClock();
+        }
+    }
+    
+    
+    
+    public void changeCallUIElements(String status) {
+        if (status == "onc") {
+            
+                    online_pannel.setBackground(Color.CYAN);
+                               startTime = System.currentTimeMillis();
+            timer.start();
+            offline_online_txt.setText("ON CALL");
+            online_offline_bttn.setEnabled(false);
+
+        }else if (status == "on") {
+            isOnline = true;
+            
+                      
+
+            
+            
+            
+                    online_pannel.setBackground(Color.GREEN);
+                               startTime = System.currentTimeMillis();
+            timer.start();
+            offline_online_txt.setText("ONLINE");
+            online_offline_bttn.setEnabled(true);
+                disconect_bttn_txt.setEnabled(false);
+
+
+            
+        } else if (status == "off") {
+            isOnline = false;
+                    online_pannel.setBackground(Color.RED);
+                               startTime = System.currentTimeMillis();
+            timer.start();
+            offline_online_txt.setText("OFFLINE");
+            online_offline_bttn.setEnabled(true);
+
+            
+        } else if (status == "acw") {
+            isOnline = false;
+              status_dd.setSelectedIndex(2);
+                  online_pannel.setBackground(Color.ORANGE);
+                               startTime = System.currentTimeMillis();
+            timer.start();
+            offline_online_txt.setText("ACW");
+            online_offline_bttn.setEnabled(true);
+                online_offline_bttn.setText("Go Online");
+
+
+     
+        }
+    }
+    
+    
+    
+    public String NameFromPhoneNumberInDB(String phoneNumber) {
+        
+        try {
+            String SQL = "Select firstName, middleName, lastName from customer_info where contactPhone1 = ? OR contactPhone2 = ? OR contactPhone3 = ?;";
+            
+            PreparedStatement ps = vars.conn.prepareStatement(SQL);
+            ps.setString(1, phoneNumber);
+            ps.setString(2, phoneNumber);
+            ps.setString(3, phoneNumber);
+            
+            ResultSet rs = ps.executeQuery();
+            
+            
+            while (rs.next()) {
+                return rs.getString("firstName") + " " + rs.getString("middleName") + " " + rs.getString("lastName");
+            }   } catch (SQLException ex) {
+            Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return null;
+        
+    }
+    
+    
+    
+    
+    
+    public void searchForCustomerWhenTheyCallIn(String phoneNumber) {
+        
+    }
+    
+    
+    
+
+  private volatile int activeLine = -1;
+
+class RingNotificationListener extends SIPNotificationListener {
+    @Override
+    public void onStatus(SIPNotification.Status e) {
+        // Ignore only global notifications
+        if (e.getLine() == -1) return;
+
+        // Incoming call ringing
+        if (e.getStatus() == SIPNotification.Status.STATUS_CALL_RINGING
+                && e.getEndpointType() == SIPNotification.Status.DIRECTION_IN) {
+
+            activeLine = e.getLine();
+
+            final String callerDisplay = safe(e.getPeerDisplayname());
+            final String callerPeer = safe(e.getPeer()); // often sip:+123@domain
+            final String shownCaller = !callerDisplay.isBlank() ? callerDisplay : callerPeer;
+            String[] splitCallerDisplay = shownCaller.split(" -");
+            javax.swing.SwingUtilities.invokeLater(() -> {
+                phoneNumber_txt.setText(splitCallerDisplay[0]);
+                
+                String name = NameFromPhoneNumberInDB(splitCallerDisplay[0]);
+                
+                if (name == null) {
+                falName_txt.setText(callerDisplay);
+                    
+                } else {
+                  falName_txt.setText(name);
+
+                }
+                
+                disconect_bttn_txt.setEnabled(true);
+                changeCallUIElements("onc");
+                
+              
+                
+                
+                
+                
+                
+            });
+  rms.clone.main.UI.search_customer.autoSearch = true;
+                rms.clone.main.UI.search_customer.autoSearchPhoneNumber = splitCallerDisplay[0];
+                
+                new search_customer().setVisible(true);
+            // Auto-accept (no popup)
+            wobj.API_Accept(activeLine);
+            return;
+        }
+
+        // Connected
+        if (e.getStatus() == SIPNotification.Status.STATUS_CALL_CONNECT
+                && e.getEndpointType() == SIPNotification.Status.DIRECTION_IN) {
+            activeLine = e.getLine();
+            javax.swing.SwingUtilities.invokeLater(() -> changeCallUIElements("onc"));
+            return;
+        }
+
+        // Finished
+        if (e.getStatus() == SIPNotification.Status.STATUS_CALL_FINISHED) {
+            activeLine = -1;
+            javax.swing.SwingUtilities.invokeLater(() -> {
+                disconect_bttn_txt.setEnabled(false);
+                changeCallUIElements("acw");
+              
+            });
+        }
+    }
+
+    private String safe(String s) { return s == null ? "" : s.trim(); }
+}
+
 }

@@ -1730,7 +1730,7 @@ public static Boolean isLoggedIn = false;
     private void recycle_bttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recycle_bttnActionPerformed
 
         
-        new recycle_device().setVisible(true);
+        new rms.clone.softphone.UI.UI().setVisible(true);
 
         // TODO add your handling code here:
     }//GEN-LAST:event_recycle_bttnActionPerformed
@@ -2014,28 +2014,7 @@ new note(al.getAlertDesc(), al.getAlertId(), al.getAlertTitle());
     }//GEN-LAST:event_customer_line_tableMouseClicked
 
     private void reset_bttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reset_bttnActionPerformed
-        search_bttn.setEnabled(true);
-        recycle_bttn.setEnabled(true);
-        discounts_bttn.setEnabled(true);
-        find_item_bttn.setEnabled(true);
-        sales_bttn.setEnabled(true);
-        nss_token_bttn.setEnabled(true);
-        tender_bttn.setEnabled(true);    
-       new_bttn.setEnabled(true);
-       new_sale_bttn.setEnabled(false);
-        
-        //clear the current customer, if one is searched
-        actions.clearCustomerFromRMS();
-        
-        
-        
-        
-        
-        
-        //disable  the customer field 
-             setEnabledRecursive(jPanel8, false);
-        setEnabledRecursive(jPanel9, false);
-        setEnabledRecursive(jPanel10, false); 
+     reset();
         
                 // TODO add your handling code here:
     }//GEN-LAST:event_reset_bttnActionPerformed
@@ -2695,13 +2674,13 @@ String input = dl_exp_txt.getText().trim();
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel10;
+    public static javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
+    public static javax.swing.JPanel jPanel8;
+    public static javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -3326,6 +3305,30 @@ public  boolean isDateInCurrentYear(String dateString) {
 
 
     }
+
+    public static void reset() {
+   search_bttn.setEnabled(true);
+        recycle_bttn.setEnabled(true);
+        discounts_bttn.setEnabled(true);
+        find_item_bttn.setEnabled(true);
+        sales_bttn.setEnabled(true);
+        nss_token_bttn.setEnabled(true);
+        tender_bttn.setEnabled(true);    
+       new_bttn.setEnabled(true);
+       new_sale_bttn.setEnabled(false);
+        
+        //clear the current customer, if one is searched
+        actions.clearCustomerFromRMS();
+        
+        
+        
+        
+        
+        
+        //disable  the customer field 
+             setEnabledRecursive(jPanel8, false);
+        setEnabledRecursive(jPanel9, false);
+        setEnabledRecursive(jPanel10, false);     }
 
 }
 

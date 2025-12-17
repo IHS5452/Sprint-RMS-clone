@@ -245,55 +245,13 @@ public class search_customer extends javax.swing.JFrame {
  String typeOfAccount = ""; // ACC for Account number, PHO for Phone Number, and FAL ofr first/last name
 DefaultTableModel model;
  static Cx cx = null;
+ public static Boolean autoSearch = false;
+ public static String autoSearchPhoneNumber = "";
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-model = (DefaultTableModel) sleectCustomer_tbl.getModel();
-Component frame = null;
 
-boolean usingAcctNumber = true;
-boolean usingFaLName = true;
-boolean usingPhoneNumber = true;
-
-if (acct_num_txt.getText().toString().strip().isEmpty()) {
-    usingAcctNumber = false;
-}
-
-if (fname_txt.getText().toString().strip().isEmpty() && lname_txt.getText().toString().strip().isEmpty()) {
-    usingFaLName = false;
-}
-
-if (phoneNumber_txt.getText().toString().strip().isEmpty()) {
-    usingPhoneNumber = false;
-}
-List<Map.Entry<phoneNumbers, Cx>> cxList = new ArrayList<>();
-
-
-if (usingAcctNumber) {
-    cxList = actions.searchCustomer("ACC", "", acct_num_txt.getText().toString(), "", "");
-} else if (usingFaLName) {
-    cxList = actions.searchCustomer("FAL", "", "", fname_txt.getText().toString(), lname_txt.getText().toString());
-} else if (usingPhoneNumber) {
-    cxList = actions.searchCustomer("PHO", phoneNumber_txt.getText().toString(), "", "", "");
-}
-
-System.out.println("FAL NAME: " + usingFaLName);
-System.out.println("Phone Number: " + usingPhoneNumber);
-System.out.println("ACCT NUMBER: " + usingAcctNumber);
-
-model.setRowCount(0);
-
-for (Map.Entry<phoneNumbers, Cx> entry : cxList) {
-    phoneNumbers ph = entry.getKey();
-    Cx cx = entry.getValue();
-
-    Object[] rowData = {
-        ph.getPhoneNumber(), // show phoneNumber from phoneNumbers
-        cx.getAccountNumber(),
-        cx.getFirstName() + " " + cx.getLastName(),
-        cx.getAccountType()
-    };
-    model.addRow(rowData);
-}
-
+        
+        searchForACX();
+        
         
         
         // TODO add your handling code here:
@@ -355,6 +313,16 @@ for (Map.Entry<phoneNumbers, Cx> entry : cxList) {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         RMS_Clone_CSR.new_bttn.setEnabled(false);
+        
+        
+        if (autoSearch) {
+            phoneNumber_txt.setText(autoSearchPhoneNumber);
+            searchForACX();
+        }
+        
+        
+        
+        
     }//GEN-LAST:event_formWindowOpened
 
     /**
@@ -410,6 +378,57 @@ for (Map.Entry<phoneNumbers, Cx> entry : cxList) {
     private javax.swing.JTextField phoneNumber_txt;
     private javax.swing.JTable sleectCustomer_tbl;
     // End of variables declaration//GEN-END:variables
+
+    private void searchForACX() {
+model = (DefaultTableModel) sleectCustomer_tbl.getModel();
+Component frame = null;
+
+boolean usingAcctNumber = true;
+boolean usingFaLName = true;
+boolean usingPhoneNumber = true;
+
+if (acct_num_txt.getText().toString().strip().isEmpty()) {
+    usingAcctNumber = false;
+}
+
+if (fname_txt.getText().toString().strip().isEmpty() && lname_txt.getText().toString().strip().isEmpty()) {
+    usingFaLName = false;
+}
+
+if (phoneNumber_txt.getText().toString().strip().isEmpty()) {
+    usingPhoneNumber = false;
+}
+List<Map.Entry<phoneNumbers, Cx>> cxList = new ArrayList<>();
+
+
+if (usingAcctNumber) {
+    cxList = actions.searchCustomer("ACC", "", acct_num_txt.getText().toString(), "", "");
+} else if (usingFaLName) {
+    cxList = actions.searchCustomer("FAL", "", "", fname_txt.getText().toString(), lname_txt.getText().toString());
+} else if (usingPhoneNumber) {
+    cxList = actions.searchCustomer("PHO", phoneNumber_txt.getText().toString(), "", "", "");
+}
+
+System.out.println("FAL NAME: " + usingFaLName);
+System.out.println("Phone Number: " + usingPhoneNumber);
+System.out.println("ACCT NUMBER: " + usingAcctNumber);
+
+model.setRowCount(0);
+
+for (Map.Entry<phoneNumbers, Cx> entry : cxList) {
+    phoneNumbers ph = entry.getKey();
+    Cx cx = entry.getValue();
+
+    Object[] rowData = {
+        ph.getPhoneNumber(), // show phoneNumber from phoneNumbers
+        cx.getAccountNumber(),
+        cx.getFirstName() + " " + cx.getLastName(),
+        cx.getAccountType()
+    };
+    model.addRow(rowData);
+}
+
+        }
 
 
 
