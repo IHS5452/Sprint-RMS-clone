@@ -1,8 +1,7 @@
 <h1 align="center">Sprint RMS Clone</h1>
 
-<p align="center">
-This project is a CLONE of the old Point of Sales (POS) System used at Sprint retial stores, along with some changes that I wanted to add to it when I was a sales rep for them.
-Note: the design of the application does NOT fully represent the actual POS application we used.
+<p align="center">This project is a CLONE of the old Point of Sales (POS) System used at Sprint retial stores and call centers, along with some changes that I wanted to add to it when I was a sales rep for them.</p><br>
+<p align="center">Note: the design of the application does NOT fully represent the actual POS application we used.
 </p>
 
 <hr>
@@ -11,8 +10,7 @@ Note: the design of the application does NOT fully represent the actual POS appl
 <ul>
   <li><a href="#about">About</a></li>
   <li><a href="#author">Author & Contact</a></li>
-  <li><a href="#known-issues">Known Issues and "Heads ups"</a></li>
-  <li><a href="#features-IP">Features that are not complete</a></li>
+  <li><a href="#known-issues">Ground Rules</a></li>
   <li><a href="#license">License</a></li>
 </ul>
 
@@ -36,20 +34,17 @@ When I was a cell phone sales represanative at Sprint, we used thier older-style
 
 <hr>
 
-<h2 id="known-issues">⚠️ Heads ups</h2>
+<h2 id="known-issues">⚠️ Ground Rules</h2>
 <ul>
-  <li>Right now, checking a cusomter's credit results in the program generating a random credit score. This is intentional.</li>
+  <li>If you have an idea for this project, please research to see if it would belong in the Store side or the Call Center Side. There will be two seperate branches for call center and the store side.</li>
+  <ul>
+    <li>If you are unsure, please post it in the issues section with the "Enchnacement" flair.</li>
+  </ul>
+  <li>If there is a feature that already exists, please do NOT remove it unless you have permission from the Author.</li>
+  <li>Feel free to suggest any changes to features that already exist.</li>
 </ul>
 
 <hr>
-
-<h2 id="features-IP">⚠️ Features that are not completed</h2>
-<ul>
-  <li>Adding a new phone sale, and everything assosited with a sale</li>
-  <li>Anything with Discounts</li>
-  <li>Anything with finding a SKU/Item</li>
-</ul>
-
 
 <hr>
 
