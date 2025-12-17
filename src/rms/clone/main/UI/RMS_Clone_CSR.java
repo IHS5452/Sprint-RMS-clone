@@ -116,6 +116,7 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
         pid_txt_main = new javax.swing.JTextField();
         jLabel42 = new javax.swing.JLabel();
         reset_bttn = new javax.swing.JButton();
+        new_sale_bttn = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         customer_line_table = new javax.swing.JTable();
@@ -265,7 +266,6 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
         jLabel39 = new javax.swing.JLabel();
         jButton15 = new javax.swing.JButton();
         jTextField30 = new javax.swing.JTextField();
-        lookup_accessory_btn = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -291,7 +291,7 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
 
-        new_bttn.setText("New");
+        new_bttn.setText("New Acct");
         new_bttn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 new_bttnActionPerformed(evt);
@@ -333,7 +333,7 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
             }
         });
 
-        nss_token_bttn.setText("NSS Token");
+        nss_token_bttn.setText("Return");
         nss_token_bttn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nss_token_bttnActionPerformed(evt);
@@ -372,6 +372,13 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
             }
         });
 
+        new_sale_bttn.setText("New sale");
+        new_sale_bttn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                new_sale_bttnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -381,9 +388,11 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
                 .addComponent(jLabel42)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(pid_txt_main, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
-                .addComponent(new_bttn, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(new_bttn, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(new_sale_bttn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(search_bttn, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(recycle_bttn, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -416,8 +425,9 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
                     .addComponent(tender_bttn, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(pid_txt_main, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel42)
-                    .addComponent(reset_bttn, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(reset_bttn, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(new_sale_bttn, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 204));
@@ -547,7 +557,7 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(add_note_bttn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         main_menu.setTabPlacement(javax.swing.JTabbedPane.BOTTOM);
@@ -1489,8 +1499,6 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
 
         jTextField30.setEditable(false);
 
-        lookup_accessory_btn.setText("Lookup Accessory");
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -1515,8 +1523,7 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(add_to_cart_bttn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextField32, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
-                            .addComponent(lookup_accessory_btn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(jTextField32, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE))))
                 .addGap(62, 62, 62)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
@@ -1599,9 +1606,7 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
                             .addComponent(jTextField32, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(add_to_cart_bttn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lookup_accessory_btn)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout sales_pannnelLayout = new javax.swing.GroupLayout(sales_pannnel);
@@ -1673,26 +1678,28 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(main_menu)))
-                .addGap(22, 22, 22))
+                        .addComponent(main_menu)
+                        .addGap(22, 22, 22))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 11, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(main_menu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(main_menu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
 
         main_menu.getAccessibleContext().setAccessibleName("Sales\nCustomer\nConsent\nServices\n");
@@ -2011,6 +2018,8 @@ new note(al.getAlertDesc(), al.getAlertId(), al.getAlertTitle());
         sales_bttn.setEnabled(true);
         nss_token_bttn.setEnabled(true);
         tender_bttn.setEnabled(true);    
+       new_bttn.setEnabled(true);
+       new_sale_bttn.setEnabled(false);
         
         //clear the current customer, if one is searched
         actions.clearCustomerFromRMS();
@@ -2498,6 +2507,40 @@ String input = dl_exp_txt.getText().trim();
         // TODO add your handling code here:
     }//GEN-LAST:event_cx_zipActionPerformed
 
+    private void new_sale_bttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_new_sale_bttnActionPerformed
+        search_bttn.setEnabled(true);
+        recycle_bttn.setEnabled(true);
+        discounts_bttn.setEnabled(true);
+        find_item_bttn.setEnabled(true);
+        sales_bttn.setEnabled(true);
+        nss_token_bttn.setEnabled(true);
+        tender_bttn.setEnabled(true);   
+                new_bttn.setEnabled(false);
+
+        
+        
+             setEnabledRecursive(jPanel8, false);
+        setEnabledRecursive(jPanel9, false);
+        setEnabledRecursive(jPanel10, false); 
+        setEnabledRecursive(jPanel3, true); 
+        
+        
+        
+        
+        
+        
+        
+         main_menu.setSelectedIndex(5);
+        //set the tabbed pane to be the 
+
+
+        
+
+
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_new_sale_bttnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -2671,10 +2714,10 @@ String input = dl_exp_txt.getText().trim();
     private javax.swing.JTextField jTextField31;
     private javax.swing.JTextField jTextField32;
     private javax.swing.JTextField lname_txt;
-    private javax.swing.JButton lookup_accessory_btn;
     private javax.swing.JTabbedPane main_menu;
     private javax.swing.JTextField minit_txt;
     public static javax.swing.JButton new_bttn;
+    public static javax.swing.JButton new_sale_bttn;
     private static javax.swing.JTextArea news_content;
     private static javax.swing.JLabel news_title;
     public static javax.swing.JTextArea note_full_txt;
@@ -2762,6 +2805,7 @@ public void fillInInformation(Cx cx) {
 public static void checkIfLoggedIn() {
     if (!vars.isLoggedIn) {
         new_bttn.setEnabled(false);
+        new_sale_bttn.setEnabled(false);
         search_bttn.setEnabled(false);
         recycle_bttn.setEnabled(false);
         discounts_bttn.setEnabled(false);
@@ -2777,6 +2821,7 @@ public static void checkIfLoggedIn() {
     } else {
                 pid_txt_main.setEditable(false);
                         new_bttn.setEnabled(true);
+
         search_bttn.setEnabled(true);
         recycle_bttn.setEnabled(true);
         discounts_bttn.setEnabled(true);

@@ -96,7 +96,6 @@ public class Alerts {
             if (rs.next()) {
                 alert = new Alerts();
                 alert.setAlertId(rs.getInt("alert_id"));
-                alert.setAssignedToGroup(rs.getString("assigned_to_group"));
                 alert.setAlertTitle(rs.getString("alert_title"));
                 alert.setAlertDesc(rs.getString("alert_desc"));
                 alert.setActive(rs.getBoolean("is_active"));

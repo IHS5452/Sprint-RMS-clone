@@ -89,14 +89,17 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Component id="jPanel1" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
                   <Group type="102" attributes="0">
                       <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="main_menu" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -105,15 +108,15 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="11" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       <Component id="main_menu" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -136,9 +139,11 @@
                   <Component id="jLabel42" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="pid_txt_main" min="-2" pref="167" max="-2" attributes="0"/>
-                  <EmptySpace pref="45" max="32767" attributes="0"/>
-                  <Component id="new_bttn" min="-2" pref="84" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="new_bttn" min="-2" pref="84" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="new_sale_bttn" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="search_bttn" min="-2" pref="84" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="recycle_bttn" min="-2" pref="84" max="-2" attributes="0"/>
@@ -174,8 +179,9 @@
                       <Component id="pid_txt_main" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel42" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="reset_bttn" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
+                      <Component id="new_sale_bttn" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="16" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -183,7 +189,7 @@
       <SubComponents>
         <Component class="javax.swing.JButton" name="new_bttn">
           <Properties>
-            <Property name="text" type="java.lang.String" value="New"/>
+            <Property name="text" type="java.lang.String" value="New Acct"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="new_bttnActionPerformed"/>
@@ -249,7 +255,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="nss_token_bttn">
           <Properties>
-            <Property name="text" type="java.lang.String" value="NSS Token"/>
+            <Property name="text" type="java.lang.String" value="Return"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nss_token_bttnActionPerformed"/>
@@ -290,6 +296,17 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="reset_bttnActionPerformed"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JButton" name="new_sale_bttn">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="New sale"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="new_sale_bttnActionPerformed"/>
           </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
@@ -354,7 +371,7 @@
                   <Component id="jScrollPane3" min="-2" pref="105" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="add_note_bttn" min="-2" pref="35" max="-2" attributes="0"/>
-                  <EmptySpace pref="29" max="32767" attributes="0"/>
+                  <EmptySpace pref="23" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -2198,7 +2215,6 @@
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                       <Component id="add_to_cart_bttn" max="32767" attributes="0"/>
                                       <Component id="jTextField32" pref="127" max="32767" attributes="0"/>
-                                      <Component id="lookup_accessory_btn" alignment="0" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -2310,9 +2326,7 @@
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="add_to_cart_bttn" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="lookup_accessory_btn" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="16" max="32767" attributes="0"/>
+                          <EmptySpace pref="45" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -2453,11 +2467,6 @@
                 <Component class="javax.swing.JTextField" name="jTextField30">
                   <Properties>
                     <Property name="editable" type="boolean" value="false"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JButton" name="lookup_accessory_btn">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Lookup Accessory"/>
                   </Properties>
                 </Component>
               </SubComponents>

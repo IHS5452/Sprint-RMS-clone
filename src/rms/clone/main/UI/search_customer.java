@@ -55,6 +55,14 @@ public class search_customer extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(204, 255, 255));
 
@@ -300,9 +308,7 @@ for (Map.Entry<phoneNumbers, Cx> entry : cxList) {
         
        
         rms.clone.main.business.vars.selectedCx = actions.selectCustomer(phoneNumberFromTable);
-        
-        System.out.println("RMS ID: " + rms.clone.main.business.vars.selectedCx.getFirstName());
-        
+               
         
         
         
@@ -315,7 +321,9 @@ for (Map.Entry<phoneNumbers, Cx> entry : cxList) {
         RMS_Clone_CSR.getServices(phoneNumberFromTable);
         RMS_Clone_CSR.fillInCXInfoInSalesTab();
         RMS_Clone_CSR.add_note_bttn.setEnabled(true);
-                        RMS_Clone_CSR.setEnabledRecursive(jPanel3, false);
+        RMS_Clone_CSR.setEnabledRecursive(jPanel3, true);
+
+        RMS_Clone_CSR.new_sale_bttn.setEnabled(true);
 
         
         
@@ -331,6 +339,23 @@ for (Map.Entry<phoneNumbers, Cx> entry : cxList) {
     private void acct_num_txtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acct_num_txtActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_acct_num_txtActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+//
+//        if (vars.selectedCx.equals(null)) {
+//                    RMS_Clone_CSR.new_bttn.setEnabled(true);
+//
+//        }
+//        
+
+
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formWindowClosed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        RMS_Clone_CSR.new_bttn.setEnabled(false);
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
