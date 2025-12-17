@@ -167,6 +167,7 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
         jScrollPane8 = new javax.swing.JScrollPane();
         note_full_txt = new javax.swing.JTextArea();
         jLabel50 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         customer_pannel = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         minit_txt = new javax.swing.JTextField();
@@ -594,7 +595,7 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
                 .addComponent(news_title)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 498, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(120, Short.MAX_VALUE))
+                .addContainerGap(127, Short.MAX_VALUE))
         );
 
         main_menu.addTab("Home", home_pannel);
@@ -607,7 +608,7 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
         );
         consent_pannnelLayout.setVerticalGroup(
             consent_pannnelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 699, Short.MAX_VALUE)
+            .addGap(0, 707, Short.MAX_VALUE)
         );
 
         main_menu.addTab("Consent", consent_pannnel);
@@ -842,6 +843,13 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
 
         jLabel50.setText("Note");
 
+        jButton1.setText("Send Feedback on Agent");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
@@ -849,22 +857,30 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jLabel49)
-                        .addComponent(jLabel50))
-                    .addComponent(jLabel48, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(pid_entered_by_txt)
-                    .addComponent(entered_date_txt)
-                    .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(71, Short.MAX_VALUE))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addGap(20, 20, 20)
+                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel49)
+                                    .addComponent(jLabel50)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel48)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(pid_entered_by_txt)
+                            .addComponent(entered_date_txt)
+                            .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton1)))
+                .addContainerGap(73, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 677, Short.MAX_VALUE)
+            .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 685, Short.MAX_VALUE)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -878,7 +894,8 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel50))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout notes_pannelLayout = new javax.swing.GroupLayout(notes_pannel);
@@ -1396,7 +1413,7 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
                         .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jLabel36))
-                .addContainerGap(93, Short.MAX_VALUE))
+                .addContainerGap(120, Short.MAX_VALUE))
         );
         customer_pannelLayout.setVerticalGroup(
             customer_pannelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1606,7 +1623,7 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
                             .addComponent(jTextField32, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(add_to_cart_bttn)
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout sales_pannnelLayout = new javax.swing.GroupLayout(sales_pannnel);
@@ -1718,7 +1735,7 @@ public String acctType = "postpaid_p";
    
                                Map<String,String> infoForAbout = new LinkedHashMap<>();
 
-   
+      public static List<String> agentList;
    
 public static Boolean isLoggedIn = false;
 
@@ -2523,6 +2540,31 @@ String input = dl_exp_txt.getText().trim();
         // TODO add your handling code here:
     }//GEN-LAST:event_new_sale_bttnActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        agentList = new ArrayList<>();
+                DefaultTableModel model = (DefaultTableModel) notes_table.getModel();
+int column = 2;
+int rowCount = model.getRowCount();
+
+for (int i = 0; i < rowCount; i++) {
+    Object value = model.getValueAt(i, column);
+
+    if (value != null) {
+        String text = value.toString();
+        System.out.println(text);
+        agentList.add(text);
+    }
+}
+
+new send_feedback_agent().setVisible(true);
+
+
+
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -2606,6 +2648,7 @@ String input = dl_exp_txt.getText().trim();
     private javax.swing.JTextField fname_txt;
     private javax.swing.JComboBox<String> gender_dd;
     private javax.swing.JPanel home_pannel;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton2;
