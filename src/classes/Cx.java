@@ -6,6 +6,7 @@ package classes;
 
 import java.util.Date;
     import java.util.List;
+import java.sql.*;
 
 
 /**
@@ -60,6 +61,102 @@ public class Cx {
 
     public Cx() {
     }
+
+    
+    
+    public Cx(ResultSet rs) throws SQLException {
+   this.clearAllFields();
+
+    this.id = rs.getInt("id");
+    this.prefix = rs.getString("prefix");
+    this.firstName = rs.getString("firstName");
+    this.middleName = rs.getString("middleName");
+    this.lastName = rs.getString("lastName");
+    this.suffix = rs.getString("suffix");
+    this.email = rs.getString("email");
+    this.emailNotProvided = rs.getBoolean("emailNotProvided");
+    this.ssn = rs.getString("ssn");
+    this.birthDate = rs.getDate("birthDate");
+    this.dlNumber = rs.getString("dlNumber");
+    this.dlState = rs.getString("dlState");
+    this.dlExp = rs.getDate("dlExp");
+    this.contactPhone1 = rs.getString("contactPhone1");
+    this.contactPhone2 = rs.getString("contactPhone2");
+    this.contactPhone3 = rs.getString("contactPhone3");
+    this.streetNumber = rs.getString("streetNumber");
+    this.streetName = rs.getString("streetName");
+    this.addressLine2 = rs.getString("addressLine2");
+    this.city = rs.getString("city");
+    this.state = rs.getString("state");
+    this.zip = rs.getString("zip");
+    this.employer = rs.getString("employer");
+
+    // These fields exist in your earlier constructor signature—set them if your table has them:
+    // (Only keep lines that match real DB column names)
+    this.isNvp = rs.getBoolean("isNvp");
+    this.assignToBusinessAccount = rs.getBoolean("assignToBusinessAccount");
+    this.attachToHierarchy = rs.getBoolean("attachToHierarchy");
+
+    this.accountType = rs.getString("accountType");
+    this.creditSsn = rs.getString("creditSsn");
+    this.creditClass = rs.getString("creditClass");
+    this.approvedLines = rs.getInt("approvedLines");
+    this.lastDateChecked = rs.getDate("lastDateChecked");
+    this.typeOfAccount = rs.getString("typeOfAccount");
+    this.accountNumber = rs.getString("account_number");
+
+    // Optional nullable numeric/boolean fields:
+    Integer dp = (Integer) rs.getObject("downpay_perc");
+    this.downpayPerc = dp;
+
+    Boolean dn = (Boolean) rs.getObject("downpayment_needed");
+    this.downpaymentNeeded = dn;
+}
+
+    
+    
+    public Cx(int id, String prefix, String firstName, String middleName, String lastName, String suffix, String email, boolean emailNotProvided, String ssn, Date birthDate, String dlNumber, String dlState, Date dlExp, String contactPhone1, String contactPhone2, String contactPhone3, String streetNumber, String streetName, String addressLine2, String city, String state, String zip, String employer, boolean isNvp, boolean assignToBusinessAccount, boolean attachToHierarchy, String accountType, String creditSsn, String creditClass, int approvedLines, Date lastDateChecked, String typeOfAccount, String accountNumber, Integer downpayPerc, Boolean downpaymentNeeded) {
+        this.id = id;
+        this.prefix = prefix;
+        this.firstName = firstName;
+        this.middleName = middleName;
+        this.lastName = lastName;
+        this.suffix = suffix;
+        this.email = email;
+        this.emailNotProvided = emailNotProvided;
+        this.ssn = ssn;
+        this.birthDate = birthDate;
+        this.dlNumber = dlNumber;
+        this.dlState = dlState;
+        this.dlExp = dlExp;
+        this.contactPhone1 = contactPhone1;
+        this.contactPhone2 = contactPhone2;
+        this.contactPhone3 = contactPhone3;
+        this.streetNumber = streetNumber;
+        this.streetName = streetName;
+        this.addressLine2 = addressLine2;
+        this.city = city;
+        this.state = state;
+        this.zip = zip;
+        this.employer = employer;
+        this.isNvp = isNvp;
+        this.assignToBusinessAccount = assignToBusinessAccount;
+        this.attachToHierarchy = attachToHierarchy;
+        this.accountType = accountType;
+        this.creditSsn = creditSsn;
+        this.creditClass = creditClass;
+        this.approvedLines = approvedLines;
+        this.lastDateChecked = lastDateChecked;
+        this.typeOfAccount = typeOfAccount;
+        this.accountNumber = accountNumber;
+        this.downpayPerc = downpayPerc;
+        this.downpaymentNeeded = downpaymentNeeded;
+    }
+    
+    
+    
+    
+    
 
     /* ================= GETTERS / SETTERS ================= */
 

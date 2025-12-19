@@ -21,11 +21,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import rms.clone.main.UI.RMS_Clone_CSR;
-import static rms.clone.main.UI.RMS_Clone_CSR.alerts_table;
-import static rms.clone.main.UI.RMS_Clone_CSR.customer_line_table;
-import static rms.clone.main.UI.RMS_Clone_CSR.services_table;
-import static rms.clone.main.UI.RMS_Clone_CSR.notes_table;
+import rms.clone.main.UI.main.RMS_Clone_CSR;
+import static rms.clone.main.UI.main.RMS_Clone_CSR.alerts_table;
+import static rms.clone.main.UI.main.RMS_Clone_CSR.customer_line_table;
+import static rms.clone.main.UI.main.RMS_Clone_CSR.services_table;
+import static rms.clone.main.UI.main.RMS_Clone_CSR.notes_table;
 
 /**
  *
@@ -33,7 +33,26 @@ import static rms.clone.main.UI.RMS_Clone_CSR.notes_table;
  */
 public class actions {
     
-    
+    public static Cx selectCustomerByAccountNumber(String accountNumber) {
+    String SQL = "SELECT * FROM customer_info WHERE account_number = ? LIMIT 1";
+
+    try (PreparedStatement ps = vars.conn.prepareStatement(SQL)) {
+        ps.setString(1, accountNumber);
+
+        try (ResultSet rs = ps.executeQuery()) {
+            if (!rs.next()) {
+                System.out.println("No customer found for account_number=" + accountNumber);
+                return null;
+            }
+
+            // Build CX from DB row
+            return new Cx(rs);
+        }
+    } catch (SQLException ex) {
+        Logger.getLogger(actions.class.getName()).log(Level.SEVERE, null, ex);
+        return null;
+    }
+}
     
     
     
@@ -140,6 +159,9 @@ public static String login(String pid, String password) {
         return classes.Strings.GENERAL_ERROR;
     }
 }
+
+
+
 
 public static Cx selectCustomer(String id) {
      try {

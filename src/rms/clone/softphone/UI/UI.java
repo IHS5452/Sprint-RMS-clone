@@ -17,8 +17,11 @@ import java.util.logging.Logger;
 import javax.swing.Timer;
 import rms.clone.main.business.vars;
 import java.util.TimerTask;
-import rms.clone.main.UI.RMS_Clone_CSR;
-import rms.clone.main.UI.search_customer;
+import rms.clone.main.UI.main.RMS_Clone_CSR;
+ 
+    import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import rms.clone.main.UI.submain.search_customer;
 
 
 /**
@@ -59,8 +62,12 @@ public class UI extends javax.swing.JFrame {
         phoneNumber_txt = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         acctNumber_txt = new javax.swing.JTextField();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -142,6 +149,7 @@ public class UI extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         jLabel2.setText("Customer information");
 
         jLabel3.setText("Phone Number");
@@ -149,6 +157,23 @@ public class UI extends javax.swing.JFrame {
         jLabel4.setText("First & Last name");
 
         jLabel5.setText("Account number");
+
+        jMenu1.setText("File");
+
+        jMenuItem1.setText("SIP Settings");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+
+        jMenuItem2.setText("Incoming call settings");
+        jMenu1.add(jMenuItem2);
+
+        jMenuBar1.add(jMenu1);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -206,7 +231,7 @@ public class UI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(acctNumber_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addContainerGap(9, Short.MAX_VALUE))
         );
 
         pack();
@@ -217,6 +242,8 @@ public class UI extends javax.swing.JFrame {
         ClockListener clock = new ClockListener();
     Timer timer = new Timer(53, clock);
     boolean isOnline = false;
+    
+    String currentPhoneNumber = "";
 
 
     
@@ -251,14 +278,23 @@ if (!isOnline) {
             // subscribe once (or guard so you don’t set it multiple times)
 wobj.API_SetNotificationListener(new RingNotificationListener()); // required to get events :contentReference[oaicite:1]{index=1}
 
-// disable JVoIP’s own GUI/dialogs (prevents accept/decline popup)
-wobj.API_SetParameter("iscommandline", "true");                   // disables GUI :contentReference[oaicite:2]{index=2}
+// Disable JVoIP built-in GUI / popup dialogs
+wobj.API_SetParameter("iscommandline", "true");   // run without built-in GUI
+wobj.API_SetParameter("hasgui", "false");         // no built-in GUI at all
+wobj.API_SetParameter("hasincomingcall popup", "0"); // disable Accept/Reject popup  :contentReference[oaicite:1]{index=1}
+wobj.API_SetParameter("hasincomingcallpopup", "0"); // disable Accept/Reject popup  :contentReference[oaicite:1]{index=1}
 
-// auto-answer ALL incoming calls (no popup needed)
-            wobj.API_SetParameter("multilinegui", false);
-wobj.API_SetParameter("rejectonbusy", true);
-wobj.API_SetParameter("maxlines", 1);
-            
+// Old parameter name mentioned in docs (typo in docs, but still valid)
+wobj.API_SetParameter("hasincomigcall", "0");     // safety
+
+
+// IMPORTANT: don’t let new calls replace/steal the current call
+wobj.API_SetParameter("allowreplace", "0");
+
+// IMPORTANT: reject any new incoming call while already in call
+wobj.API_SetParameter("rejectonbusy", "1");
+
+
             wobj.API_Start();
             updateClock();
             startTime = System.currentTimeMillis();
@@ -339,6 +375,14 @@ wobj.API_SetParameter("maxlines", 1);
 // TODO add your handling code here:
     }//GEN-LAST:event_disconect_bttn_txtActionPerformed
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+
+        new softphone_settings().setVisible(true);
+
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -386,6 +430,10 @@ wobj.API_SetParameter("maxlines", 1);
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JLabel offline_online_txt;
     private javax.swing.JButton online_offline_bttn;
     private javax.swing.JPanel online_pannel;
@@ -396,15 +444,15 @@ wobj.API_SetParameter("maxlines", 1);
 
 public void firstLaunch() {
     try {
-        String SQL = "Select * from csr_extensions where csr_id = ?;";
+        String SQL = "SELECT ce.csr_id, ce.csr_username, ce.csr_ext, ce.csr_queue, ce.csr_extension_password, ce.uses_default_sip, CASE WHEN ce.uses_default_sip = 1 THEN v.default_sip_address ELSE ce.alt_sip_address END AS sip_address FROM csr_extensions ce CROSS JOIN vars v WHERE ce.csr_id = ?;";
         PreparedStatement pstmt = vars.conn.prepareStatement(SQL);
         pstmt.setInt(1, Integer.parseInt(vars.loggedInUID));
         ResultSet rs = pstmt.executeQuery();
 
         Softphone s = new Softphone();
         while (rs.next()) {
-            s.setSevrer_sip_address("");
-            s.setSip_username("");
+            s.setSevrer_sip_address(rs.getString("sip_address"));
+            s.setSip_username(rs.getString("csr_username"));
             s.setSip_extension(Integer.toString(rs.getInt("csr_ext")));
             s.setSip_password(rs.getString("csr_extension_password"));
         }
@@ -417,15 +465,27 @@ public void firstLaunch() {
         wobj.API_SetParameter("username", s.getSip_username() + s.getSip_extension());
         wobj.API_SetParameter("password", s.getSip_password());
 
-        // Register + auto accept + NO popup
-wobj.API_SetParameter("maxlines", "2");
+// Disable JVoIP built-in GUI / popup dialogs
+wobj.API_SetParameter("hasgui", "false");         // no built-in GUI at all
+wobj.API_SetParameter("hasincomingcall popup", "0"); // disable Accept/Reject popup  :contentReference[oaicite:1]{index=1}
 
-        // Correct param name to hide incoming popup
-wobj.API_SetParameter("iscommandline", "true"); // :contentReference[oaicite:2]{index=2}
-        // Optional: also hide any other UI bits if you’re embedding
+// Old parameter name mentioned in docs (typo in docs, but still valid)
+wobj.API_SetParameter("hasincomigcall", "0");     // safety
 
-        // Reject new incoming calls while already in a call
+
+// IMPORTANT: don’t let new calls replace/steal the current call
+wobj.API_SetParameter("allowreplace", "0");
+
+// IMPORTANT: reject any new incoming call while already in call
 wobj.API_SetParameter("rejectonbusy", "1");
+
+wobj.API_SetParameter("iscommandline", "true");      // run without built-in UI
+wobj.API_SetParameter("hasincomingcallpopup", "0"); // disable popup :contentReference[oaicite:1]{index=1}
+
+// optional “silent” knobs (also from docs):
+wobj.API_SetParameter("playring", "0");
+wobj.API_SetParameter("beeponincoming", "1");
+
 
         status_dd.setSelectedIndex(8);
 
@@ -520,7 +580,15 @@ wobj.API_SetParameter("rejectonbusy", "1");
             
             
             while (rs.next()) {
-                return rs.getString("firstName") + " " + rs.getString("middleName") + " " + rs.getString("lastName");
+                if (rs.getString("middleName").equals(null)) {
+                                   return rs.getString("firstName") + " " + rs.getString("lastName");
+ 
+                } else {
+                                    return rs.getString("firstName") + " " + rs.getString("middleName") + " " + rs.getString("lastName");
+
+                }
+                
+                
             }   } catch (SQLException ex) {
             Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -530,48 +598,102 @@ wobj.API_SetParameter("rejectonbusy", "1");
     }
     
     
-    
-    
-    
-    public void searchForCustomerWhenTheyCallIn(String phoneNumber) {
+        public String AccountNumberFromPhoneNumberInDB(String phoneNumber) {
         
-    }
-    
-    
-    private volatile int activeLine = -1;
+        try {
+            String SQL = "Select account_number from customer_info where contactPhone1 = ? OR contactPhone2 = ? OR contactPhone3 = ?;";
+            
+            PreparedStatement ps = vars.conn.prepareStatement(SQL);
+            ps.setString(1, phoneNumber);
+            ps.setString(2, phoneNumber);
+            ps.setString(3, phoneNumber);
+            
+            ResultSet rs = ps.executeQuery();
+            
+            
+            while (rs.next()) {
+                return rs.getString("account_number");
+            }   } catch (SQLException ex) {
+            Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return null;
+        
+        }
+private volatile int activeLine = -1;
 private volatile boolean inCall = false;
+
 class RingNotificationListener extends SIPNotificationListener {
+
     @Override
     public void onStatus(SIPNotification.Status e) {
-        if (e.getLine() <= 0) return;
+        if (e == null) return;
 
         final int line = e.getLine();
+        if (line <= 0) return;
 
-        // RINGING (incoming)
+        // INCOMING RING
         if (e.getStatus() == SIPNotification.Status.STATUS_CALL_RINGING
                 && e.getEndpointType() == SIPNotification.Status.DIRECTION_IN) {
 
-            // If we’re already on a call, reject the NEW call (do NOT touch activeLine)
+            // Busy: reject new call WITHOUT touching the active call
             if (inCall && activeLine > 0) {
-                wobj.API_Reject(line);   // send busy/decline for the 2nd call
+                wobj.API_Reject(line);
                 return;
             }
 
-            // Otherwise accept this call and mark it active
+            // Mark active line immediately
             activeLine = line;
 
+            // Extract caller fast (NO DB here)
             final String callerDisplay = safe(e.getPeerDisplayname());
             final String callerPeer = safe(e.getPeer());
             final String shownCaller = !callerDisplay.isBlank() ? callerDisplay : callerPeer;
 
+            final String phone = extractPhone(shownCaller);
+
+            // 1) ACCEPT IMMEDIATELY (don't wait for UI/DB)
+            wobj.API_Accept(line);
+
+            // 2) Update UI quickly (on EDT)
             javax.swing.SwingUtilities.invokeLater(() -> {
-                phoneNumber_txt.setText(shownCaller);
-                falName_txt.setText(callerDisplay);
+                phoneNumber_txt.setText(phone);
+                falName_txt.setText(callerDisplay); // placeholder until DB returns
+                acctNumber_txt.setText("");
                 disconect_bttn_txt.setEnabled(true);
                 changeCallUIElements("onc");
             });
 
-            wobj.API_Accept(line);
+            // 3) Background DB lookup + open your search window (won't block call answering)
+            new javax.swing.SwingWorker<Void, Void>() {
+                String dbName;
+                String dbAcct;
+
+                @Override
+                protected Void doInBackground() {
+                    dbName = NameFromPhoneNumberInDB(phone);
+                    dbAcct = AccountNumberFromPhoneNumberInDB(phone);
+                    return null;
+                }
+
+                @Override
+                protected void done() {
+                    javax.swing.SwingUtilities.invokeLater(() -> {
+                        if (dbName != null && !dbName.isBlank()) {
+                            falName_txt.setText(dbName);
+                        }
+                        if (dbAcct != null) {
+                            acctNumber_txt.setText(dbAcct);
+                        }
+
+                        // Auto-search window
+                            rms.clone.main.UI.submain.search_customer.autoSearch = true;
+                            rms.clone.main.UI.submain.search_customer.autoSearchPhoneNumber = phone;
+                        new search_customer().setVisible(true);
+                    });
+                }
+            }.execute();
+
             return;
         }
 
@@ -584,20 +706,63 @@ class RingNotificationListener extends SIPNotificationListener {
             return;
         }
 
-        // FINISHED / DISCONNECTED
-//        if (e.getStatus() == SIPNotification.Status.STATUS_CALL_FINISHED) {
-//            if (line == activeLine) {
-//                activeLine = -1;
-//                inCall = false;
-//                javax.swing.SwingUtilities.invokeLater(() -> {
-//                    disconect_bttn_txt.setEnabled(false);
-//                    changeCallUIElements("acw");
-//                });
-//            }
-//        }
+        // FINISHED
+        if (e.getStatus() == SIPNotification.Status.STATUS_CALL_FINISHED) {
+            if (line == activeLine) {
+                activeLine = -1;
+                inCall = false;
+                javax.swing.SwingUtilities.invokeLater(() -> {
+                    disconect_bttn_txt.setEnabled(false);
+                    changeCallUIElements("acw");
+                });
+            }
+        }
     }
 
-    private String safe(String s) { return s == null ? "" : s.trim(); }
-}
+    private String safe(String s) {
+        return s == null ? "" : s.trim();
+    }
 
+    private String extractPhone(String raw) {
+    if (raw == null || raw.isBlank()) return "";
+
+    String s = raw.trim();
+
+    int dash = s.indexOf(" -");
+    if (dash > 0) s = s.substring(0, dash).trim();
+
+    // Strip SIP URI parts
+    if (s.startsWith("sip:")) s = s.substring(4);
+    int at = s.indexOf('@');
+    if (at > 0) s = s.substring(0, at);
+
+    // Keep digits and optional leading +
+    s = s.replaceAll("[^0-9+]", "");
+
+    // If it starts with +, treat as international (keep country code)
+    if (s.startsWith("+")) {
+        return s;
+    }
+
+    // No + → digits only
+    // US number cases
+    if (s.length() == 11 && s.startsWith("1")) {
+        // US number with country code → strip leading 1
+        return s.substring(1);
+    }
+
+    if (s.length() == 10) {
+        // Standard US number
+        return s;
+    }
+
+    // Foreign number without + (best effort: add +)
+    if (s.length() > 10) {
+        return "+" + s;
+    }
+
+    // Fallback (short/invalid numbers)
+    return s;
+}
+    }
 }
