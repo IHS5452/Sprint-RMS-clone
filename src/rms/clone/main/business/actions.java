@@ -88,7 +88,11 @@ public class actions {
         
         // clear the saved cx var
         
+        if (vars.selectedCx != null) {
         vars.selectedCx.clearAllFields();
+            
+        }
+        
 
         
         

@@ -51,11 +51,13 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.HashMap;
 import rms.clone.main.UI.submain.pay_bill;
 import rms.clone.main.UI.submain.return_phone;
 import rms.clone.main.UI.submain.search_customer;
 import rms.clone.main.UI.submain.search_for_service;
 import rms.clone.main.UI.submain.send_feedback_agent;
+import rms.clone.main.UI.submain.tender;
 
 
 /**
@@ -1478,7 +1480,7 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(204, 204, 204));
 
-        transType_dd.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Return", "Prepaid Single Activation", "Prepaid Multiple Activation", "Postpaid Single Activation", "Postpaid Multiple Activation", "Prepaid Addon Activation", "Postpaid Addon Activation", "Service", "Accessory", "Activation Fee", "Bill Pay", "Other" }));
+        transType_dd.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Return", "Prepaid Activation", "Postpaid Activation", "Service addon", "Accessory", "Activation Fee", "Bill Pay", "Other" }));
         transType_dd.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 transType_ddItemStateChanged(evt);
@@ -1574,7 +1576,7 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
                         .addGap(157, 157, 157))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 126, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 173, Short.MAX_VALUE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1755,7 +1757,10 @@ public String acctType = "postpaid_p";
    
 public static Boolean isLoggedIn = false;
 
-DefaultTableModel cart_model;
+ public static double billTotal = 0.00;
+
+
+public static DefaultTableModel cart_model;
 
     private void search_bttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_bttnActionPerformed
   new search_customer().setVisible(true);
@@ -1805,6 +1810,90 @@ DefaultTableModel cart_model;
     }//GEN-LAST:event_employee_acct_bttnActionPerformed
 
     private void tender_bttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tender_bttnActionPerformed
+
+               int rowCount = cart_model.getRowCount();
+                int column_itemType = 1;
+                int column_itemPrice = 2;
+
+                Map<String, Double> types_of_items_in_cart = new HashMap<>();
+
+                double billTotal = 0.0;
+
+                // Read cart rows safely
+                for (int i = 0; i < rowCount; i++) {
+                    String itemType = cart_model.getValueAt(i, column_itemType).toString();
+                    double itemPrice = Double.parseDouble(
+                            cart_model.getValueAt(i, column_itemPrice).toString()
+                    );
+
+                    // Store (or accumulate) item types
+                    types_of_items_in_cart.merge(itemType, itemPrice, Double::sum);
+
+                    // Accumulate total
+                    billTotal += itemPrice;
+
+                    System.out.println(itemType + " -> " + itemPrice);
+                }
+
+                // Handle Bill Pay logic
+                if (types_of_items_in_cart.containsKey("Bill Pay")) {
+                    tender.includesBillPay = true;
+                    tender.ammt_for_bill = types_of_items_in_cart.get("Bill Pay");
+                } 
+                
+                
+                if (types_of_items_in_cart.containsKey("Prepaid Activation")) {
+                    tender.includesPrepaidSale = true;
+                    
+                    
+                }
+                
+                 
+                if (types_of_items_in_cart.containsKey("Postpaid Activation")) {
+                    tender.includesPostpaidSale = true;
+                    
+                    
+                }
+                
+                 
+                if (types_of_items_in_cart.containsKey("Return")) {
+                    tender.includesPrepaidSale = true;
+                    
+                    
+                }
+                
+                  if (types_of_items_in_cart.containsKey("Service addon")) {
+                    tender.includesPrepaidSale = true;
+                    
+                    
+                }
+                
+                
+                if (types_of_items_in_cart.containsKey("Accessory")) {
+                    tender.includesPrepaidSale = true;
+                    
+                    
+                }
+                
+    
+                
+                
+                
+
+                // Final totals
+                tender.subtotal = billTotal;
+                tender.tax_total = 0.00;
+                tender.discount_total = 0.00;
+                tender.final_total = billTotal;
+
+                System.out.println("Bill total: " + billTotal);
+
+                new tender().setVisible(true);
+
+                
+                    
+
+
         // TODO add your handling code here:
     }//GEN-LAST:event_tender_bttnActionPerformed
 
@@ -3301,29 +3390,14 @@ public static String generateConfNumber(String transactionType) {
         
     if (transactionType == "Return") {
         return "R" + randomNumber;
-    }else if (transactionType == "Prepaid Single Activation") {
-    return "PRP" + randomNumber;
+    }else if (transactionType == "Prepaid Activation") {
+    return "PR" + randomNumber;
  
-    } else if (transactionType == "Prepaid Multiple Activation") {
-    return "PRPD" + randomNumber;
- 
-    } else if (transactionType == "Postpaid Single Activation") {
-    return "POP" + randomNumber;
+    } else if (transactionType == "Postpaid Activation") {
+    return "PO" + randomNumber;
  
     } 
-    else if (transactionType == "Postpaid Multiple Activation") {
-    return "POPD" + randomNumber;
- 
-    } 
-    else if (transactionType == "Prepaid Addon Activation") {
-    return "PRD" + randomNumber;
- 
-    } 
-    else if (transactionType == "Postpaid Addon Activation") {
-    return "POD" + randomNumber;
- 
-    } 
-    else if (transactionType == "Service") {
+    else if (transactionType == "Service addon") {
     return "SRV" + randomNumber;
  
     } 

@@ -6,6 +6,7 @@ package rms.clone.main.UI.submain;
 
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import rms.clone.main.UI.main.RMS_Clone_CSR;
 
 /**
  *
@@ -146,7 +147,9 @@ public class pay_bill extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
 
-        Object[] row = {};
+        Object[] row = {BillPayID, "Bill Pay", ammt_to_pay_txt.getText().toString(), "1"};
+        RMS_Clone_CSR.cart_model.addRow(row);
+        this.dispose();
         
         
         

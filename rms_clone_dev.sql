@@ -38,7 +38,7 @@ CREATE TABLE `account_notes` (
   `account_number` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`note_id`),
   KEY `idx_account_notes_account_number` (`account_number`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -103,7 +103,7 @@ CREATE TABLE `csr_extensions` (
   `alt_sip_address` varchar(250) DEFAULT NULL,
   PRIMARY KEY (`csr_id`),
   KEY `idx_csr_extensions_account_number` (`csr_extension_password`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -357,7 +357,7 @@ CREATE TABLE `phone_numbers` (
   KEY `idx_phone_numbers_account_number` (`account_number`),
   KEY `idx_phone_numbers_phone` (`phoneNumber`),
   KEY `idx_cp_account_number_trim` (`account_number`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -393,7 +393,7 @@ CREATE TABLE `phone_plans` (
   `is_prepaid` tinyint(1) NOT NULL,
   `is_postpaid` tinyint(1) NOT NULL,
   PRIMARY KEY (`plan_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -534,7 +534,7 @@ CREATE TABLE `user_info` (
   `agent_type` varchar(50) DEFAULT NULL,
   `groupId` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --

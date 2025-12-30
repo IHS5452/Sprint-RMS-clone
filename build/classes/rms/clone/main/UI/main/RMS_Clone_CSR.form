@@ -2288,7 +2288,7 @@
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
                                   <Component id="jButton12" min="-2" pref="209" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" pref="126" max="32767" attributes="0"/>
+                                  <EmptySpace type="unrelated" pref="173" max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                       <Group type="102" alignment="0" attributes="0">
                                           <Group type="103" groupAlignment="0" attributes="0">
@@ -2384,19 +2384,15 @@
                 <Component class="javax.swing.JComboBox" name="transType_dd">
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="12">
+                      <StringArray count="8">
                         <StringItem index="0" value="Return"/>
-                        <StringItem index="1" value="Prepaid Single Activation"/>
-                        <StringItem index="2" value="Prepaid Multiple Activation"/>
-                        <StringItem index="3" value="Postpaid Single Activation"/>
-                        <StringItem index="4" value="Postpaid Multiple Activation"/>
-                        <StringItem index="5" value="Prepaid Addon Activation"/>
-                        <StringItem index="6" value="Postpaid Addon Activation"/>
-                        <StringItem index="7" value="Service"/>
-                        <StringItem index="8" value="Accessory"/>
-                        <StringItem index="9" value="Activation Fee"/>
-                        <StringItem index="10" value="Bill Pay"/>
-                        <StringItem index="11" value="Other"/>
+                        <StringItem index="1" value="Prepaid Activation"/>
+                        <StringItem index="2" value="Postpaid Activation"/>
+                        <StringItem index="3" value="Service addon"/>
+                        <StringItem index="4" value="Accessory"/>
+                        <StringItem index="5" value="Activation Fee"/>
+                        <StringItem index="6" value="Bill Pay"/>
+                        <StringItem index="7" value="Other"/>
                       </StringArray>
                     </Property>
                   </Properties>
