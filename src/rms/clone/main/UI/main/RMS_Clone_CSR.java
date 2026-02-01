@@ -174,7 +174,7 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
         jScrollPane8 = new javax.swing.JScrollPane();
         note_full_txt = new javax.swing.JTextArea();
         jLabel50 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        send_feedback_bttn = new javax.swing.JButton();
         customer_pannel = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         minit_txt = new javax.swing.JTextField();
@@ -860,10 +860,11 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
 
         jLabel50.setText("Note");
 
-        jButton1.setText("Send Feedback on Agent");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        send_feedback_bttn.setText("Send Feedback on Agent");
+        send_feedback_bttn.setEnabled(false);
+        send_feedback_bttn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                send_feedback_bttnActionPerformed(evt);
             }
         });
 
@@ -892,7 +893,7 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
                             .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton1)))
+                        .addComponent(send_feedback_bttn)))
                 .addContainerGap(73, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
@@ -912,7 +913,7 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
                     .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel50))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(send_feedback_bttn, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout notes_pannelLayout = new javax.swing.GroupLayout(notes_pannel);
@@ -2650,7 +2651,7 @@ String input = dl_exp_txt.getText().trim();
         // TODO add your handling code here:
     }//GEN-LAST:event_new_sale_bttnActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void send_feedback_bttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_send_feedback_bttnActionPerformed
 
         agentList = new ArrayList<>();
                 DefaultTableModel model = (DefaultTableModel) notes_table.getModel();
@@ -2673,7 +2674,7 @@ new send_feedback_agent().setVisible(true);
 
 
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_send_feedback_bttnActionPerformed
 
     private void pay_bill_bttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pay_bill_bttnActionPerformed
 
@@ -2808,7 +2809,6 @@ new send_feedback_agent().setVisible(true);
     private javax.swing.JTextField fname_txt;
     private javax.swing.JComboBox<String> gender_dd;
     private javax.swing.JPanel home_pannel;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton2;
@@ -2923,6 +2923,7 @@ new send_feedback_agent().setVisible(true);
     private javax.swing.JPanel sales_pannnel;
     public static javax.swing.JButton search_bttn;
     private javax.swing.JButton search_zip_code_bttn;
+    public static javax.swing.JButton send_feedback_bttn;
     public static javax.swing.JTextArea service_desc_txt;
     public static javax.swing.JTextField service_id_txt;
     public static javax.swing.JTextField service_name_txt;

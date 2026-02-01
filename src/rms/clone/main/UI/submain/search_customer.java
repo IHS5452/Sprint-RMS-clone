@@ -290,6 +290,7 @@ if (rms.clone.main.business.vars.selectedCx == null) {
         RMS_Clone_CSR.pay_bill_bttn.setEnabled(true);
 
         RMS_Clone_CSR.new_sale_bttn.setEnabled(true);
+        RMS_Clone_CSR.send_feedback_bttn.setEnabled(true);
 
         
         

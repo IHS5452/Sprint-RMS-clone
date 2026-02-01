@@ -7,6 +7,11 @@ package rms.clone.main.UI.submain;
 import rms.clone.main.UI.main.RMS_Clone_CSR;
 import java.util.ArrayList;
 import java.util.List;
+import rms.clone.main.business.vars;
+import java.sql.*;
+import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -35,10 +40,10 @@ public class send_feedback_agent extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jTextField1 = new javax.swing.JTextField();
+        feedback_type = new javax.swing.JComboBox<>();
+        topic_txt = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        description_txt = new javax.swing.JTextArea();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -56,13 +61,18 @@ public class send_feedback_agent extends javax.swing.JFrame {
 
         jLabel4.setText("Feedback Type");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Positive", "Negitive" }));
+        feedback_type.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Positive", "Negitive" }));
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        description_txt.setColumns(20);
+        description_txt.setRows(5);
+        jScrollPane1.setViewportView(description_txt);
 
         jButton1.setText("Submit");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -83,8 +93,8 @@ public class send_feedback_agent extends javax.swing.JFrame {
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(agent_list_dd, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jComboBox1, 0, 113, Short.MAX_VALUE)
-                                .addComponent(jTextField1)))
+                                .addComponent(feedback_type, 0, 113, Short.MAX_VALUE)
+                                .addComponent(topic_txt)))
                         .addGap(0, 69, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -98,11 +108,11 @@ public class send_feedback_agent extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(feedback_type, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(topic_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
@@ -122,10 +132,17 @@ public class send_feedback_agent extends javax.swing.JFrame {
      
         
         
-        for (int i = 0; i <= RMS_Clone_CSR.agentList.size(); i++) {
-   
-                 agent_list_dd.addItem(RMS_Clone_CSR.agentList.get(i));
+        for (int i = 0; i <= RMS_Clone_CSR.agentList.size()-1; i++) {
             
+   
+                
+            
+                 
+                 if (!RMS_Clone_CSR.agentList.get(i).equals(vars.loggedInUID)) {
+                      agent_list_dd.addItem(RMS_Clone_CSR.agentList.get(i));
+                 }
+                 
+                 
         }
         
         
@@ -136,6 +153,46 @@ public class send_feedback_agent extends javax.swing.JFrame {
 
         // TODO add your handling code here:
     }//GEN-LAST:event_formWindowOpened
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+            int max = 9999999;
+            int min = 1000000;
+            Random random = new Random();
+            int fid = random.nextInt(max - min + 1) + min;
+            String SQL = "insert into agent_feedback VALUES(?,?,?,?,?,?,?,?,?,?);";
+            
+            PreparedStatement ps = vars.conn.prepareStatement(SQL);
+            ps.setInt(1,fid);
+            ps.setInt(2, Integer.parseInt(vars.loggedInUID));
+            ps.setInt(3, Integer.parseInt(agent_list_dd.getSelectedItem().toString()));
+            ps.setString(4, feedback_type.getSelectedItem().toString());
+            ps.setString(5, topic_txt.getText());
+            ps.setString(6, description_txt.getText());
+            ps.setBoolean(7, false);
+            ps.setBoolean(8, false);
+            ps.setBoolean(9, false);
+            ps.setString(10, "");
+
+            int rs = ps.executeUpdate();
+            
+            if (rs >0) {
+                this.dispose();
+            }
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            // TODO add your handling code here:
+        } catch (SQLException ex) {
+            Logger.getLogger(send_feedback_agent.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -174,14 +231,14 @@ public class send_feedback_agent extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> agent_list_dd;
+    private javax.swing.JTextArea description_txt;
+    private javax.swing.JComboBox<String> feedback_type;
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField topic_txt;
     // End of variables declaration//GEN-END:variables
 }
