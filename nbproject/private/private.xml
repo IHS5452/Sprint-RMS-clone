@@ -5,6 +5,16 @@
         <group>
             <file>file:/Users/ianschrauth/Documents/GitHub/Sprint-RMS-clone/src/rms/clone/main/UI/main/RMS_Clone_CSR.java</file>
             <file>file:/Users/ianschrauth/Documents/GitHub/Sprint-RMS-clone/src/rms/clone/vars/db.java</file>
+            <file>file:/Users/ianschrauth/Documents/GitHub/Sprint-RMS-clone/src/rms/clone/business/database/actions.java</file>
+            <file>file:/Users/ianschrauth/Documents/GitHub/Sprint-RMS-clone/src/rms/clone/main/UI/submain/send_feedback_agent.java</file>
+            <file>file:/Users/ianschrauth/Documents/GitHub/Sprint-RMS-clone/src/rms/clone/main/UI/submain/phone_conditions.java</file>
+            <file>file:/Users/ianschrauth/Documents/GitHub/Sprint-RMS-clone/src/rms/clone/main/UI/submain/pay_bill.java</file>
+            <file>file:/Users/ianschrauth/Documents/GitHub/Sprint-RMS-clone/src/rms/clone/main/UI/submain/search_customer.java</file>
+            <file>file:/Users/ianschrauth/Documents/GitHub/Sprint-RMS-clone/src/rms/clone/main/business/actions.java</file>
+            <file>file:/Users/ianschrauth/Documents/GitHub/Sprint-RMS-clone/src/rms/clone/main/UI/submain/find_item.java</file>
+            <file>file:/Users/ianschrauth/Documents/GitHub/Sprint-RMS-clone/src/rms/clone/main/UI/main/aboutApp.java</file>
+            <file>file:/Users/ianschrauth/Documents/GitHub/Sprint-RMS-clone/src/rms/clone/main/UI/submain/return_phone.java</file>
+            <file>file:/Users/ianschrauth/Documents/GitHub/Sprint-RMS-clone/src/rms/clone/main/system/starter.java</file>
         </group>
     </open-files>
 </project-private>

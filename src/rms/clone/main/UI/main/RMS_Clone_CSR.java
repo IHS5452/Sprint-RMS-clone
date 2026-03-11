@@ -52,6 +52,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.HashMap;
+import rms.clone.main.UI.submain.find_item;
 import rms.clone.main.UI.submain.pay_bill;
 import rms.clone.main.UI.submain.return_phone;
 import rms.clone.main.UI.submain.search_customer;
@@ -1781,7 +1782,11 @@ public static DefaultTableModel cart_model;
     }//GEN-LAST:event_discounts_bttnActionPerformed
 
     private void find_item_bttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_find_item_bttnActionPerformed
-        // TODO add your handling code here:
+        new find_item().setVisible(true);
+    
+
+
+// TODO add your handling code here:
     }//GEN-LAST:event_find_item_bttnActionPerformed
 
     private void sales_bttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sales_bttnActionPerformed
@@ -2050,7 +2055,11 @@ java.sql.Timestamp sqlNow = new java.sql.Timestamp(date.getTime());
             // TODO add your handling code here:
         } catch (SQLException ex) {
             System.out.println("Connection Failed.");
-            Logger.getLogger(RMS_Clone_CSR.class.getName()).log(Level.SEVERE, null, ex);
+            this.dispose();
+            JOptionPane.showMessageDialog(frame, "Could not connect to the database. Exiting program now...", "Could not connect to the database,", JOptionPane.ERROR_MESSAGE);
+            System.exit(0);
+
+
         }
     }//GEN-LAST:event_formWindowOpened
 

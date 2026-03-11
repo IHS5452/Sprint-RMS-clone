@@ -160,7 +160,15 @@ public class send_feedback_agent extends javax.swing.JFrame {
             int min = 1000000;
             Random random = new Random();
             int fid = random.nextInt(max - min + 1) + min;
-            String SQL = "insert into agent_feedback VALUES(?,?,?,?,?,?,?,?,?,?);";
+            String SQL = "insert into agent_feedback VALUES(?,?,?,?,?,?,?,?,?,?,?);";
+            
+            
+            // for future refrence, this is the insert code for the mysql database, just in case I forget to upload the updated sql file
+            
+            // create table agent_feedback (fid int, reported_uid int, for_agent_uid int, feedback_type text, topic text, description text, is_visible_to_agent bool, mgr_reviewed bool, needs_coaching bool, mgr_comments text, agent_comments text)
+
+            
+            
             
             PreparedStatement ps = vars.conn.prepareStatement(SQL);
             ps.setInt(1,fid);
@@ -173,6 +181,7 @@ public class send_feedback_agent extends javax.swing.JFrame {
             ps.setBoolean(8, false);
             ps.setBoolean(9, false);
             ps.setString(10, "");
+            ps.setString(11,"");
 
             int rs = ps.executeUpdate();
             
