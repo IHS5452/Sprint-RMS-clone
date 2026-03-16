@@ -4,10 +4,13 @@
  */
 package rms.clone.main.UI.submain;
 
+import java.awt.Component;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import rms.clone.main.UI.main.RMS_Clone_CSR;
 import rms.clone.main.business.vars;
 
 /**
@@ -43,10 +46,12 @@ public class find_item extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        sel_item_desc_txt = new javax.swing.JTextArea();
         jLabel5 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        sel_item_name_txt = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        qty_txt = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -64,26 +69,36 @@ public class find_item extends javax.swing.JFrame {
                 item_name_txtInputMethodTextChanged(evt);
             }
         });
+        item_name_txt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                item_name_txtActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Item SKU");
 
         jLabel3.setText("Item Type ");
 
-        item_type_dd.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Choose an item type--", "iPhone case", "Android case", "iPhone Screen Protector", "Android Screen Protector", "Bluetooth Speaker", "Bluetooth Headphones", "Wired Speaker", "Wired headphones", "Old iPhone carging cable", "New iPhone/Android charging cable", "Test Item", " " }));
+        item_type_dd.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Choose an item type--", "iPhone case", "Android case", "iPhone Screen Protector", "Android Screen Protector", "Bluetooth Speaker", "Bluetooth Headphones", "Wired Speaker", "Wired headphones", "Old iPhone carging cable", "New iPhone/Android charging cable", "Test Item" }));
+        item_type_dd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                item_type_ddActionPerformed(evt);
+            }
+        });
 
         item_table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Name", "SKU", "Stock"
+                "Name", "SKU", "Price", "Stock"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                true, true, false
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -94,17 +109,30 @@ public class find_item extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        item_table.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                item_tableMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(item_table);
 
         jButton1.setText("Add to cart");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("Selected Item Description");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane2.setViewportView(jTextArea1);
+        sel_item_desc_txt.setEditable(false);
+        sel_item_desc_txt.setColumns(20);
+        sel_item_desc_txt.setRows(5);
+        jScrollPane2.setViewportView(sel_item_desc_txt);
 
         jLabel5.setText("Selected Item Name");
+
+        sel_item_name_txt.setEditable(false);
 
         jButton2.setText("Search");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -113,39 +141,51 @@ public class find_item extends javax.swing.JFrame {
             }
         });
 
+        jLabel6.setText("Quantity");
+
+        qty_txt.setText("0");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel1)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(item_name_txt))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel3)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(item_type_dd, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel2)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(item_sku_txt))))
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel4)
-                                .addComponent(jLabel5)))
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addContainerGap()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jLabel1)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(item_name_txt))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jLabel3)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(item_type_dd, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jLabel2)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(item_sku_txt))))
+                                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addContainerGap()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel4)
+                                        .addComponent(jLabel5)))
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(sel_item_name_txt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(qty_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -165,16 +205,20 @@ public class find_item extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(item_type_dd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
+                .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel5)
                 .addGap(1, 1, 1)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(sel_item_name_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(52, 52, 52)
+                .addGap(14, 14, 14)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(qty_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jScrollPane1)
@@ -189,16 +233,35 @@ public class find_item extends javax.swing.JFrame {
     //create table accessories (itid int,item_sku text,item_name text,item_type text,quantity_in_warehouse int,is_in_stock bool,price_usd double,is_preorder bool);
     public static DefaultTableModel item_table_dtm;
 
-    boolean hasNameInput = true;
+    boolean hasNameInput = false;
     boolean hasSKUInput = false;
     boolean hasItemCatInput = false;
+   
     
+    
+    String selectedItemSKU = "";
+    String selectedItemName = "";
+   double selectedItemPrice = 0.00;
+
+   Component frame = null;
     
     
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
          item_table_dtm.setRowCount(0);
         String SQL = "SELECT * FROM accessories";
 
+        
+        if (!item_name_txt.getText().strip().isEmpty()) {
+            hasNameInput=true;
+        } else if (!item_sku_txt.getText().strip().isEmpty()) {
+            hasSKUInput=true;
+        }else if (!item_type_dd.getSelectedItem().equals("--Choose an item type--")) {
+            hasItemCatInput = true;
+        } else {
+            JOptionPane.showMessageDialog(frame, "Please enter a search item.");
+        }
+        
+        
         
         
 try {
@@ -245,6 +308,7 @@ try {
 
         Object[] row = {
             rs.getString("item_name"),
+            rs.getString("item_sku"),
             Double.toString(rs.getDouble("price_usd")),
             Integer.toString(rs.getInt("quantity_in_warehouse"))
         };
@@ -272,6 +336,93 @@ try {
         item_table_dtm = (DefaultTableModel) item_table.getModel();
         // TODO add your handling code here:
     }//GEN-LAST:event_formWindowOpened
+
+    private void item_type_ddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_item_type_ddActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_item_type_ddActionPerformed
+
+    private void item_tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_item_tableMouseClicked
+
+        
+        
+        try {
+            int row = item_table.getSelectedRow();
+            int column = 1;
+            
+                    System.out.println("Selected: " + item_table_dtm.getValueAt(row, column));
+
+            String SQL = "Select * from accessories where item_sku = ?;";
+            
+            PreparedStatement ps = vars.conn.prepareStatement(SQL);
+            
+            ps.setString(1, item_table.getValueAt(row, column).toString());
+            
+                        ResultSet rs = ps.executeQuery();
+
+                        
+                        while (rs.next()) {
+                            sel_item_name_txt.setText(rs.getString("item_name"));
+                         
+                            sel_item_desc_txt.setText(rs.getString("item_desc"));
+         
+                            
+                                                        selectedItemSKU = rs.getString("item_sku");
+                            selectedItemPrice = rs.getDouble("price_usd");
+                            selectedItemName = rs.getString("item_name");
+
+                            
+                        }
+            
+            
+            
+            
+            
+            // TODO add your handling code here:
+        } catch (SQLException ex) {
+            Logger.getLogger(find_item.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_item_tableMouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        
+        Component frame = null;
+            
+        
+        double quantity = isInt(qty_txt.getText().toString());
+        
+        if (quantity == -99) {
+            
+            
+            JOptionPane.showMessageDialog(frame, "Quantity must be a whole number. Please enter a whole number in the quanitty section. ");
+            
+            
+        } else if (quantity <= 0) {
+                        JOptionPane.showMessageDialog(frame, "Quantity must be more than 1.");
+
+        
+        
+        
+            }else {
+            
+            double itemTruePrice = selectedItemPrice * Double.parseDouble(qty_txt.getText());
+         
+        Object[] row = {selectedItemSKU, selectedItemName, itemTruePrice, qty_txt.getText().toString()};
+        RMS_Clone_CSR.cart_model.addRow(row);
+        this.dispose();
+        
+        }
+        
+  
+
+
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void item_name_txtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_item_name_txtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_item_name_txtActionPerformed
 
     /**
      * @param args the command line arguments
@@ -320,9 +471,19 @@ try {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField qty_txt;
+    private javax.swing.JTextArea sel_item_desc_txt;
+    private javax.swing.JTextField sel_item_name_txt;
     // End of variables declaration//GEN-END:variables
+
+public static int isInt(String input) {
+    try {
+        return Integer.parseInt(input);
+    } catch (NumberFormatException e) {
+        return -99;
+    }
+}
 }

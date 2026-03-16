@@ -19,5 +19,6 @@ public class vars {
     public static Connection conn;
     public static String typeOfSelectedAccount = "";
     public static Cx selectedCx;
+    public static boolean hasManagerAuth = false;
     
 }

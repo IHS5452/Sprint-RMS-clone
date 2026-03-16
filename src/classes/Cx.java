@@ -58,6 +58,7 @@ public class Cx {
     private String accountNumber;
     private Integer downpayPerc;
     private Boolean downpaymentNeeded;
+    public Double currentCredits;
 
     public Cx() {
     }
@@ -104,6 +105,7 @@ public class Cx {
     this.lastDateChecked = rs.getDate("lastDateChecked");
     this.typeOfAccount = rs.getString("typeOfAccount");
     this.accountNumber = rs.getString("account_number");
+    this.currentCredits = rs.getDouble("current_credits");
 
     // Optional nullable numeric/boolean fields:
     Integer dp = (Integer) rs.getObject("downpay_perc");
@@ -115,7 +117,7 @@ public class Cx {
 
     
     
-    public Cx(int id, String prefix, String firstName, String middleName, String lastName, String suffix, String email, boolean emailNotProvided, String ssn, Date birthDate, String dlNumber, String dlState, Date dlExp, String contactPhone1, String contactPhone2, String contactPhone3, String streetNumber, String streetName, String addressLine2, String city, String state, String zip, String employer, boolean isNvp, boolean assignToBusinessAccount, boolean attachToHierarchy, String accountType, String creditSsn, String creditClass, int approvedLines, Date lastDateChecked, String typeOfAccount, String accountNumber, Integer downpayPerc, Boolean downpaymentNeeded) {
+    public Cx(int id, String prefix, String firstName, String middleName, String lastName, String suffix, String email, boolean emailNotProvided, String ssn, Date birthDate, String dlNumber, String dlState, Date dlExp, String contactPhone1, String contactPhone2, String contactPhone3, String streetNumber, String streetName, String addressLine2, String city, String state, String zip, String employer, boolean isNvp, boolean assignToBusinessAccount, boolean attachToHierarchy, String accountType, String creditSsn, String creditClass, int approvedLines, Date lastDateChecked, String typeOfAccount, String accountNumber, Integer downpayPerc, Boolean downpaymentNeeded, double currentCredits) {
         this.id = id;
         this.prefix = prefix;
         this.firstName = firstName;
@@ -151,14 +153,23 @@ public class Cx {
         this.accountNumber = accountNumber;
         this.downpayPerc = downpayPerc;
         this.downpaymentNeeded = downpaymentNeeded;
+        this.currentCredits = currentCredits;
     }
+
+
     
     
     
     
     
+    public Double getCurrentCredits() {
+        return currentCredits;
+    }
 
     /* ================= GETTERS / SETTERS ================= */
+    public void setCurrentCredits(Double currentCredits) {
+        this.currentCredits = currentCredits;
+    }
 
     public int getId() {
         return id;

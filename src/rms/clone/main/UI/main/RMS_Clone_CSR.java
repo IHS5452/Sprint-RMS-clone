@@ -600,7 +600,7 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
             .addGroup(home_pannelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(home_pannelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 913, Short.MAX_VALUE)
+                    .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 940, Short.MAX_VALUE)
                     .addGroup(home_pannelLayout.createSequentialGroup()
                         .addComponent(news_title)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -622,7 +622,7 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
         consent_pannnel.setLayout(consent_pannnelLayout);
         consent_pannnelLayout.setHorizontalGroup(
             consent_pannnelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 925, Short.MAX_VALUE)
+            .addGap(0, 952, Short.MAX_VALUE)
         );
         consent_pannnelLayout.setVerticalGroup(
             consent_pannnelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1574,11 +1574,10 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(conf_number, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(142, 142, 142)
-                        .addComponent(jLabel39)
-                        .addGap(157, 157, 157))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel39))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 173, Short.MAX_VALUE)
+                        .addGap(83, 83, 83)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1591,8 +1590,8 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                                 .addComponent(cx_address_1, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton15)))
-                        .addGap(14, 14, 14))))
+                                .addComponent(jButton15)))))
+                .addContainerGap(110, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1652,7 +1651,7 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
             sales_pannnelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, sales_pannnelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 913, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 940, Short.MAX_VALUE)
                 .addContainerGap())
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -1823,7 +1822,6 @@ public static DefaultTableModel cart_model;
 
                 Map<String, Double> types_of_items_in_cart = new HashMap<>();
 
-                double billTotal = 0.0;
 
                 // Read cart rows safely
                 for (int i = 0; i < rowCount; i++) {
@@ -1887,10 +1885,10 @@ public static DefaultTableModel cart_model;
                 
 
                 // Final totals
-                tender.subtotal = billTotal;
-                tender.tax_total = 0.00;
-                tender.discount_total = 0.00;
-                tender.final_total = billTotal;
+                tender.orig_subtotal = billTotal;
+                tender.orig_tax_total = 0.00;
+                tender.orig_discount_total = 0.00;
+                tender.orig_final_total = billTotal;
 
                 System.out.println("Bill total: " + billTotal);
 
@@ -2717,7 +2715,6 @@ new send_feedback_agent().setVisible(true);
             }
         }
         
-        
       
 
         // NOW open the window after ammtDue is set
@@ -3022,9 +3019,7 @@ public static void checkIfLoggedIn() {
         recycle_bttn.setEnabled(true);
         discounts_bttn.setEnabled(true);
         find_item_bttn.setEnabled(true);
-        sales_bttn.setEnabled(true);
         nss_token_bttn.setEnabled(true);
-        tender_bttn.setEnabled(true);
                 reset_bttn.setEnabled(true);
                 note_txt.setEditable(true);
 
@@ -3544,7 +3539,7 @@ public  boolean isDateInCurrentYear(String dateString) {
         nss_token_bttn.setEnabled(true);
         tender_bttn.setEnabled(true);    
        new_bttn.setEnabled(true);
-       new_sale_bttn.setEnabled(false);
+       new_sale_bttn.setEnabled(true);
         
         //clear the current customer, if one is searched
         actions.clearCustomerFromRMS();

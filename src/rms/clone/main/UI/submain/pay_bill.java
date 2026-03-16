@@ -37,7 +37,7 @@ public class pay_bill extends javax.swing.JFrame {
         ammt_to_pay_txt = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -147,6 +147,11 @@ public class pay_bill extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
 
+        if (Double.parseDouble(ammt_due_txt.getText()) > 0) {
+            tender.orig_overage_for_bill = Double.parseDouble(ammt_due_txt.getText());
+        }
+        
+        
         Object[] row = {BillPayID, "Bill Pay", ammt_to_pay_txt.getText().toString(), "1"};
         RMS_Clone_CSR.cart_model.addRow(row);
         this.dispose();
@@ -228,7 +233,7 @@ private void updateAmountDue() {
 
     try {
         double amountGiven = Double.parseDouble(input);
-        double newAmountDue = ammtDue - amountGiven;
+        double newAmountDue = (ammtDue - amountGiven) * -1;
 
         ammt_due_txt.setText(String.format("%.2f", newAmountDue));
 

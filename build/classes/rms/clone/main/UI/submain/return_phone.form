@@ -80,19 +80,19 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="device_type_dd" min="-2" pref="113" max="-2" attributes="0"/>
+                                      <Component id="device_type_dd" min="-2" pref="174" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jTextField2" min="-2" pref="102" max="-2" attributes="0"/>
+                                      <Component id="eligable_txt" min="-2" pref="102" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jButton4" min="-2" pref="207" max="-2" attributes="0"/>
-                                          <Component id="jComboBox1" min="-2" pref="207" max="-2" attributes="0"/>
+                                          <Component id="chnage_save_sttaus_bttn" min="-2" pref="207" max="-2" attributes="0"/>
+                                          <Component id="status_cb" min="-2" pref="207" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -105,12 +105,14 @@
                           </Group>
                       </Group>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jTextField1" min="-2" pref="175" max="-2" attributes="0"/>
+                      <Component id="rid_txt" min="-2" pref="175" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jButton2" min="-2" pref="84" max="-2" attributes="0"/>
+                      <Component id="search_clear_bttn" min="-2" pref="84" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="new_return_bttn" min="-2" pref="105" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -124,8 +126,9 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="rid_txt" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="search_clear_bttn" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="new_return_bttn" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="41" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -180,15 +183,15 @@
                       <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextField2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="eligable_txt" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="status_cb" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jButton4" min="-2" max="-2" attributes="0"/>
+                      <Component id="chnage_save_sttaus_bttn" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="jButton3" min="-2" pref="69" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
@@ -210,7 +213,7 @@
         <Property name="text" type="java.lang.String" value="Return ID"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField1">
+    <Component class="javax.swing.JTextField" name="rid_txt">
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
       <AuxValues>
@@ -274,21 +277,22 @@
     <Component class="javax.swing.JComboBox" name="device_type_dd">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="14">
-            <StringItem index="0" value="-Phones-"/>
-            <StringItem index="1" value="Apple"/>
-            <StringItem index="2" value="Android"/>
-            <StringItem index="3" value="Flip Phone"/>
-            <StringItem index="4" value="-Accessories-"/>
-            <StringItem index="5" value="Like-new/unopened case"/>
-            <StringItem index="6" value="Used case"/>
-            <StringItem index="7" value="unopened screen protector"/>
-            <StringItem index="8" value="opened screen protector"/>
-            <StringItem index="9" value="Bluetooth Speakers"/>
-            <StringItem index="10" value="USB C Cable"/>
-            <StringItem index="11" value="Lightning Cable"/>
-            <StringItem index="12" value="Other cable"/>
-            <StringItem index="13" value="Other Accessory"/>
+          <StringArray count="15">
+            <StringItem index="0" value="--Select a item type--"/>
+            <StringItem index="1" value="-Phones-"/>
+            <StringItem index="2" value="Apple"/>
+            <StringItem index="3" value="Android"/>
+            <StringItem index="4" value="Flip Phone"/>
+            <StringItem index="5" value="-Accessories-"/>
+            <StringItem index="6" value="Like-new/unopened case"/>
+            <StringItem index="7" value="Used case"/>
+            <StringItem index="8" value="unopened screen protector"/>
+            <StringItem index="9" value="opened screen protector"/>
+            <StringItem index="10" value="Bluetooth Speakers"/>
+            <StringItem index="11" value="USB C Cable"/>
+            <StringItem index="12" value="Lightning Cable"/>
+            <StringItem index="13" value="Other cable"/>
+            <StringItem index="14" value="Other Accessory"/>
           </StringArray>
         </Property>
       </Properties>
@@ -336,14 +340,17 @@
         <Property name="text" type="java.lang.String" value="Is eligable to be refunded"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField2">
+    <Component class="javax.swing.JTextField" name="eligable_txt">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton2">
+    <Component class="javax.swing.JButton" name="search_clear_bttn">
       <Properties>
         <Property name="text" type="java.lang.String" value="Search"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="search_clear_bttnActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButton3">
@@ -359,10 +366,13 @@
         <Property name="text" type="java.lang.String" value="Current status"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton4">
+    <Component class="javax.swing.JButton" name="chnage_save_sttaus_bttn">
       <Properties>
         <Property name="text" type="java.lang.String" value="Change Status"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="chnage_save_sttaus_bttnActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JRadioButton" name="no_1">
       <Properties>
@@ -373,6 +383,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Yes"/>
       </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="yes_1ItemStateChanged"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JRadioButton" name="no_2">
       <Properties>
@@ -424,16 +437,18 @@
         <Property name="text" type="java.lang.String" value="Yes"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="jComboBox1">
+    <Component class="javax.swing.JComboBox" name="status_cb">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="6">
-            <StringItem index="0" value="Draft"/>
-            <StringItem index="1" value="In Progress - Heading to Store"/>
-            <StringItem index="2" value="In Progress - At Store"/>
-            <StringItem index="3" value="Complete - Accepted"/>
-            <StringItem index="4" value="Completed - Denied"/>
-            <StringItem index="5" value="Canceled"/>
+          <StringArray count="8">
+            <StringItem index="0" value="--Select a status--"/>
+            <StringItem index="1" value="Draft"/>
+            <StringItem index="2" value="In Progress - Heading to Store"/>
+            <StringItem index="3" value="In Progress - At Store"/>
+            <StringItem index="4" value="Complete - Accepted"/>
+            <StringItem index="5" value="Completed - Denied"/>
+            <StringItem index="6" value="Canceled"/>
+            <StringItem index="7" value="Unable to return"/>
           </StringArray>
         </Property>
         <Property name="enabled" type="boolean" value="false"/>
@@ -445,6 +460,11 @@
     <Component class="javax.swing.JButton" name="jButton5">
       <Properties>
         <Property name="text" type="java.lang.String" value="Email return lable"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="new_return_bttn">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="New Return"/>
       </Properties>
     </Component>
   </SubComponents>

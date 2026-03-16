@@ -16,6 +16,7 @@ import javax.swing.InputMap;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
+import javax.swing.SwingUtilities;
 import rms.clone.main.business.vars;
 
 /**
@@ -36,26 +37,45 @@ public class login extends javax.swing.JFrame {
     
     
     
-    private void myPostInit() {
+private void myPostInit() {
     // 1) Disable default TAB focus behavior for this field
     passwd_txt.setFocusTraversalKeysEnabled(false);
 
-    // 2) Bind TAB to a custom action
+    // 2) Bind keys
     InputMap im = passwd_txt.getInputMap(JComponent.WHEN_FOCUSED);
     ActionMap am = passwd_txt.getActionMap();
 
+    // ENTER key
     im.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "enterPressed");
 
     am.put("enterPressed", new AbstractAction() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            
+
             System.out.println("ENTER pressed.");
             loginInitiated();
-       
 
-            // 🔹 Then manually move focus to next field
+            // Move focus to next field
             passwd_txt.transferFocus();
+        }
+    });
+
+    // ESC key
+    im.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "escapePressed");
+
+    am.put("escapePressed", new AbstractAction() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+            System.out.println("ESC pressed. Closing window.");
+
+            java.awt.Window window = SwingUtilities.getWindowAncestor(passwd_txt);
+            if (window != null) {
+                    RMS_Clone_CSR.pid_txt_main.setEnabled(true);
+                            RMS_Clone_CSR.pid_txt_main.setText("");
+
+                window.dispose();
+            }
         }
     });
 }
@@ -146,6 +166,8 @@ Component frame = null;
 
 
         RMS_Clone_CSR.pid_txt_main.setEnabled(true);
+                                    RMS_Clone_CSR.pid_txt_main.setText("");
+
 
         // TODO add your handling code here:
     }//GEN-LAST:event_formWindowClosing
@@ -210,8 +232,10 @@ Component frame = null;
                   SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
                   String formatedDate = dateFormat.format(currentDate);
                   vars.timeLoggedIn = formatedDate;
+                  
                   RMS_Clone_CSR.getTheActiveNews();
                   RMS_Clone_CSR.setEnabledRecursive(RMS_Clone_CSR.jPanel3, true);
+            
 
             
             

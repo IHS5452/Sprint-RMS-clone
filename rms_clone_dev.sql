@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 9.5.0, for macos15 (arm64)
+-- MySQL dump 10.13  Distrib 9.6.0, for macos26.2 (arm64)
 --
 -- Host: localhost    Database: rms_clone_dev
 -- ------------------------------------------------------
--- Server version	9.5.0
+-- Server version	9.6.0
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -21,7 +21,38 @@ SET @@SESSION.SQL_LOG_BIN= 0;
 -- GTID state at the beginning of the backup 
 --
 
-SET @@GLOBAL.GTID_PURGED=/*!80000 '+'*/ 'e936b2ec-d69a-11f0-ad36-7944e8bf04d5:1-425';
+SET @@GLOBAL.GTID_PURGED=/*!80000 '+'*/ '33531242-1775-11f1-afc0-34913b738f75:1-18,
+e936b2ec-d69a-11f0-ad36-7944e8bf04d5:1-425';
+
+--
+-- Table structure for table `accessories`
+--
+
+DROP TABLE IF EXISTS `accessories`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `accessories` (
+  `itid` int DEFAULT NULL,
+  `item_sku` text,
+  `item_name` text,
+  `item_type` text,
+  `quantity_in_warehouse` int DEFAULT NULL,
+  `is_in_stock` tinyint(1) DEFAULT NULL,
+  `price_usd` double DEFAULT NULL,
+  `is_preorder` tinyint(1) DEFAULT NULL,
+  `item_desc` text
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `accessories`
+--
+
+LOCK TABLES `accessories` WRITE;
+/*!40000 ALTER TABLE `accessories` DISABLE KEYS */;
+INSERT INTO `accessories` VALUES (1,'123','Test Item 1','Test Item',999,1,9.99,0,'Test Item 1. Delete in prod'),(1,'1232','Test Item 2','Test Item',999,1,9.99,0,'Test Item 2. Delete in prod'),(1,'1233','Test Item 3','Test Item',999,1,9.99,0,'Test Item 3. Delete in prod');
+/*!40000 ALTER TABLE `accessories` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `account_notes`
@@ -38,7 +69,7 @@ CREATE TABLE `account_notes` (
   `account_number` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`note_id`),
   KEY `idx_account_notes_account_number` (`account_number`)
-);
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -49,6 +80,37 @@ LOCK TABLES `account_notes` WRITE;
 /*!40000 ALTER TABLE `account_notes` DISABLE KEYS */;
 INSERT INTO `account_notes` VALUES (1,1,'Customer requested plan review.','2025-12-14 20:12:42','ACC-10001'),(2,2,'Billing verified and confirmed.','2025-12-14 20:12:42','ACC-10001'),(3,1,'Customer asked about plan options.','2025-12-14 20:12:42','ACC-20002');
 /*!40000 ALTER TABLE `account_notes` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `agent_feedback`
+--
+
+DROP TABLE IF EXISTS `agent_feedback`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `agent_feedback` (
+  `fid` int DEFAULT NULL,
+  `reported_uid` int DEFAULT NULL,
+  `for_agent_uid` int DEFAULT NULL,
+  `feedback_type` text,
+  `topic` text,
+  `description` text,
+  `is_visible_to_agent` tinyint(1) DEFAULT NULL,
+  `mgr_reviewed` tinyint(1) DEFAULT NULL,
+  `needs_coaching` tinyint(1) DEFAULT NULL,
+  `mgr_comments` text,
+  `agent_comments` text
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `agent_feedback`
+--
+
+LOCK TABLES `agent_feedback` WRITE;
+/*!40000 ALTER TABLE `agent_feedback` DISABLE KEYS */;
+/*!40000 ALTER TABLE `agent_feedback` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -103,7 +165,7 @@ CREATE TABLE `csr_extensions` (
   `alt_sip_address` varchar(250) DEFAULT NULL,
   PRIMARY KEY (`csr_id`),
   KEY `idx_csr_extensions_account_number` (`csr_extension_password`)
-);
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -357,7 +419,7 @@ CREATE TABLE `phone_numbers` (
   KEY `idx_phone_numbers_account_number` (`account_number`),
   KEY `idx_phone_numbers_phone` (`phoneNumber`),
   KEY `idx_cp_account_number_trim` (`account_number`)
-);
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -393,7 +455,7 @@ CREATE TABLE `phone_plans` (
   `is_prepaid` tinyint(1) NOT NULL,
   `is_postpaid` tinyint(1) NOT NULL,
   PRIMARY KEY (`plan_id`)
-);
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -434,6 +496,40 @@ CREATE TABLE `recycled_devices` (
 LOCK TABLES `recycled_devices` WRITE;
 /*!40000 ALTER TABLE `recycled_devices` DISABLE KEYS */;
 /*!40000 ALTER TABLE `recycled_devices` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `returns`
+--
+
+DROP TABLE IF EXISTS `returns`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `returns` (
+  `rid` int DEFAULT NULL,
+  `date_time_of_return` datetime DEFAULT NULL,
+  `type_of_item` text,
+  `free_of_cracks` tinyint(1) DEFAULT NULL,
+  `free_of_dents` tinyint(1) DEFAULT NULL,
+  `device_formatted` tinyint(1) DEFAULT NULL,
+  `can_go_through_setup` tinyint(1) DEFAULT NULL,
+  `opened` tinyint(1) DEFAULT NULL,
+  `liquid_damage` tinyint(1) DEFAULT NULL,
+  `is_eligable` tinyint(1) DEFAULT NULL,
+  `status` text,
+  `method_of_return` text,
+  `store_number` text,
+  `email` text
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `returns`
+--
+
+LOCK TABLES `returns` WRITE;
+/*!40000 ALTER TABLE `returns` DISABLE KEYS */;
+/*!40000 ALTER TABLE `returns` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -534,7 +630,7 @@ CREATE TABLE `user_info` (
   `agent_type` varchar(50) DEFAULT NULL,
   `groupId` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-);
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -586,4 +682,4 @@ SET @@SESSION.SQL_LOG_BIN = @MYSQLDUMP_TEMP_LOG_BIN;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-12-19  7:20:20
+-- Dump completed on 2026-03-16  6:36:55

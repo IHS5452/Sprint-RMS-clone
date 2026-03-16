@@ -4,6 +4,16 @@
  */
 package rms.clone.main.UI.submain;
 
+import java.awt.Component;
+import javax.swing.JOptionPane;
+import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import rms.clone.main.UI.main.RMS_Clone_CSR;
+import rms.clone.main.business.vars;
+
+
+
 /**
  *
  * @author ian
@@ -36,8 +46,10 @@ public class tender extends javax.swing.JFrame {
         final_total_txt = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        cash_given_txt = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -47,18 +59,39 @@ public class tender extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel1.setText("Subtotal");
 
+        subtotal_txt.setEditable(false);
+
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel2.setText("Tax");
+
+        tax_total_txt.setEditable(false);
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel3.setText("Discounts");
 
+        discount_total_txt.setEditable(false);
+
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel4.setText("Total");
 
+        final_total_txt.setEditable(false);
+
         jButton1.setText("Pay with cash");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Pay with card");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel5.setText("Cash Given");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -67,28 +100,35 @@ public class tender extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel3)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(discount_total_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel1)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(subtotal_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addComponent(jLabel2)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(tax_total_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(final_total_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cash_given_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(discount_total_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel1)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(subtotal_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addComponent(jLabel2)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(tax_total_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(final_total_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(19, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -106,23 +146,32 @@ public class tender extends javax.swing.JFrame {
                     .addComponent(discount_total_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(final_total_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(63, 63, 63)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 63, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(47, 47, 47)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cash_given_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(64, 64, 64)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     
-    public static double subtotal;
-    public static double tax_total;
-    public static double discount_total;
-    public static double final_total;
+    public static double orig_subtotal;
+    public static double orig_tax_total;
+    public static double orig_discount_total;
+    public static double orig_final_total;
+    public static double cash_given_all;
+    public static double orig_overage_for_bill;
     
     
     
@@ -147,25 +196,108 @@ public class tender extends javax.swing.JFrame {
     //returned accessory vard
         public static Boolean includesReturnedAcc = false;
 
-
+Component frame = null;
     
     
     
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
 
         
-         System.out.println(ammt_for_bill + " is the bill portion.");
-        
+         System.out.println(orig_overage_for_bill + " is the overage.");
+
+         
+         
         
         
 
-        fillTotals(subtotal, tax_total, discount_total, final_total);
+        fillTotals(orig_subtotal, orig_tax_total, orig_discount_total, orig_final_total);
 
 
 
 
         // TODO add your handling code here:
     }//GEN-LAST:event_formWindowOpened
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        
+        double cash_given = Double.parseDouble(cash_given_txt.getText().replace("$", ""));
+        double final_total = Double.parseDouble(final_total_txt.getText().replace("$", ""));
+        
+      
+        
+        double cx_change = cash_given - final_total;
+        
+        if (cx_change <= -0.01) {
+            final_total = cx_change * -1;
+            final_total_txt.setText(Double.toString(final_total));
+            subtotal_txt.setText("-");
+            tax_total_txt.setText("-");
+            discount_total_txt.setText("-");
+            JOptionPane.showMessageDialog(rootPane, "Customer still owes $" + final_total);
+            
+        } else {
+            try {
+                String SQL = "insert into transactions_all VALUES(?,?,?,?,?,?,?,?,?,NOW(),?,?);";
+                PreparedStatement ps = vars.conn.prepareStatement(SQL);
+                ps.setInt(1, 0);
+                ps.setString(2, getTransactionType());
+                ps.setDouble(3, orig_subtotal);
+                ps.setDouble(4, orig_tax_total);
+                ps.setDouble(5, orig_discount_total);
+                ps.setDouble(6, orig_final_total);
+                ps.setString(7, "Cash");
+                ps.setDouble(8, cash_given_all);
+                ps.setDouble(9, cx_change);
+                ps.setBoolean(10, true);
+                ps.setInt(11, Integer.parseInt(vars.loggedInUID));
+                
+                int rs = ps.executeUpdate();
+                
+                
+                if (includesBillPay) {
+                    payBill(orig_final_total, orig_overage_for_bill);
+                }
+                
+                if (includesPostpaidSale) {
+                    activateLine("postpaid");
+                }
+                
+                if (includesPrepaidSale) {
+                    activateLine("prepaid");
+                }
+                
+                if (cx_change > 0) {
+                JOptionPane.showMessageDialog(frame, "Their change is: $" + cx_change);
+                    
+                } else {
+                                    JOptionPane.showMessageDialog(frame, "No Change to give");
+
+                }
+                
+                this.dispose();
+                RMS_Clone_CSR.reset();
+                
+                
+                
+            } catch (SQLException ex) {
+                Logger.getLogger(tender.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            
+        }
+        
+
+        
+
+
+
+// TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -203,6 +335,7 @@ public class tender extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField cash_given_txt;
     private javax.swing.JTextField discount_total_txt;
     private javax.swing.JTextField final_total_txt;
     private javax.swing.JButton jButton1;
@@ -211,6 +344,7 @@ public class tender extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JTextField subtotal_txt;
     private javax.swing.JTextField tax_total_txt;
     // End of variables declaration//GEN-END:variables
@@ -226,4 +360,146 @@ public class tender extends javax.swing.JFrame {
 
 
     }
+    
+    
+    
+    public static String getTransactionType() {
+        
+        if (includesBillPay) {
+            return "Bill Pay";
+        } else if (includesAccessorySale) {
+            return "Accessory Sale";
+        } else if (includesPostpaidSale) {
+            return "Postapid Sale";
+        } else if (includesPrepaidSale) {
+            return "Prepaid sale";
+        } else if (includesReturnedPhone) {
+            return "Return - Phone";
+
+        } else if (includesReturnedAcc) {
+          return "Return - Accessory";
+
+        } else {
+            return "Multiple or Unknown";
+        }
+        
+        
+        
+        
+        
+      }
+
+   private void payBill(double paymentAmount, double overage) {
+
+    PreparedStatement psBills = null;
+    PreparedStatement psCredits = null;
+
+    try {
+
+        vars.conn.setAutoCommit(false);
+
+        System.out.println("payBill() called");
+        System.out.println("Payment amount: " + paymentAmount);
+        System.out.println("Overage passed in: " + overage);
+        System.out.println("Account: " + vars.selectedCx.getAccountNumber());
+
+        String SQL = "UPDATE phone_bills pb JOIN ( SELECT bill_id, account_number, total_amount_due, SUM(total_amount_due) OVER ( PARTITION BY account_number ORDER BY bill_id ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW ) AS running_total FROM phone_bills WHERE account_number = ? AND is_paid = 0 ) x ON x.bill_id = pb.bill_id AND x.account_number = pb.account_number SET pb.total_amount_due = CASE WHEN x.running_total <= ? THEN 0 WHEN x.running_total - x.total_amount_due >= ? THEN pb.total_amount_due ELSE x.running_total - ? END, pb.is_paid = CASE WHEN x.running_total <= ? THEN 1 ELSE 0 END, pb.bill_status = CASE WHEN x.running_total <= ? THEN 'Paid' ELSE pb.bill_status END, pb.payment_received_date = CASE WHEN x.running_total <= ? THEN CURRENT_DATE ELSE pb.payment_received_date END WHERE pb.account_number = ? AND pb.is_paid = 0;";
+
+        psBills = vars.conn.prepareStatement(SQL);
+
+        psBills.setString(1, vars.selectedCx.getAccountNumber());
+        psBills.setDouble(2, paymentAmount);
+        psBills.setDouble(3, paymentAmount);
+        psBills.setDouble(4, paymentAmount);
+        psBills.setDouble(5, paymentAmount);
+        psBills.setDouble(6, paymentAmount);
+        psBills.setDouble(7, paymentAmount);
+        psBills.setString(8, vars.selectedCx.getAccountNumber());
+
+        psBills.executeUpdate();
+        
+
+        if (overage > 0) {
+
+           
+            
+            
+            String creditSQL =
+            "UPDATE customer_info SET current_credits = current_credits + ? WHERE account_number = ?";
+
+            psCredits = vars.conn.prepareStatement(creditSQL);
+
+            psCredits.setDouble(1, overage);
+            psCredits.setString(2, vars.selectedCx.getAccountNumber());
+
+            int rows = psCredits.executeUpdate();
+
+            System.out.println("customer_info rows updated: " + rows);
+        }
+
+        vars.conn.commit();
+
+    } catch (SQLException ex) {
+
+        try {
+            vars.conn.rollback();
+        } catch (SQLException rollbackEx) {
+            rollbackEx.printStackTrace();
+        }
+
+        Logger.getLogger(tender.class.getName()).log(Level.SEVERE, null, ex);
+
+    } finally {
+
+        try {
+            if (psBills != null) psBills.close();
+            if (psCredits != null) psCredits.close();
+            vars.conn.setAutoCommit(true);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
 }
+   
+    private void activateLine(String preOrpost) {
+        // add the phone number to the database in the phone_numbers database, along with the correct plan info for the line (Priority GB, plan name and code, etc)
+    }
+
+   
+    
+    
+    
+}
+
+
+//UPDATE phone_bills pb
+//JOIN (
+//  SELECT
+//    bill_id,
+//    account_number,
+//    total_amount_due,
+//    SUM(total_amount_due) OVER (
+//      PARTITION BY account_number
+//      ORDER BY bill_id
+//      ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
+//    ) AS running_total
+//  FROM phone_bills
+//  WHERE account_number = ? AND is_paid = 0
+//) x
+//ON x.bill_id = pb.bill_id AND x.account_number = pb.account_number
+//SET
+//  pb.total_amount_due =
+//    CASE
+//      WHEN x.running_total <= ? THEN 0
+//
+//      WHEN x.running_total - x.total_amount_due >= ? THEN pb.total_amount_due
+//
+//      ELSE x.running_total - ?
+//    END,
+//  pb.is_paid =
+//    CASE
+//      WHEN x.running_total <= ? THEN 1
+//      ELSE 0
+//    END
+//WHERE pb.account_number = ? AND pb.is_paid = 0;
