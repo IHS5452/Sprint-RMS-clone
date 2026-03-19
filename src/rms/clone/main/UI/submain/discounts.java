@@ -4,7 +4,14 @@
  */
 package rms.clone.main.UI.submain;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
+import rms.clone.main.UI.main.RMS_Clone_CSR;
+import rms.clone.main.business.vars;
 
 /**
  *
@@ -29,9 +36,9 @@ public class discounts extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        discount_name_txt = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        discount_use_cb = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         discounts_tbl = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
@@ -44,15 +51,20 @@ public class discounts extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
-        jButton2 = new javax.swing.JButton();
+        apply_to_cart_bttn = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jLabel1.setText("Discount Name");
 
         jLabel2.setText("Discount Use");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Select A Discount use--", "-Phones-", "Apple Phones", "Android Phones", "Flip Phones", "-Accessories-", "Apple Phone Cases", "Apple Phone Screen Protectors", "Old Apple Phone Chargers", "Other Apple Phone Accessories ", "Android Phone Cases", "Android Phone Screen Protectors", "Android/New Apple Phone Chargers", "Other Android Phone Accessories ", "-Bluetooth-", "Bluetooth Speakers", "Bluetooth Headphones", "Other Accessories" }));
+        discount_use_cb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Select A Discount use--", "-Phones-", "Apple Phones", "Android Phones", "Flip Phones", "-Accessories-", "Apple Phone Cases", "Apple Phone Screen Protectors", "Old Apple Phone Chargers", "Other Apple Phone Accessories ", "Android Phone Cases", "Android Phone Screen Protectors", "Android/New Apple Phone Chargers", "Other Android Phone Accessories ", "-Bluetooth-", "Bluetooth Speakers", "Bluetooth Headphones", "Other Accessories" }));
 
         discounts_tbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -98,41 +110,49 @@ public class discounts extends javax.swing.JFrame {
         jTextArea1.setRows(5);
         jScrollPane2.setViewportView(jTextArea1);
 
-        jButton2.setText("Apply to cart");
+        apply_to_cart_bttn.setText("Apply to cart");
+        apply_to_cart_bttn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                apply_to_cart_bttnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel1)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(discount_name_txt))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(discount_use_cb, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTextField2)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jRadioButton1)
+                                            .addComponent(jRadioButton2))
+                                        .addGap(19, 19, 19)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(jTextField4, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
+                                            .addComponent(jTextField3)))
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)))))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel1)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jTextField1))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel2)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jTextField2)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jRadioButton1)
-                                        .addComponent(jRadioButton2))
-                                    .addGap(19, 19, 19)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jTextField4, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
-                                        .addComponent(jTextField3)))
-                                .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)))))
+                        .addComponent(apply_to_cart_bttn, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -145,11 +165,11 @@ public class discounts extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(discount_name_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(discount_use_cb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -168,9 +188,9 @@ public class discounts extends javax.swing.JFrame {
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(apply_to_cart_bttn, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 493, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -184,12 +204,83 @@ public class discounts extends javax.swing.JFrame {
             
             
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       try {
+
+    discounts_tbl_dtm.setRowCount(0);
+
+    ResultSet rs;
+    PreparedStatement ps;
+
+    String SQL = "SELECT * FROM discounts";
+
+    if (!discount_name_txt.getText().strip().isEmpty()) {
+
+        SQL += " WHERE discount_name LIKE ?";
+        ps = vars.conn.prepareStatement(SQL);
+        ps.setString(1, "%" + discount_name_txt.getText() + "%");
+
+    } 
+    else if (
+        !discount_use_cb.getSelectedItem().equals("--Select A Discount use--") &&
+        !discount_use_cb.getSelectedItem().equals("-Phones-") &&
+        !discount_use_cb.getSelectedItem().equals("-Accessories-") &&
+        !discount_use_cb.getSelectedItem().equals("-Bluetooth-")
+    ) {
+
+        SQL += " WHERE discount_use = ?";
+        ps = vars.conn.prepareStatement(SQL);
+        ps.setString(1, discount_use_cb.getSelectedItem().toString());
+
+    } 
+    else {
+        ps = vars.conn.prepareStatement(SQL);
+    }
+
+    rs = ps.executeQuery();
+
+    while (rs.next()) {
+
+        double percOff_number = rs.getDouble("discount_perc_off");
+        double dollarOff_number = rs.getDouble("discount_usd_off");
+
+        Object[] row;
+
+        if (dollarOff_number == -1.0) {
+            row = new Object[]{
+                rs.getString("discount_name"),
+                rs.getString("discount_use"),
+                percOff_number + "%"
+            };
+        } 
+        else {
+            row = new Object[]{
+                rs.getString("discount_name"),
+                rs.getString("discount_use"),
+                "$" + dollarOff_number
+            };
+        }
+
+        discounts_tbl_dtm.addRow(row);
+    }
+
+} catch (SQLException ex) {
+    Logger.getLogger(discounts.class.getName()).log(Level.SEVERE, null, ex);
+}
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        discounts_tbl_dtm = (DefaultTableModel) discounts_tbl.getModel();
+
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formWindowOpened
+
+    private void apply_to_cart_bttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apply_to_cart_bttnActionPerformed
 
         
-        discounts_tbl_dtm.setRowCount(0);
-
+        boolean applies =  rms.clone.main.business.actions.checkIfDiscountAppliesToCart(RMS_Clone_CSR.cart_model);
         
-        String SQL = "Select * from discounts";
         
         
 
@@ -197,7 +288,7 @@ public class discounts extends javax.swing.JFrame {
 
 
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_apply_to_cart_bttnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -235,10 +326,11 @@ public class discounts extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton apply_to_cart_bttn;
+    private javax.swing.JTextField discount_name_txt;
+    private javax.swing.JComboBox<String> discount_use_cb;
     private javax.swing.JTable discounts_tbl;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -248,9 +340,10 @@ public class discounts extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     // End of variables declaration//GEN-END:variables
+
+  
 }

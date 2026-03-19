@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import rms.clone.main.UI.main.RMS_Clone_CSR;
+import rms.clone.main.business.actions;
 import rms.clone.main.business.vars;
 
 /**
@@ -35,15 +36,9 @@ public class find_item extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        item_name_txt = new javax.swing.JTextField();
-        item_sku_txt = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        item_type_dd = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         item_table = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        addToCart_selectPhone_bttn = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         sel_item_desc_txt = new javax.swing.JTextArea();
@@ -52,6 +47,14 @@ public class find_item extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         qty_txt = new javax.swing.JTextField();
+        jPanel1 = new javax.swing.JPanel();
+        item_name_txt = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        item_sku_txt = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        item_type_dd = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
+        refurb_phones_cb = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -60,38 +63,12 @@ public class find_item extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Item Name");
-
-        item_name_txt.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-            }
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-                item_name_txtInputMethodTextChanged(evt);
-            }
-        });
-        item_name_txt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                item_name_txtActionPerformed(evt);
-            }
-        });
-
-        jLabel2.setText("Item SKU");
-
-        jLabel3.setText("Item Type ");
-
-        item_type_dd.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Choose an item type--", "iPhone case", "Android case", "iPhone Screen Protector", "Android Screen Protector", "Bluetooth Speaker", "Bluetooth Headphones", "Wired Speaker", "Wired headphones", "Old iPhone carging cable", "New iPhone/Android charging cable", "Test Item" }));
-        item_type_dd.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                item_type_ddActionPerformed(evt);
-            }
-        });
-
         item_table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Name", "SKU", "Price", "Stock"
+                "SKU/IMEI", "Name", "Price", "Stock"
             }
         ) {
             Class[] types = new Class [] {
@@ -116,10 +93,10 @@ public class find_item extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(item_table);
 
-        jButton1.setText("Add to cart");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        addToCart_selectPhone_bttn.setText("Add to cart");
+        addToCart_selectPhone_bttn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                addToCart_selectPhone_bttnActionPerformed(evt);
             }
         });
 
@@ -145,68 +122,142 @@ public class find_item extends javax.swing.JFrame {
 
         qty_txt.setText("0");
 
+        jPanel1.setBackground(new java.awt.Color(204, 255, 255));
+
+        item_name_txt.setEditable(false);
+        item_name_txt.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+                item_name_txtInputMethodTextChanged(evt);
+            }
+        });
+        item_name_txt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                item_name_txtActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Item Name");
+
+        item_sku_txt.setEditable(false);
+
+        jLabel2.setText("IMEI/SKU");
+
+        item_type_dd.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Choose an item type--", "--Activation--", "Phone Activation", "Tablet Activation", "Hotspot Activation", "IoT Activation", "--Accessories--", "iPhone case", "Android case", "iPhone Screen Protector", "Android Screen Protector", "Bluetooth Speaker", "Bluetooth Headphones", "Wired Speaker", "Wired headphones", "Old iPhone carging cable", "New iPhone/Android charging cable", "Test Item" }));
+        item_type_dd.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                item_type_ddItemStateChanged(evt);
+            }
+        });
+        item_type_dd.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+                item_type_ddInputMethodTextChanged(evt);
+            }
+        });
+        item_type_dd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                item_type_ddActionPerformed(evt);
+            }
+        });
+        item_type_dd.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                item_type_ddPropertyChange(evt);
+            }
+        });
+
+        jLabel3.setText("Item Type ");
+
+        refurb_phones_cb.setText("Refurbished Phones");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jLabel1)
+                                    .addGap(9, 9, 9))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(item_sku_txt)
+                            .addComponent(item_name_txt)
+                            .addComponent(item_type_dd, 0, 261, Short.MAX_VALUE))
+                        .addContainerGap())
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(5, 5, 5)
+                        .addComponent(refurb_phones_cb)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(item_type_dd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(item_name_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(item_sku_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(refurb_phones_cb)
+                .addGap(33, 33, 33))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(sel_item_name_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addContainerGap()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addContainerGap()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel1)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(item_name_txt))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel3)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(item_type_dd, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel2)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(item_sku_txt))))
-                                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addContainerGap()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel4)
-                                        .addComponent(jLabel5)))
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(sel_item_name_txt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                                .addComponent(jLabel4)
+                                .addComponent(jLabel5)))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addGap(6, 6, 6)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(qty_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(qty_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(addToCart_selectPhone_bttn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(item_name_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(item_sku_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(item_type_dd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5)
                 .addGap(1, 1, 1)
                 .addComponent(sel_item_name_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -219,9 +270,9 @@ public class find_item extends javax.swing.JFrame {
                     .addComponent(jLabel6)
                     .addComponent(qty_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(addToCart_selectPhone_bttn, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 545, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -236,12 +287,14 @@ public class find_item extends javax.swing.JFrame {
     boolean hasNameInput = false;
     boolean hasSKUInput = false;
     boolean hasItemCatInput = false;
+    boolean hasNewActivationCatInput = false;
    
     
     
     String selectedItemSKU = "";
     String selectedItemName = "";
    double selectedItemPrice = 0.00;
+   ResultSet rs = null;
 
    Component frame = null;
     
@@ -249,6 +302,7 @@ public class find_item extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
          item_table_dtm.setRowCount(0);
         String SQL = "SELECT * FROM accessories";
+        String SQL_phone = "SELECT * FROM devices";
 
         
         if (!item_name_txt.getText().strip().isEmpty()) {
@@ -257,6 +311,8 @@ public class find_item extends javax.swing.JFrame {
             hasSKUInput=true;
         }else if (!item_type_dd.getSelectedItem().equals("--Choose an item type--")) {
             hasItemCatInput = true;
+        } else if (item_type_dd.getSelectedItem().equals("Phone Activation") || (item_type_dd.getSelectedItem().equals("Tablet Activation")) || (item_type_dd.getSelectedItem().equals("Hotspot Activation")) || (item_type_dd.getSelectedItem().equals("IoT Activation"))){
+            hasNewActivationCatInput = true;
         } else {
             JOptionPane.showMessageDialog(frame, "Please enter a search item.");
         }
@@ -265,7 +321,7 @@ public class find_item extends javax.swing.JFrame {
         
         
 try {
-    ResultSet rs = null;
+    rs = null;
     PreparedStatement ps = null;
 
     if (hasNameInput) {
@@ -295,6 +351,15 @@ try {
         ps = vars.conn.prepareStatement(SQL);
         ps.setString(1, item_type_dd.getSelectedItem().toString());
 
+        
+} else if (hasNewActivationCatInput) {
+    SQL_phone = " where device_imei= ? AND is_refurb= ? AND is_pre_order=false;";
+        System.out.println("Searching for phone for activation");
+        ps = vars.conn.prepareStatement(SQL_phone);
+        ps.setString(1, item_sku_txt.getText().toString());
+        ps.setBoolean(2, refurb_phones_cb.isSelected());
+        
+        
     } else {
 
         System.out.println("Error: No search input provided");
@@ -305,16 +370,39 @@ try {
 
     while (rs.next()) {
         
-
+        
+        if (hasNewActivationCatInput) {
+          
+            
+            
+            
+            
+            
+            Object[] row = {
+            rs.getString("device_imei"),
+            rs.getString("device_make") + rs.getString("device_model"),
+            Double.toString(rs.getDouble("payment_plan_monthly_cost")),
+            Integer.toString(rs.getInt("amt_in_stock"))
+        }; 
+             item_table_dtm.addRow(row);
+        System.out.println(row);
+         
+          
+        } else {
         Object[] row = {
-            rs.getString("item_name"),
             rs.getString("item_sku"),
+            rs.getString("item_name"),
             Double.toString(rs.getDouble("price_usd")),
             Integer.toString(rs.getInt("quantity_in_warehouse"))
-        };
-
-        item_table_dtm.addRow(row);
+        }; 
+         item_table_dtm.addRow(row);
         System.out.println(row);
+        }
+        
+
+        
+
+       
     }
 
 } catch (SQLException ex) {
@@ -357,7 +445,7 @@ try {
             
             ps.setString(1, item_table.getValueAt(row, column).toString());
             
-                        ResultSet rs = ps.executeQuery();
+                        rs = ps.executeQuery();
 
                         
                         while (rs.next()) {
@@ -383,7 +471,7 @@ try {
         }
     }//GEN-LAST:event_item_tableMouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void addToCart_selectPhone_bttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addToCart_selectPhone_bttnActionPerformed
 
         
         Component frame = null;
@@ -401,7 +489,18 @@ try {
                         JOptionPane.showMessageDialog(frame, "Quantity must be more than 1.");
 
         
-        
+} else if (hasNewActivationCatInput) {
+
+            try {
+                boolean iseligableForPaymentPlan = getPaymentPlanEligability(rs.getString("device_type"));
+                actions.launchNewActivationWindowWithData(rs.getString("device_imei"), rs.getString("device_make"), rs.getString("device_model"), iseligableForPaymentPlan, rs.getDouble("up_front_cost"), rs.getDouble("payment_plan_monthly_cost"), vars.selectedCx.getDownpaymentNeeded(), vars.selectedCx.getDownpayPerc());
+            } catch (SQLException ex) {
+                Logger.getLogger(find_item.class.getName()).log(Level.SEVERE, null, ex);
+            }
+          
+
+
+
         
             }else {
             
@@ -413,16 +512,64 @@ try {
         
         }
         
+        
+        
+        
+         //open up new window for new number and addons
+//          
+//          
   
 
 
 
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_addToCart_selectPhone_bttnActionPerformed
 
     private void item_name_txtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_item_name_txtActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_item_name_txtActionPerformed
+
+    private void item_type_ddItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_item_type_ddItemStateChanged
+if (item_type_dd.getSelectedItem().equals("Phone Activation") || (item_type_dd.getSelectedItem().equals("Tablet Activation")) || (item_type_dd.getSelectedItem().equals("Hotspot Activation")) || (item_type_dd.getSelectedItem().equals("IoT Activation"))){
+            item_name_txt.setEditable(false);
+            item_name_txt.setEnabled(false);
+            
+            item_sku_txt.setEditable(true);
+            item_sku_txt.setEnabled(true);
+            refurb_phones_cb.setEnabled(true);
+            addToCart_selectPhone_bttn.setText("Select Phone");
+        } else if (item_type_dd.getSelectedItem().toString().startsWith("--")) {
+            item_name_txt.setEditable(false);
+            item_sku_txt.setEditable(false);
+            item_name_txt.setEnabled(false);
+            item_sku_txt.setEnabled(false);
+            
+                        refurb_phones_cb.setEnabled(false);
+
+            
+        } else {
+                    item_name_txt.setEditable(true);
+            item_sku_txt.setEditable(true);  
+            
+            item_name_txt.setEnabled(true);
+            item_sku_txt.setEnabled(true);  
+                                    refurb_phones_cb.setEnabled(false);
+
+        }
+
+
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_item_type_ddItemStateChanged
+
+    private void item_type_ddInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_item_type_ddInputMethodTextChanged
+      
+    }//GEN-LAST:event_item_type_ddInputMethodTextChanged
+
+    private void item_type_ddPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_item_type_ddPropertyChange
+      
+
+    }//GEN-LAST:event_item_type_ddPropertyChange
 
     /**
      * @param args the command line arguments
@@ -460,11 +607,11 @@ try {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addToCart_selectPhone_bttn;
     private javax.swing.JTextField item_name_txt;
     private javax.swing.JTextField item_sku_txt;
     private javax.swing.JTable item_table;
     private javax.swing.JComboBox<String> item_type_dd;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -472,9 +619,11 @@ try {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField qty_txt;
+    private javax.swing.JCheckBox refurb_phones_cb;
     private javax.swing.JTextArea sel_item_desc_txt;
     private javax.swing.JTextField sel_item_name_txt;
     // End of variables declaration//GEN-END:variables
@@ -486,4 +635,17 @@ public static int isInt(String input) {
         return -99;
     }
 }
+
+    private boolean getPaymentPlanEligability(String devicetype) {
+
+        if ((devicetype == "IoT Device") || (devicetype == "Hotspot")) {
+            return false;
+        } else {
+            return true;
+        }
+
+
+
+    }
 }
+

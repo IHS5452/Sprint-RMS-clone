@@ -1777,6 +1777,9 @@ public static DefaultTableModel cart_model;
     }//GEN-LAST:event_recycle_bttnActionPerformed
 
     private void discounts_bttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_discounts_bttnActionPerformed
+        new rms.clone.main.UI.submain.discounts().setVisible(true);
+
+
         // TODO add your handling code here:
     }//GEN-LAST:event_discounts_bttnActionPerformed
 

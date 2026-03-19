@@ -21,7 +21,7 @@ SET @@SESSION.SQL_LOG_BIN= 0;
 -- GTID state at the beginning of the backup 
 --
 
-SET @@GLOBAL.GTID_PURGED=/*!80000 '+'*/ '33531242-1775-11f1-afc0-34913b738f75:1-18,
+SET @@GLOBAL.GTID_PURGED=/*!80000 '+'*/ '33531242-1775-11f1-afc0-34913b738f75:1-124,
 e936b2ec-d69a-11f0-ad36-7944e8bf04d5:1-425';
 
 --
@@ -110,6 +110,7 @@ CREATE TABLE `agent_feedback` (
 
 LOCK TABLES `agent_feedback` WRITE;
 /*!40000 ALTER TABLE `agent_feedback` DISABLE KEYS */;
+INSERT INTO `agent_feedback` VALUES (4500518,1,2,'Negitive','they suck','i hate them ',0,0,0,'','');
 /*!40000 ALTER TABLE `agent_feedback` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -144,7 +145,7 @@ CREATE TABLE `company_logins` (
 
 LOCK TABLES `company_logins` WRITE;
 /*!40000 ALTER TABLE `company_logins` DISABLE KEYS */;
-INSERT INTO `company_logins` VALUES (1,'Alice','Brown','Customer Service Rep','alice@company.com','password123',0,1,'2023-01-10',0,0,1,0),(2,'Bob','Green','Sales Manager','bob@company.com','securepass2',0,1,'2021-06-15',1,1,1,0),(3,'Charlie','Davis','Tech Support','charlie@company.com','securepass3',1,1,'2020-11-20',0,0,1,1);
+INSERT INTO `company_logins` VALUES (1,'Alice','Brown','Customer Service Rep','alice@company.com','password123',0,1,'2023-01-10',0,0,1,0),(2,'Bob','Green','Sales Manager','bob@company.com','password123',0,1,'2021-06-15',1,1,1,0),(3,'Charlie','Davis','Tech Support','charlie@company.com','password123',1,1,'2020-11-20',0,0,1,1);
 /*!40000 ALTER TABLE `company_logins` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -250,6 +251,7 @@ CREATE TABLE `customer_info` (
   `account_number` varchar(255) DEFAULT NULL,
   `downpay_perc` int DEFAULT NULL,
   `downpayment_needed` tinyint(1) DEFAULT NULL,
+  `current_credits` double DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `idx_customer_info_account_number` (`account_number`),
   KEY `idx_customer_info_name` (`lastName`,`firstName`),
@@ -263,7 +265,7 @@ CREATE TABLE `customer_info` (
 
 LOCK TABLES `customer_info` WRITE;
 /*!40000 ALTER TABLE `customer_info` DISABLE KEYS */;
-INSERT INTO `customer_info` VALUES (1,'Mr.','John','A','Doe',NULL,'john.doe@example.com',0,'123-45-6789','1985-06-15 00:00:00','D1234567','MO','2028-05-01 00:00:00','5125552000',NULL,NULL,'1500','Corporate Woods Dr',NULL,'Chesterfield','MO','63017','MegaCorp LLC',1,1,1,'Business','123-45-6789','A',5,'2025-12-14 14:12:42','Corporate','ACC-10001',NULL,NULL),(2,'Ms.','Jane',NULL,'Smith',NULL,'jane.smith@example.com',0,'987-65-4321','1990-02-20 00:00:00','S7654321','MO','2027-09-30 00:00:00','6365553333','REDACTED',NULL,'42','Market St','Apt 5','St. Louis','MO','63101','Acme Co',0,0,0,'Personal','987-65-4321','B',2,'2025-12-14 14:12:42','Consumer','ACC-20002',NULL,NULL);
+INSERT INTO `customer_info` VALUES (1,'Mr.','John','A','Doe',NULL,'john.doe@example.com',0,'123-45-6789','1985-06-15 00:00:00','D1234567','MO','2028-05-01 00:00:00','5125552000',NULL,NULL,'1500','Corporate Woods Dr',NULL,'Chesterfield','MO','63017','MegaCorp LLC',1,1,1,'Business','123-45-6789','A',5,'2025-12-14 14:12:42','Corporate','ACC-10001',NULL,NULL,100),(2,'Ms.','Jane',NULL,'Smith',NULL,'jane.smith@example.com',0,'987-65-4321','1990-02-20 00:00:00','S7654321','MO','2027-09-30 00:00:00','6365553333','REDACTED',NULL,'42','Market St','Apt 5','St. Louis','MO','63101','Acme Co',0,0,0,'Personal','987-65-4321','B',2,'2025-12-14 14:12:42','Consumer','ACC-20002',20,1,0);
 /*!40000 ALTER TABLE `customer_info` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -300,6 +302,69 @@ INSERT INTO `customer_services_list` VALUES (1,12,'5125552000','International Ca
 UNLOCK TABLES;
 
 --
+-- Table structure for table `devices`
+--
+
+DROP TABLE IF EXISTS `devices`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `devices` (
+  `dvid` int DEFAULT NULL,
+  `device_type` text,
+  `device_make` text,
+  `device_model` text,
+  `device_imei` text,
+  `device_release_year` text,
+  `payment_plan_eligable` tinyint(1) DEFAULT NULL,
+  `payment_plan_monthly_cost` double DEFAULT NULL,
+  `up_front_cost` double DEFAULT NULL,
+  `is_pre_order` tinyint(1) DEFAULT NULL,
+  `is_pending_shipment` tinyint(1) DEFAULT NULL,
+  `is_refurb` tinyint(1) DEFAULT NULL,
+  `return_eligable` tinyint(1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `devices`
+--
+
+LOCK TABLES `devices` WRITE;
+/*!40000 ALTER TABLE `devices` DISABLE KEYS */;
+INSERT INTO `devices` VALUES (1,'Smartphone','Samsung','Galaxy S23','9781234567891','2023',1,89.99,799,0,0,0,1),(2,'Smartphone','Apple','iPhone 15','9781234567892','2023',1,79.99,999,0,0,0,1),(3,'Tablet','Samsung','Galaxy Tab S8','9781234567893','2023',0,39.99,449,0,0,0,1),(4,'Smartphone','Google','Pixel 8','9781234567894','2023',1,99.99,699,0,0,0,1),(5,'Smartphone','OnePlus','12','9781234567895','2023',0,49.99,699,0,0,0,1),(6,'Smartphone','Xiaomi','14','9781234567896','2023',1,69.99,599,0,0,0,1),(7,'Smartphone','Motorola','Edge 50','9781234567897','2023',0,59.99,449,0,0,1,0),(8,'Tablet','Apple','iPad Air','9781234567898','2023',1,49.99,399,0,0,0,1),(9,'IoT Device','Amazon','Echo Dot (5th Gen)','9781234567899','2023',1,29.99,49.99,0,0,0,1),(10,'Hotspot','Tmobile','Mace II','9781234567810','2023',0,49.99,79.99,0,0,0,1);
+/*!40000 ALTER TABLE `devices` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `discounts`
+--
+
+DROP TABLE IF EXISTS `discounts`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `discounts` (
+  `dscid` int DEFAULT NULL,
+  `discount_perc_off` double DEFAULT NULL,
+  `discount_usd_off` double DEFAULT NULL,
+  `requires_mgr_approval` tinyint(1) DEFAULT NULL,
+  `discount_name` text,
+  `discount_description` text,
+  `discount_use` text,
+  `is_active` tinyint(1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `discounts`
+--
+
+LOCK TABLES `discounts` WRITE;
+/*!40000 ALTER TABLE `discounts` DISABLE KEYS */;
+INSERT INTO `discounts` VALUES (1,-1,50,0,'Test Discount. $50 off','A Test discount for dev purposes. Delete in prod.','Other Accessories',1),(2,50,-1,0,'Percentage discount','A Test discount for dev purposes. Delete in prod.','Other Accessories',1);
+/*!40000 ALTER TABLE `discounts` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `homepage_news`
 --
 
@@ -323,6 +388,31 @@ LOCK TABLES `homepage_news` WRITE;
 /*!40000 ALTER TABLE `homepage_news` DISABLE KEYS */;
 INSERT INTO `homepage_news` VALUES (0,'test title','this is a test of the new news system. \n new line...',1,'2025-12-11 13:35:59');
 /*!40000 ALTER TABLE `homepage_news` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `manager_signoffs`
+--
+
+DROP TABLE IF EXISTS `manager_signoffs`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `manager_signoffs` (
+  `soid` int DEFAULT NULL,
+  `date_time_preformed` datetime DEFAULT NULL,
+  `for_assosiate_pid` int DEFAULT NULL,
+  `mgr_pid` int DEFAULT NULL,
+  `reason_for_signoff` text
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `manager_signoffs`
+--
+
+LOCK TABLES `manager_signoffs` WRITE;
+/*!40000 ALTER TABLE `manager_signoffs` DISABLE KEYS */;
+/*!40000 ALTER TABLE `manager_signoffs` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -384,7 +474,7 @@ CREATE TABLE `phone_bills` (
 
 LOCK TABLES `phone_bills` WRITE;
 /*!40000 ALTER TABLE `phone_bills` DISABLE KEYS */;
-INSERT INTO `phone_bills` VALUES (1,'2025-01-01','2025-01-31',129.99,129.99,1,'2025-02-01','2025-01-29','Paid','12,14,18','ACC-10001'),(2,'2025-01-01','2025-01-31',59.99,0.00,0,'2025-02-01',NULL,'Pending','14','ACC-20002');
+INSERT INTO `phone_bills` VALUES (1,'2025-01-01','2025-01-31',0.00,0.00,1,'2025-02-01','2026-03-16','Paid','12,14,18','ACC-10001'),(2,'2025-01-01','2025-01-31',0.00,0.00,1,'2025-02-01','2026-03-16','Paid','14','ACC-10001');
 /*!40000 ALTER TABLE `phone_bills` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -529,6 +619,7 @@ CREATE TABLE `returns` (
 
 LOCK TABLES `returns` WRITE;
 /*!40000 ALTER TABLE `returns` DISABLE KEYS */;
+INSERT INTO `returns` VALUES (1,'2026-03-16 06:55:32','Other cable',1,1,1,1,1,1,1,'Unable to return','mail','na','test@test.com');
 /*!40000 ALTER TABLE `returns` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -559,6 +650,39 @@ LOCK TABLES `services` WRITE;
 /*!40000 ALTER TABLE `services` DISABLE KEYS */;
 INSERT INTO `services` VALUES (12,1,'2025-11-30 03:25:21','International Calling Add-On','Add international calling capabilities to the line.',0,0),(14,1,'2025-11-30 03:25:21','Voicemail Provisioning','Enable or repair voicemail services for the customer line.',0,0),(18,1,'2025-11-30 03:25:21','Priority Data Add-On','Add additional priority data to this phone line.',1,9.99);
 /*!40000 ALTER TABLE `services` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `transactions_all`
+--
+
+DROP TABLE IF EXISTS `transactions_all`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `transactions_all` (
+  `tid` int DEFAULT NULL,
+  `type_of_transaction` text,
+  `orig_subtotal` double DEFAULT NULL,
+  `tax` double DEFAULT NULL,
+  `discounts_given` double DEFAULT NULL,
+  `grand_total` double DEFAULT NULL,
+  `payment_method` text,
+  `cash_given_total` double DEFAULT NULL,
+  `change_given` double DEFAULT NULL,
+  `date_time_of_transaction` datetime DEFAULT NULL,
+  `is_finalized` tinyint(1) DEFAULT NULL,
+  `pid_of_assosiate` int DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `transactions_all`
+--
+
+LOCK TABLES `transactions_all` WRITE;
+/*!40000 ALTER TABLE `transactions_all` DISABLE KEYS */;
+INSERT INTO `transactions_all` VALUES (0,'Bill Pay',136,0,0,136,'Cash',0,4,'2026-03-16 09:09:50',1,1),(0,'Bill Pay',135,0,0,135,'Cash',0,5,'2026-03-16 09:11:57',1,1),(0,'Bill Pay',155,0,0,155,'Cash',0,5,'2026-03-16 09:14:56',1,1),(0,'Bill Pay',155,0,0,155,'Cash',0,5,'2026-03-16 09:15:29',1,1),(0,'Bill Pay',5,0,0,5,'Cash',0,0,'2026-03-16 09:19:28',1,1),(0,'Bill Pay',600,0,0,600,'Cash',0,0,'2026-03-16 09:22:40',1,1),(0,'Bill Pay',600,0,0,600,'Cash',0,0,'2026-03-16 09:26:37',1,1),(0,'Bill Pay',600,0,0,600,'Cash',0,0,'2026-03-16 09:28:15',1,1),(0,'Bill Pay',600,0,0,600,'Cash',0,0,'2026-03-16 09:35:18',1,1),(0,'Bill Pay',600,0,0,600,'Cash',0,0,'2026-03-16 09:38:08',1,1),(0,'Bill Pay',600,0,0,600,'Cash',0,100,'2026-03-16 09:40:23',1,1),(0,'Bill Pay',600,0,0,600,'Cash',0,0,'2026-03-16 09:41:05',1,1),(0,'Bill Pay',600,0,0,600,'Cash',0,0,'2026-03-16 09:43:35',1,1),(0,'Bill Pay',600,0,0,600,'Cash',0,400,'2026-03-16 09:45:17',1,1),(0,'Bill Pay',600,0,0,600,'Cash',0,0,'2026-03-16 09:47:31',1,1),(0,'Bill Pay',600,0,0,600,'Cash',0,0,'2026-03-16 09:50:53',1,1),(0,'Bill Pay',600,0,0,600,'Cash',0,0,'2026-03-16 09:54:29',1,1);
+/*!40000 ALTER TABLE `transactions_all` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -682,4 +806,4 @@ SET @@SESSION.SQL_LOG_BIN = @MYSQLDUMP_TEMP_LOG_BIN;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-03-16  6:36:55
+-- Dump completed on 2026-03-19 18:13:45

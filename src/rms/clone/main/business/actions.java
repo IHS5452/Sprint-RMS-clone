@@ -26,6 +26,7 @@ import static rms.clone.main.UI.main.RMS_Clone_CSR.alerts_table;
 import static rms.clone.main.UI.main.RMS_Clone_CSR.customer_line_table;
 import static rms.clone.main.UI.main.RMS_Clone_CSR.services_table;
 import static rms.clone.main.UI.main.RMS_Clone_CSR.notes_table;
+import rms.clone.main.UI.submain.new_activation;
 
 /**
  *
@@ -440,5 +441,72 @@ ps.setString(2, lastName.trim() + "%");
 
     return results;
 }
+
+
+  public static boolean checkIfDiscountAppliesToCart(DefaultTableModel cart_model) {
+
+  
+  
+  
+  
+  
+  
+  return false;
+  }
+  
+  
+  
+  
+  
+  
+  
+public static void launchNewActivationWindowWithData(String imei, String make, String model, boolean isPiadUpFront, double price_today, double price_per_month, boolean requiresDownpayment, int downpaymentPerc) {
+   
+    new_activation.imei_txt.setText(imei);
+     new_activation.make_txt.setText(make);
+     new_activation.model_txt.setText(model);
+    if (isPiadUpFront) {
+         new_activation.paid_in_full_cb.setSelected(true);
+         new_activation.cost_per_month_txt.setText("0.00");
+         new_activation.cost_today_txt.setText(Double.toString(price_today));
+    } else {
+           new_activation.paid_in_full_cb.setSelected(false);
+      
+        
+        if (requiresDownpayment) {
+            double downpayment_ammt = price_today * (downpaymentPerc * .01);
+            double newPricePerMonth = (price_today - downpayment_ammt) / 24;
+
+                     new_activation.cost_per_month_txt.setText(Double.toString(newPricePerMonth));
+
+                     new_activation.cost_today_txt.setText(Double.toString(downpayment_ammt));  
+
+        } else {
+                                 new_activation.cost_per_month_txt.setText(Double.toString(price_per_month));
+
+                     new_activation.cost_today_txt.setText("0.00");  
+
+        }
+        
+        
+        new new_activation().setVisible(true);
+        
+          
+    }
+    
+    
+    
+    
+    
+    
+    
+}
+
+
+
+
+
+
+
 
 }
