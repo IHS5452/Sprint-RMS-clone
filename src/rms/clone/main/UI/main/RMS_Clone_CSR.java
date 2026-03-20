@@ -3021,7 +3021,6 @@ public static void checkIfLoggedIn() {
         search_bttn.setEnabled(true);
         recycle_bttn.setEnabled(true);
         discounts_bttn.setEnabled(true);
-        find_item_bttn.setEnabled(true);
         nss_token_bttn.setEnabled(true);
                 reset_bttn.setEnabled(true);
                 note_txt.setEditable(true);

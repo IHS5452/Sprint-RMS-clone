@@ -4,6 +4,22 @@
  */
 package rms.clone.main.UI.submain;
 
+import classes.Phone_plans;
+import java.sql.PreparedStatement;
+import java.awt.Component;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import rms.clone.main.UI.main.RMS_Clone_CSR;
+import rms.clone.main.business.actions;
+import rms.clone.main.business.vars;
+
 /**
  *
  * @author ianschrauth
@@ -26,8 +42,8 @@ public class new_activation extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        port_in_rb = new javax.swing.JRadioButton();
+        new_number_rb = new javax.swing.JRadioButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         imei_txt = new javax.swing.JTextField();
@@ -42,22 +58,38 @@ public class new_activation extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         cost_today_txt = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        area_code_txt = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        acct_number_txt = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
+        acct_pin_txt = new javax.swing.JTextField();
+        accct_zip_code_txt = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        plans_cb = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        rest_of_number_txt = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
-        jRadioButton1.setText("Port in");
+        port_in_rb.setText("Port in");
+        port_in_rb.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                port_in_rbItemStateChanged(evt);
+            }
+        });
 
-        jRadioButton2.setText("New Number");
+        new_number_rb.setText("New Number");
+        new_number_rb.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                new_number_rbItemStateChanged(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -175,20 +207,15 @@ public class new_activation extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jLabel7)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(acct_pin_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
@@ -198,23 +225,29 @@ public class new_activation extends javax.swing.JFrame {
                                         .addComponent(jLabel9)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jTextField7, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)))))
-                    .addGroup(layout.createSequentialGroup()
+                                    .addComponent(plans_cb, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(accct_zip_code_txt, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(25, 25, 25)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jRadioButton1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jRadioButton2))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(port_in_rb)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(area_code_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(5, 5, 5)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(rest_of_number_txt)
+                            .addComponent(new_number_rb, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(acct_number_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -226,27 +259,28 @@ public class new_activation extends javax.swing.JFrame {
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jRadioButton1)
-                            .addComponent(jRadioButton2))
-                        .addGap(29, 29, 29)
+                            .addComponent(port_in_rb)
+                            .addComponent(new_number_rb))
+                        .addGap(43, 43, 43)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(area_code_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(rest_of_number_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
-                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(acct_number_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
-                            .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(acct_pin_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8)
-                            .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(32, 32, 32)
+                            .addComponent(accct_zip_code_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(plans_cb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel9))
                         .addGap(75, 75, 75)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -256,9 +290,94 @@ public class new_activation extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
+   public static String typeOfDevice = "";
+    
+        public static PreparedStatement ps = null;
+
+    
     private void make_txtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_make_txtActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_make_txtActionPerformed
+
+    private void port_in_rbItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_port_in_rbItemStateChanged
+
+        new_number_rb.setSelected(false);
+        area_code_txt.setEditable(true);
+        rest_of_number_txt.setEditable(true);
+        acct_number_txt.setEditable(true);
+        accct_zip_code_txt.setEditable(true);
+        acct_pin_txt.setEditable(true);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_port_in_rbItemStateChanged
+
+    private void new_number_rbItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_new_number_rbItemStateChanged
+        port_in_rb.setSelected(false);
+        
+         area_code_txt.setEditable(true);
+        rest_of_number_txt.setEditable(false);
+        acct_number_txt.setEditable(false);
+        accct_zip_code_txt.setEditable(false);
+        acct_pin_txt.setEditable(false);
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_new_number_rbItemStateChanged
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+
+                System.out.println("Window Opened.");
+
+        try {
+            String SQL = "Select * from phone_plans where type_of_device = ? AND is_active=true;";
+            
+            ps = vars.conn.prepareStatement(SQL);
+                            System.out.println("Init'd ps.");
+
+            ps.setString(1, typeOfDevice);
+                                        System.out.println("added " + typeOfDevice + " as the device type(s).");
+
+            ResultSet rs = ps.executeQuery();
+        Map<String, Integer> plans = new HashMap<>();
+
+                                        System.out.println("starting rs");
+
+            while (rs.next()) {
+                Phone_plans pp = new Phone_plans();
+                pp.setPlanId(rs.getInt("plan_id"));
+                System.out.println(rs.getString("plan_name"));
+                pp.setPlanName(rs.getString("plan_name"));
+                                System.out.println(rs.getString("plan_description"));
+                                
+
+                pp.setPlanDescription(rs.getString("plan_description"));
+                pp.setActive(rs.getBoolean("is_active"));
+                pp.setIfUnlimitedTalkMins(rs.getBoolean("is_unlimited_talk_mins"));
+                pp.setMaxNumTalkMins(rs.getInt("max_num_talk_mins"));
+                pp.setIfUnlimitedTexts(rs.getBoolean("is_unlimited_texts"));
+                pp.setMaxNumTexts(rs.getInt("max_num_texts"));
+                pp.setIfUnlimitedData(rs.getBoolean("is_unlimited_data"));
+                pp.setMaxDataGb(rs.getInt("max_data_gb"));
+                pp.setIfUnlimitedPriorityData(rs.getBoolean("is_unlimited_priority_data"));
+                pp.setMaxPriorityDataGb(rs.getInt("max_priority_data_gb"));
+                pp.setPrepaid(rs.getBoolean("is_prepaid"));
+                pp.setPostpaid(rs.getBoolean("is_postpaid"));
+                pp.setTypeOfDevice(rs.getString("type_of_device"));
+                plans.put(pp.getPlanName(), pp.getPlanId());
+            }
+            
+            
+            for (String key: plans.keySet()) {
+                System.out.println(key);
+                plans_cb.addItem(key);
+            }
+       
+            
+            
+            // TODO add your handling code here:
+        } catch (SQLException ex) {
+            Logger.getLogger(new_activation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
@@ -296,11 +415,14 @@ public class new_activation extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField accct_zip_code_txt;
+    private javax.swing.JTextField acct_number_txt;
+    private javax.swing.JTextField acct_pin_txt;
+    private javax.swing.JTextField area_code_txt;
     public static javax.swing.JTextField cost_per_month_txt;
     public static javax.swing.JTextField cost_today_txt;
     public static javax.swing.JTextField imei_txt;
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -313,15 +435,13 @@ public class new_activation extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
     public static javax.swing.JTextField make_txt;
     public static javax.swing.JTextField model_txt;
+    private javax.swing.JRadioButton new_number_rb;
     public static javax.swing.JCheckBox paid_in_full_cb;
+    public static javax.swing.JComboBox<String> plans_cb;
+    private javax.swing.JRadioButton port_in_rb;
+    private javax.swing.JTextField rest_of_number_txt;
     // End of variables declaration//GEN-END:variables
 
 public void launchWindowWithData(String imei, String make, String model, boolean isPiadUpFront, double price_today, double price_per_month, boolean requiresDownpayment, int downpaymentPerc) {

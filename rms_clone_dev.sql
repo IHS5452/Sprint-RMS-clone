@@ -21,7 +21,7 @@ SET @@SESSION.SQL_LOG_BIN= 0;
 -- GTID state at the beginning of the backup 
 --
 
-SET @@GLOBAL.GTID_PURGED=/*!80000 '+'*/ '33531242-1775-11f1-afc0-34913b738f75:1-124,
+SET @@GLOBAL.GTID_PURGED=/*!80000 '+'*/ '33531242-1775-11f1-afc0-34913b738f75:1-130,
 e936b2ec-d69a-11f0-ad36-7944e8bf04d5:1-425';
 
 --
@@ -265,7 +265,7 @@ CREATE TABLE `customer_info` (
 
 LOCK TABLES `customer_info` WRITE;
 /*!40000 ALTER TABLE `customer_info` DISABLE KEYS */;
-INSERT INTO `customer_info` VALUES (1,'Mr.','John','A','Doe',NULL,'john.doe@example.com',0,'123-45-6789','1985-06-15 00:00:00','D1234567','MO','2028-05-01 00:00:00','5125552000',NULL,NULL,'1500','Corporate Woods Dr',NULL,'Chesterfield','MO','63017','MegaCorp LLC',1,1,1,'Business','123-45-6789','A',5,'2025-12-14 14:12:42','Corporate','ACC-10001',NULL,NULL,100),(2,'Ms.','Jane',NULL,'Smith',NULL,'jane.smith@example.com',0,'987-65-4321','1990-02-20 00:00:00','S7654321','MO','2027-09-30 00:00:00','6365553333','REDACTED',NULL,'42','Market St','Apt 5','St. Louis','MO','63101','Acme Co',0,0,0,'Personal','987-65-4321','B',2,'2025-12-14 14:12:42','Consumer','ACC-20002',20,1,0);
+INSERT INTO `customer_info` VALUES (1,'Mr.','John','A','Doe',NULL,'john.doe@example.com',0,'123-45-6789','1985-06-15 00:00:00','D1234567','MO','2028-05-01 00:00:00','5125552000',NULL,NULL,'1500','Corporate Woods Dr',NULL,'Chesterfield','MO','63017','MegaCorp LLC',1,1,1,'Business','123-45-6789','A',5,'2025-12-14 14:12:42','Corporate','ACC-10001',0,0,100),(2,'Ms.','Jane',NULL,'Smith',NULL,'jane.smith@example.com',0,'987-65-4321','1990-02-20 00:00:00','S7654321','MO','2027-09-30 00:00:00','6365553333','REDACTED',NULL,'42','Market St','Apt 5','St. Louis','MO','63101','Acme Co',0,0,0,'Personal','987-65-4321','B',2,'2025-12-14 14:12:42','Consumer','ACC-20002',20,1,0);
 /*!40000 ALTER TABLE `customer_info` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -544,8 +544,9 @@ CREATE TABLE `phone_plans` (
   `max_priority_data_gb` int DEFAULT NULL,
   `is_prepaid` tinyint(1) NOT NULL,
   `is_postpaid` tinyint(1) NOT NULL,
+  `type_of_device` text,
   PRIMARY KEY (`plan_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -554,7 +555,7 @@ CREATE TABLE `phone_plans` (
 
 LOCK TABLES `phone_plans` WRITE;
 /*!40000 ALTER TABLE `phone_plans` DISABLE KEYS */;
-INSERT INTO `phone_plans` VALUES (1,'Standard Plan','A balanced plan with talk, text, and data',1,1,NULL,1,NULL,0,10,0,5,0,1),(2,'Business Premium','Unlimited data plan for business users',1,1,NULL,1,NULL,1,NULL,1,50,0,1),(3,'Prepaid Basic','Affordable prepaid plan with limited data',1,0,500,1,NULL,0,5,0,2,1,0);
+INSERT INTO `phone_plans` VALUES (1,'Standard Plan','A balanced plan with talk, text, and data',1,1,NULL,1,NULL,0,10,0,5,0,1,'Smartphone'),(2,'Business Premium','Unlimited data plan for business users',1,1,NULL,1,NULL,1,NULL,1,50,0,1,'Smartphone'),(3,'Prepaid Basic','Affordable prepaid plan with limited data',1,0,500,1,NULL,0,5,0,2,1,0,'Smartphone'),(4,'Unlimited Tablet Plan','This plan includes Unlimited Data for your cellular tablet!',1,0,0,0,0,1,9999,0,100,0,1,'Tablet');
 /*!40000 ALTER TABLE `phone_plans` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -806,4 +807,4 @@ SET @@SESSION.SQL_LOG_BIN = @MYSQLDUMP_TEMP_LOG_BIN;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-03-19 18:13:45
+-- Dump completed on 2026-03-20 12:42:47

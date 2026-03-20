@@ -4,6 +4,7 @@
  */
 package rms.clone.main.UI.submain;
 
+import classes.SelectedPhone;
 import java.awt.Component;
 import java.sql.*;
 import java.util.logging.Level;
@@ -51,7 +52,7 @@ public class find_item extends javax.swing.JFrame {
         item_name_txt = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         item_sku_txt = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
+        imei_sku_lbl = new javax.swing.JLabel();
         item_type_dd = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         refurb_phones_cb = new javax.swing.JCheckBox();
@@ -142,7 +143,7 @@ public class find_item extends javax.swing.JFrame {
 
         item_sku_txt.setEditable(false);
 
-        jLabel2.setText("IMEI/SKU");
+        imei_sku_lbl.setText("IMEI/SKU");
 
         item_type_dd.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Choose an item type--", "--Activation--", "Phone Activation", "Tablet Activation", "Hotspot Activation", "IoT Activation", "--Accessories--", "iPhone case", "Android case", "iPhone Screen Protector", "Android Screen Protector", "Bluetooth Speaker", "Bluetooth Headphones", "Wired Speaker", "Wired headphones", "Old iPhone carging cable", "New iPhone/Android charging cable", "Test Item" }));
         item_type_dd.addItemListener(new java.awt.event.ItemListener() {
@@ -186,7 +187,7 @@ public class find_item extends javax.swing.JFrame {
                                     .addComponent(jLabel1)
                                     .addGap(9, 9, 9))
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(imei_sku_lbl, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel3)
@@ -215,7 +216,7 @@ public class find_item extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(item_sku_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                    .addComponent(imei_sku_lbl))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(refurb_phones_cb)
                 .addGap(33, 33, 33))
@@ -295,6 +296,7 @@ public class find_item extends javax.swing.JFrame {
     String selectedItemName = "";
    double selectedItemPrice = 0.00;
    ResultSet rs = null;
+            SelectedPhone sp = new SelectedPhone();
 
    Component frame = null;
     
@@ -302,21 +304,25 @@ public class find_item extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
          item_table_dtm.setRowCount(0);
         String SQL = "SELECT * FROM accessories";
-        String SQL_phone = "SELECT * FROM devices";
 
         
-        if (!item_name_txt.getText().strip().isEmpty()) {
-            hasNameInput=true;
-        } else if (!item_sku_txt.getText().strip().isEmpty()) {
-            hasSKUInput=true;
-        }else if (!item_type_dd.getSelectedItem().equals("--Choose an item type--")) {
-            hasItemCatInput = true;
-        } else if (item_type_dd.getSelectedItem().equals("Phone Activation") || (item_type_dd.getSelectedItem().equals("Tablet Activation")) || (item_type_dd.getSelectedItem().equals("Hotspot Activation")) || (item_type_dd.getSelectedItem().equals("IoT Activation"))){
+        if (item_type_dd.getSelectedItem().toString().startsWith("--")) {
+           JOptionPane.showMessageDialog(frame, "Please enter a search item.");
+
+           
+        } else if (imei_sku_lbl.getText().equals("IMEI")) {
+
+           
+//        } else if (item_type_dd.getSelectedItem().equals("Phone Activation") || (item_type_dd.getSelectedItem().equals("Tablet Activation")) || (item_type_dd.getSelectedItem().equals("Hotspot Activation")) || (item_type_dd.getSelectedItem().equals("IoT Activation"))){
             hasNewActivationCatInput = true;
-        } else {
-            JOptionPane.showMessageDialog(frame, "Please enter a search item.");
+            
+        } else if (imei_sku_lbl.getText().equals("SKU") && (!item_name_txt.getText().toString().strip().isEmpty())) {
+            hasNameInput = true;
+        } else if (imei_sku_lbl.getText().equals("SKU") && (!item_sku_txt.getText().toString().strip().isEmpty())) {
+            hasSKUInput = true;
         }
         
+  
         
         
         
@@ -353,9 +359,9 @@ try {
 
         
 } else if (hasNewActivationCatInput) {
-    SQL_phone = " where device_imei= ? AND is_refurb= ? AND is_pre_order=false;";
+    String SQL2 = "SELECT * FROM devices where device_imei= ? AND is_refurb= ? AND is_pre_order=false;";
         System.out.println("Searching for phone for activation");
-        ps = vars.conn.prepareStatement(SQL_phone);
+        ps = vars.conn.prepareStatement(SQL2);
         ps.setString(1, item_sku_txt.getText().toString());
         ps.setBoolean(2, refurb_phones_cb.isSelected());
         
@@ -373,19 +379,30 @@ try {
         
         if (hasNewActivationCatInput) {
           
-            
-            
-            
-            
-            
+            sp.setDvid(rs.getInt("dvid"));
+            sp.setDevice_imei(rs.getString("device_imei"));
+            sp.setDevice_make(rs.getString("device_make"));
+            sp.setDevice_model(rs.getString("device_model"));
+            sp.setDevice_release_year(rs.getString("device_release_year"));
+            sp.setPayment_plan_elig(rs.getBoolean("payment_plan_eligable"));
+            sp.setPay_plan_monthyl_cost(rs.getDouble("payment_plan_monthly_cost"));
+            sp.setUp_front_cost(rs.getDouble("up_front_cost"));
+            sp.setIs_pre_order(rs.getBoolean("is_pre_order"));
+            sp.setIs_pending_shipment(rs.getBoolean("is_pending_shipment"));
+            sp.setIs_refurb(rs.getBoolean("is_refurb"));
+            sp.setReturn_eligable(rs.getBoolean("return_eligable"));
+            sp.setDevice_type(rs.getString("device_type"));
+           
             Object[] row = {
-            rs.getString("device_imei"),
-            rs.getString("device_make") + rs.getString("device_model"),
-            Double.toString(rs.getDouble("payment_plan_monthly_cost")),
-            Integer.toString(rs.getInt("amt_in_stock"))
+            sp.getDevice_imei(),
+            sp.getDevice_make() + " " + sp.getDevice_model() + ", " + sp.getDevice_release_year(),
+            sp.getPay_plan_monthyl_cost(),
+            "N/A"
         }; 
              item_table_dtm.addRow(row);
         System.out.println(row);
+        qty_txt.setText("1");
+        qty_txt.setEnabled(false);
          
           
         } else {
@@ -491,12 +508,10 @@ try {
         
 } else if (hasNewActivationCatInput) {
 
-            try {
-                boolean iseligableForPaymentPlan = getPaymentPlanEligability(rs.getString("device_type"));
-                actions.launchNewActivationWindowWithData(rs.getString("device_imei"), rs.getString("device_make"), rs.getString("device_model"), iseligableForPaymentPlan, rs.getDouble("up_front_cost"), rs.getDouble("payment_plan_monthly_cost"), vars.selectedCx.getDownpaymentNeeded(), vars.selectedCx.getDownpayPerc());
-            } catch (SQLException ex) {
-                Logger.getLogger(find_item.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            boolean iaPaidUpFront = !getPaymentPlanEligability(sp.getDevice_type());
+            actions.launchNewActivationWindowWithData(sp.getDevice_imei(), sp.getDevice_type(), sp.getDevice_make(), sp.getDevice_model(), iaPaidUpFront, sp.getUp_front_cost(), sp.getPay_plan_monthyl_cost(), vars.selectedCx.getDownpaymentNeeded(), vars.selectedCx.getDownpayPerc());
+            
+            
           
 
 
@@ -537,6 +552,10 @@ if (item_type_dd.getSelectedItem().equals("Phone Activation") || (item_type_dd.g
             item_sku_txt.setEditable(true);
             item_sku_txt.setEnabled(true);
             refurb_phones_cb.setEnabled(true);
+            
+                        imei_sku_lbl.setText("IMEI");
+
+            
             addToCart_selectPhone_bttn.setText("Select Phone");
         } else if (item_type_dd.getSelectedItem().toString().startsWith("--")) {
             item_name_txt.setEditable(false);
@@ -545,6 +564,8 @@ if (item_type_dd.getSelectedItem().equals("Phone Activation") || (item_type_dd.g
             item_sku_txt.setEnabled(false);
             
                         refurb_phones_cb.setEnabled(false);
+                                    imei_sku_lbl.setText("IMEI/SKU");
+
 
             
         } else {
@@ -554,6 +575,8 @@ if (item_type_dd.getSelectedItem().equals("Phone Activation") || (item_type_dd.g
             item_name_txt.setEnabled(true);
             item_sku_txt.setEnabled(true);  
                                     refurb_phones_cb.setEnabled(false);
+                                                imei_sku_lbl.setText("SKU");
+
 
         }
 
@@ -608,13 +631,13 @@ if (item_type_dd.getSelectedItem().equals("Phone Activation") || (item_type_dd.g
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addToCart_selectPhone_bttn;
+    private javax.swing.JLabel imei_sku_lbl;
     private javax.swing.JTextField item_name_txt;
     private javax.swing.JTextField item_sku_txt;
     private javax.swing.JTable item_table;
     private javax.swing.JComboBox<String> item_type_dd;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

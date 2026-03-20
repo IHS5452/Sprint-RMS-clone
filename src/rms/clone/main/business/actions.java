@@ -460,8 +460,10 @@ ps.setString(2, lastName.trim() + "%");
   
   
   
-public static void launchNewActivationWindowWithData(String imei, String make, String model, boolean isPiadUpFront, double price_today, double price_per_month, boolean requiresDownpayment, int downpaymentPerc) {
-   
+public static void launchNewActivationWindowWithData(String imei, String typeOfDevice, String make, String model, boolean isPiadUpFront, double price_today, double price_per_month, boolean requiresDownpayment, int downpaymentPerc) {
+           new new_activation().setVisible(true);
+
+           new_activation.typeOfDevice = typeOfDevice;
     new_activation.imei_txt.setText(imei);
      new_activation.make_txt.setText(make);
      new_activation.model_txt.setText(model);
@@ -489,7 +491,6 @@ public static void launchNewActivationWindowWithData(String imei, String make, S
         }
         
         
-        new new_activation().setVisible(true);
         
           
     }

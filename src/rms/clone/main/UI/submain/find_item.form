@@ -221,7 +221,7 @@
                                       <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="1" attributes="0">
-                                      <Component id="jLabel2" min="-2" pref="55" max="-2" attributes="0"/>
+                                      <Component id="imei_sku_lbl" min="-2" pref="55" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
@@ -262,7 +262,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="item_sku_txt" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="imei_sku_lbl" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="refurb_phones_cb" min="-2" max="-2" attributes="0"/>
@@ -291,7 +291,7 @@
             <Property name="editable" type="boolean" value="false"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel2">
+        <Component class="javax.swing.JLabel" name="imei_sku_lbl">
           <Properties>
             <Property name="text" type="java.lang.String" value="IMEI/SKU"/>
           </Properties>
