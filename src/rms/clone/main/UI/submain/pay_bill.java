@@ -152,7 +152,7 @@ public class pay_bill extends javax.swing.JFrame {
         }
         
         
-        Object[] row = {BillPayID, "Bill Pay", ammt_to_pay_txt.getText().toString(), "1"};
+        Object[] row = {BillPayID, "Bill Pay", ammt_to_pay_txt.getText().toString(), "1", false};
         RMS_Clone_CSR.cart_model.addRow(row);
         this.dispose();
         

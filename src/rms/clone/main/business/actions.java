@@ -467,7 +467,7 @@ public static void launchNewActivationWindowWithData(String imei, String typeOfD
     new_activation.imei_txt.setText(imei);
      new_activation.make_txt.setText(make);
      new_activation.model_txt.setText(model);
-    if (isPiadUpFront) {
+    if (!isPiadUpFront) {
          new_activation.paid_in_full_cb.setSelected(true);
          new_activation.cost_per_month_txt.setText("0.00");
          new_activation.cost_today_txt.setText(Double.toString(price_today));
@@ -477,11 +477,12 @@ public static void launchNewActivationWindowWithData(String imei, String typeOfD
         
         if (requiresDownpayment) {
             double downpayment_ammt = price_today * (downpaymentPerc * .01);
+            
             double newPricePerMonth = (price_today - downpayment_ammt) / 24;
 
-                     new_activation.cost_per_month_txt.setText(Double.toString(newPricePerMonth));
+                     new_activation.cost_per_month_txt.setText(Double.toString(rms.clone.main.business.actions.roundToTwoDecimals(newPricePerMonth)));
 
-                     new_activation.cost_today_txt.setText(Double.toString(downpayment_ammt));  
+                     new_activation.cost_today_txt.setText(Double.toString(rms.clone.main.business.actions.roundToTwoDecimals(downpayment_ammt)));  
 
         } else {
                                  new_activation.cost_per_month_txt.setText(Double.toString(price_per_month));
@@ -505,7 +506,9 @@ public static void launchNewActivationWindowWithData(String imei, String typeOfD
 
 
 
-
+    public static double roundToTwoDecimals(double value) {
+        return Math.round(value * 100.0) / 100.0;
+    }
 
 
 

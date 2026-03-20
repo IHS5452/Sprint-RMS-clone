@@ -20,5 +20,6 @@ public class vars {
     public static String typeOfSelectedAccount = "";
     public static Cx selectedCx;
     public static boolean hasManagerAuth = false;
+    public static String currentOrderNumber = "";
     
 }

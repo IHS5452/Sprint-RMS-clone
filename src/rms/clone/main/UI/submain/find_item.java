@@ -227,29 +227,30 @@ public class find_item extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(sel_item_name_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(sel_item_name_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel5)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(layout.createSequentialGroup()
                             .addContainerGap()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel4)
-                                .addComponent(jLabel5)))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addGap(6, 6, 6)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(qty_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(addToCart_selectPhone_bttn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel6)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(qty_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(addToCart_selectPhone_bttn, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 440, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -295,6 +296,10 @@ public class find_item extends javax.swing.JFrame {
     String selectedItemSKU = "";
     String selectedItemName = "";
    double selectedItemPrice = 0.00;
+   
+   double sleectedDevicePrice = 0.00;
+   double selectedDevicesMonthlyPrice = 0.00;
+   
    ResultSet rs = null;
             SelectedPhone sp = new SelectedPhone();
 
@@ -450,9 +455,52 @@ try {
 
         
         
+        
         try {
-            int row = item_table.getSelectedRow();
+           if (item_type_dd.getSelectedItem().equals("Phone Activation") || (item_type_dd.getSelectedItem().equals("Tablet Activation")) || (item_type_dd.getSelectedItem().equals("Hotspot Activation")) || (item_type_dd.getSelectedItem().equals("IoT Activation"))){
+
+               System.out.println("Selected a device");
+               
+               int row = item_table.getSelectedRow();
             int column = 1;
+            
+                    System.out.println("Selected: " + item_table_dtm.getValueAt(row, column));
+
+            String SQL = "Select * from devices where device_imei = ?;";
+            
+            PreparedStatement ps = vars.conn.prepareStatement(SQL);
+            
+            ps.setString(1, item_table.getValueAt(row, column).toString());
+            
+                        rs = ps.executeQuery();
+
+                        
+                        while (rs.next()) {
+                         
+                            
+                            String device_name = rs.getString("device_make") + " " + rs.getString("device_model");
+                            sel_item_name_txt.setText(device_name);
+
+                            sel_item_desc_txt.setText("Activation for a " + device_name + ", released in " + rs.getString("device_name"));
+         
+                            
+                                                        selectedItemSKU = rs.getString("item_sku");
+                            selectedItemPrice = rs.getDouble("up_front_cost");
+                            selectedDevicesMonthlyPrice = rs.getDouble("payment_plan_monthly_cost");
+                            selectedItemName = device_name;
+
+                            
+                        }
+               
+               
+               
+               
+} else {
+   int row = item_table.getSelectedRow();
+            int column = 1;
+            
+                           System.out.println("Selected a item");
+
             
                     System.out.println("Selected: " + item_table_dtm.getValueAt(row, column));
 
@@ -474,6 +522,9 @@ try {
                                                         selectedItemSKU = rs.getString("item_sku");
                             selectedItemPrice = rs.getDouble("price_usd");
                             selectedItemName = rs.getString("item_name");
+                            
+                            System.out.println(selectedItemName + " : $" + selectedItemPrice);
+                            
 
                             
                         }
@@ -481,7 +532,10 @@ try {
             
             
             
-            
+             
+}
+        
+         
             // TODO add your handling code here:
         } catch (SQLException ex) {
             Logger.getLogger(find_item.class.getName()).log(Level.SEVERE, null, ex);
@@ -491,50 +545,60 @@ try {
     private void addToCart_selectPhone_bttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addToCart_selectPhone_bttnActionPerformed
 
         
-        Component frame = null;
-            
-        
-        double quantity = isInt(qty_txt.getText().toString());
-        
-        if (quantity == -99) {
-            
-            
-            JOptionPane.showMessageDialog(frame, "Quantity must be a whole number. Please enter a whole number in the quanitty section. ");
-            
-            
-        } else if (quantity <= 0) {
-                        JOptionPane.showMessageDialog(frame, "Quantity must be more than 1.");
+ int quantity = Integer.parseInt(qty_txt.getText());
 
-        
-} else if (hasNewActivationCatInput) {
+if (quantity <= 0) {
+    JOptionPane.showMessageDialog(frame, "Quantity must be greater than 0.");
+    return;
+}
 
-            boolean iaPaidUpFront = !getPaymentPlanEligability(sp.getDevice_type());
-            actions.launchNewActivationWindowWithData(sp.getDevice_imei(), sp.getDevice_type(), sp.getDevice_make(), sp.getDevice_model(), iaPaidUpFront, sp.getUp_front_cost(), sp.getPay_plan_monthyl_cost(), vars.selectedCx.getDownpaymentNeeded(), vars.selectedCx.getDownpayPerc());
-            
-            
-          
+if (item_table.getSelectedColumn() == -1) {
+        JOptionPane.showMessageDialog(frame, "You must select an item..");
+    return;
+}
 
+if (hasNewActivationCatInput) {
 
+    actions.launchNewActivationWindowWithData(
+        sp.getDevice_imei(),
+        sp.getDevice_type(),
+        sp.getDevice_make(),
+        sp.getDevice_model(),
+        sp.isPayment_plan_elig(),
+        sp.getUp_front_cost(),
+        sp.getPay_plan_monthyl_cost(),
+        vars.selectedCx.getDownpaymentNeeded(),
+        vars.selectedCx.getDownpayPerc()
+    );
 
-        
-            }else {
-            
-            double itemTruePrice = selectedItemPrice * Double.parseDouble(qty_txt.getText());
-         
-        Object[] row = {selectedItemSKU, selectedItemName, itemTruePrice, qty_txt.getText().toString()};
-        RMS_Clone_CSR.cart_model.addRow(row);
-        this.dispose();
-        
-        }
-        
-        
-        
-        
-         //open up new window for new number and addons
-//          
-//          
-  
+} else {
 
+    int column_sku = 0;
+    int column_itemName = 1;
+        int column_price = 2;
+
+    int row = item_table.getSelectedRow();
+    
+    String sku = item_table_dtm.getValueAt(row, column_sku).toString();
+    String itemname = item_table_dtm.getValueAt(row, column_itemName).toString();
+    double price = Double.parseDouble(item_table_dtm.getValueAt(row, column_price).toString());
+    
+    System.out.println(sku + " is the sku");
+    
+    double itemTruePrice = price * quantity;
+
+    Object[] row_item = {
+        sku,
+        itemname,
+        itemTruePrice,
+        quantity,
+        false
+    };
+
+    RMS_Clone_CSR.cart_model.addRow(row_item);
+RMS_Clone_CSR.cw.rebind();
+    this.dispose();
+}
 
 
         // TODO add your handling code here:

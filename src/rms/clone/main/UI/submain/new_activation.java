@@ -202,6 +202,11 @@ public class new_activation extends javax.swing.JFrame {
         jLabel9.setText("Chosen Plan");
 
         jButton1.setText("Save");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -303,22 +308,22 @@ public class new_activation extends javax.swing.JFrame {
     private void port_in_rbItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_port_in_rbItemStateChanged
 
         new_number_rb.setSelected(false);
-        area_code_txt.setEditable(true);
-        rest_of_number_txt.setEditable(true);
-        acct_number_txt.setEditable(true);
-        accct_zip_code_txt.setEditable(true);
-        acct_pin_txt.setEditable(true);
+        area_code_txt.setEnabled(true);
+        rest_of_number_txt.setEnabled(true);
+        acct_number_txt.setEnabled(true);
+        accct_zip_code_txt.setEnabled(true);
+        acct_pin_txt.setEnabled(true);
         // TODO add your handling code here:
     }//GEN-LAST:event_port_in_rbItemStateChanged
 
     private void new_number_rbItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_new_number_rbItemStateChanged
         port_in_rb.setSelected(false);
         
-         area_code_txt.setEditable(true);
-        rest_of_number_txt.setEditable(false);
-        acct_number_txt.setEditable(false);
-        accct_zip_code_txt.setEditable(false);
-        acct_pin_txt.setEditable(false);
+         area_code_txt.setEnabled(true);
+        rest_of_number_txt.setEnabled(false);
+        acct_number_txt.setEnabled(false);
+        accct_zip_code_txt.setEnabled(false);
+        acct_pin_txt.setEnabled(false);
 
         // TODO add your handling code here:
     }//GEN-LAST:event_new_number_rbItemStateChanged
@@ -378,6 +383,10 @@ public class new_activation extends javax.swing.JFrame {
             Logger.getLogger(new_activation.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_formWindowOpened
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

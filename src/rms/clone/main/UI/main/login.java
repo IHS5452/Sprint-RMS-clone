@@ -17,6 +17,7 @@ import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
+import static rms.clone.main.UI.main.RMS_Clone_CSR.*;
 import rms.clone.main.business.vars;
 
 /**
@@ -232,7 +233,8 @@ Component frame = null;
                   SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
                   String formatedDate = dateFormat.format(currentDate);
                   vars.timeLoggedIn = formatedDate;
-                  
+                          RMS_Clone_CSR.orderNumber_txt.setText(generateConfNumber("Startup"));
+
                   RMS_Clone_CSR.getTheActiveNews();
                   RMS_Clone_CSR.setEnabledRecursive(RMS_Clone_CSR.jPanel3, true);
             

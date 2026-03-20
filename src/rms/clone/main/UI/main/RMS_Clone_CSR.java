@@ -59,6 +59,7 @@ import rms.clone.main.UI.submain.search_customer;
 import rms.clone.main.UI.submain.search_for_service;
 import rms.clone.main.UI.submain.send_feedback_agent;
 import rms.clone.main.UI.submain.tender;
+import rms.clone.main.business.CartWatcher;
 
 
 /**
@@ -67,12 +68,17 @@ import rms.clone.main.UI.submain.tender;
  */
 public class RMS_Clone_CSR extends javax.swing.JFrame {
 
+    public static CartWatcher cw;
+    
+    
     /**
      * Creates new form UI
      */
     public RMS_Clone_CSR() {
         initComponents();
         myPostInit();
+        
+        cw = new CartWatcher();
     }
     
     private void myPostInit() {
@@ -90,6 +96,7 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
         public void actionPerformed(ActionEvent e) {
             
             System.out.println("TAB pressed.");
+
 
                     pid_txt_main.setEnabled(false);
                     login.PID = pid_txt_main.getText().toString();
@@ -1460,14 +1467,14 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
 
             },
             new String [] {
-                "SKU/IMEI", "Item Name", "Price", "Quantity"
+                "SKU/IMEI", "Item Name", "Price", "Quanitity", "Activation"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.String.class, java.lang.Boolean.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -1761,6 +1768,8 @@ public static Boolean isLoggedIn = false;
  public static double billTotal = 0.00;
 
 
+
+
 public static DefaultTableModel cart_model;
 
     private void search_bttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_bttnActionPerformed
@@ -2051,6 +2060,8 @@ java.sql.Timestamp sqlNow = new java.sql.Timestamp(date.getTime());
                 setEnabledRecursive(jPanel5, false); 
          
                
+              
+                
             
             
             // TODO add your handling code here:
@@ -2080,8 +2091,13 @@ java.sql.Timestamp sqlNow = new java.sql.Timestamp(date.getTime());
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
 
         checkIfLoggedIn();
+           
+        
+        
+        
         cart_model = (DefaultTableModel) cart_table.getModel();
-
+        
+        
         // TODO add your handling code here:
     }//GEN-LAST:event_formWindowActivated
 
@@ -2500,7 +2516,7 @@ String input = dl_exp_txt.getText().trim();
     }//GEN-LAST:event_transType_ddPropertyChange
 
     private void transType_ddItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_transType_ddItemStateChanged
-        conf_number.setText(generateConfNumber(transType_dd.getSelectedItem().toString()));
+        orderNumber_txt.setText(generateConfNumber(transType_dd.getSelectedItem().toString()));
 
     }//GEN-LAST:event_transType_ddItemStateChanged
 
@@ -2769,6 +2785,7 @@ new send_feedback_agent().setVisible(true);
                 
                 
                 
+                
             }
         });
     }
@@ -2783,7 +2800,7 @@ new send_feedback_agent().setVisible(true);
     private javax.swing.JTextField birthdaye_txt;
     private javax.swing.JComboBox<String> biz_type_dd;
     private javax.swing.JButton business_acct_bttn;
-    private javax.swing.JTable cart_table;
+    public static javax.swing.JTable cart_table;
     private javax.swing.JButton check_credit_bttn;
     private javax.swing.JTextField city_txt;
     private javax.swing.JTextField conf_number;
@@ -2918,7 +2935,7 @@ new send_feedback_agent().setVisible(true);
     private javax.swing.JPanel notes_pannel;
     public static javax.swing.JTable notes_table;
     public static javax.swing.JButton nss_token_bttn;
-    private javax.swing.JTextField orderNumber_txt;
+    public static javax.swing.JTextField orderNumber_txt;
     public static javax.swing.JButton pay_bill_bttn;
     public static javax.swing.JTextField pid_entered_by_txt;
     public static javax.swing.JTextField pid_txt_main;
@@ -2944,7 +2961,7 @@ new send_feedback_agent().setVisible(true);
     private javax.swing.JTextField street_number;
     private javax.swing.JComboBox<String> suffix_dd;
     public static javax.swing.JButton tender_bttn;
-    private javax.swing.JComboBox<String> transType_dd;
+    public static javax.swing.JComboBox<String> transType_dd;
     private javax.swing.JTextField zip_code_txt;
     // End of variables declaration//GEN-END:variables
 private String normalizeDate(String input) {
@@ -3445,6 +3462,8 @@ public static String generateConfNumber(String transactionType) {
 //    } catch (SQLException ex) {
 //        Logger.getLogger(RMS_Clone_CSR.class.getName()).log(Level.SEVERE, null, ex);
 //    }
+} else if (transactionType == "Startup") {
+    return "IS" + randomNumber;
 }
  else {
     return "OT" + randomNumber;

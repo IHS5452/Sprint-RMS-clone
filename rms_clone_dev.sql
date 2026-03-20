@@ -14,15 +14,11 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-SET @MYSQLDUMP_TEMP_LOG_BIN = @@SESSION.SQL_LOG_BIN;
-SET @@SESSION.SQL_LOG_BIN= 0;
+
 
 --
 -- GTID state at the beginning of the backup 
---
 
-SET @@GLOBAL.GTID_PURGED=/*!80000 '+'*/ '33531242-1775-11f1-afc0-34913b738f75:1-130,
-e936b2ec-d69a-11f0-ad36-7944e8bf04d5:1-425';
 
 --
 -- Table structure for table `accessories`
@@ -41,7 +37,7 @@ CREATE TABLE `accessories` (
   `price_usd` double DEFAULT NULL,
   `is_preorder` tinyint(1) DEFAULT NULL,
   `item_desc` text
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -101,7 +97,7 @@ CREATE TABLE `agent_feedback` (
   `needs_coaching` tinyint(1) DEFAULT NULL,
   `mgr_comments` text,
   `agent_comments` text
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -136,7 +132,7 @@ CREATE TABLE `company_logins` (
   `can_access_RMS_lite` tinyint(1) NOT NULL,
   `is_franchise_employee` tinyint(1) NOT NULL,
   PRIMARY KEY (`PID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -322,7 +318,7 @@ CREATE TABLE `devices` (
   `is_pending_shipment` tinyint(1) DEFAULT NULL,
   `is_refurb` tinyint(1) DEFAULT NULL,
   `return_eligable` tinyint(1) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -351,7 +347,7 @@ CREATE TABLE `discounts` (
   `discount_description` text,
   `discount_use` text,
   `is_active` tinyint(1) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -377,7 +373,7 @@ CREATE TABLE `homepage_news` (
   `content` text,
   `is_active` tinyint(1) DEFAULT NULL,
   `date_added` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -403,7 +399,7 @@ CREATE TABLE `manager_signoffs` (
   `for_assosiate_pid` int DEFAULT NULL,
   `mgr_pid` int DEFAULT NULL,
   `reason_for_signoff` text
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -577,7 +573,7 @@ CREATE TABLE `recycled_devices` (
   `status_desc` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `trade_in_date` datetime DEFAULT NULL,
   PRIMARY KEY (`rid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -611,7 +607,7 @@ CREATE TABLE `returns` (
   `method_of_return` text,
   `store_number` text,
   `email` text
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -673,7 +669,7 @@ CREATE TABLE `transactions_all` (
   `date_time_of_transaction` datetime DEFAULT NULL,
   `is_finalized` tinyint(1) DEFAULT NULL,
   `pid_of_assosiate` int DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -784,7 +780,7 @@ CREATE TABLE `vars` (
   `row_updated_date` date DEFAULT NULL,
   `is_in_beta` tinyint(1) DEFAULT NULL,
   `is_active` tinyint(1) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -796,7 +792,6 @@ LOCK TABLES `vars` WRITE;
 INSERT INTO `vars` VALUES (1,'REDACTED','0.0.1','202512-0001-01','2025-12-18','2025-12-18',1,1);
 /*!40000 ALTER TABLE `vars` ENABLE KEYS */;
 UNLOCK TABLES;
-SET @@SESSION.SQL_LOG_BIN = @MYSQLDUMP_TEMP_LOG_BIN;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
