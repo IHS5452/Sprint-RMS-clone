@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 9.6.0, for macos26.2 (arm64)
+-- MySQL dump 10.13  Distrib 8.0.43, for Win64 (x86_64)
 --
 -- Host: localhost    Database: rms_clone_dev
 -- ------------------------------------------------------
--- Server version	9.6.0
+-- Server version	8.0.43
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -14,11 +14,6 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-
-
---
--- GTID state at the beginning of the backup 
-
 
 --
 -- Table structure for table `accessories`
@@ -683,6 +678,35 @@ INSERT INTO `transactions_all` VALUES (0,'Bill Pay',136,0,0,136,'Cash',0,4,'2026
 UNLOCK TABLES;
 
 --
+-- Table structure for table `transactions_pending`
+--
+
+DROP TABLE IF EXISTS `transactions_pending`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `transactions_pending` (
+  `ptid` text,
+  `order_number` text,
+  `item_name` text,
+  `item_price` double DEFAULT NULL,
+  `quantity` int DEFAULT NULL,
+  `is_activation` tinyint(1) DEFAULT NULL,
+  `for_account_number` text,
+  `handeling_agent_pid` int DEFAULT NULL,
+  `status` text
+);
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `transactions_pending`
+--
+
+LOCK TABLES `transactions_pending` WRITE;
+/*!40000 ALTER TABLE `transactions_pending` DISABLE KEYS */;
+/*!40000 ALTER TABLE `transactions_pending` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `user_alerts`
 --
 
@@ -802,4 +826,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-03-20 12:42:47
+-- Dump completed on 2026-03-20 15:29:13
