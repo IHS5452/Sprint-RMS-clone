@@ -243,7 +243,8 @@ Component frame = null;
             
             this.dispose();
             
-        }    }
+        }   
+    }
 
 
 

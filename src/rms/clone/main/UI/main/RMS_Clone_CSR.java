@@ -52,7 +52,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.HashMap;
+import static rms.clone.main.UI.main.login.PID;
 import rms.clone.main.UI.submain.find_item;
+import rms.clone.main.UI.submain.output_console;
 import rms.clone.main.UI.submain.pay_bill;
 import rms.clone.main.UI.submain.return_phone;
 import rms.clone.main.UI.submain.search_customer;
@@ -69,6 +71,41 @@ import rms.clone.main.business.CartWatcher;
 public class RMS_Clone_CSR extends javax.swing.JFrame {
 
     public static CartWatcher cw;
+
+    public static void performAutoLogin(int profileId, String autoPassword) {
+        
+        
+   String login_msg = rms.clone.main.business.actions.login(Integer.toString(profileId), autoPassword);
+        
+        if (login_msg == classes.Strings.NOT_ACTIVE_IN_PAYROLL_CORP) {
+            System.out.println(login_msg);
+        } else  if (login_msg == classes.Strings.NOT_ACTIVE_IN_PAYROLL_FRAN) {
+            System.out.println(login_msg);
+        } else  if (login_msg == classes.Strings.NO_PID) {
+            System.out.println(login_msg);
+        } else  if (login_msg == classes.Strings.PASSWD_WRONG) {
+            System.out.println(login_msg);
+        } else  {
+            new RMS_Clone_CSR().setVisible(true);
+            vars.isLoggedIn = true;
+            RMS_Clone_CSR.isLoggedIn = true;
+            vars.loggedInUID = PID;
+            java.util.Date currentDate = new java.util.Date();
+                  SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                  String formatedDate = dateFormat.format(currentDate);
+                  vars.timeLoggedIn = formatedDate;
+                          RMS_Clone_CSR.orderNumber_txt.setText(generateConfNumber("Startup"));
+
+                  RMS_Clone_CSR.getTheActiveNews();
+                  RMS_Clone_CSR.setEnabledRecursive(RMS_Clone_CSR.jPanel3, true);
+                  
+
+            
+            
+            
+        } 
+        
+    }
     
     
     /**
@@ -282,9 +319,13 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
         jLabel39 = new javax.swing.JLabel();
         jButton15 = new javax.swing.JButton();
         jTextField30 = new javax.swing.JTextField();
+        jLabel55 = new javax.swing.JLabel();
+        imei_quick_activate_txt = new javax.swing.JTextField();
+        quick_activate_bttn = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -620,7 +661,7 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
                 .addComponent(news_title)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 498, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(127, Short.MAX_VALUE))
+                .addContainerGap(128, Short.MAX_VALUE))
         );
 
         main_menu.addTab("Home", home_pannel);
@@ -633,7 +674,7 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
         );
         consent_pannnelLayout.setVerticalGroup(
             consent_pannnelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 707, Short.MAX_VALUE)
+            .addGap(0, 708, Short.MAX_VALUE)
         );
 
         main_menu.addTab("Consent", consent_pannnel);
@@ -1543,6 +1584,15 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
 
         jTextField30.setEditable(false);
 
+        jLabel55.setText("IMEI Number");
+
+        quick_activate_bttn.setText("Quick Activate");
+        quick_activate_bttn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                quick_activate_bttnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -1583,7 +1633,14 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
                         .addGap(142, 142, 142)
                         .addComponent(jLabel39))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(quick_activate_bttn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel3Layout.createSequentialGroup()
+                                    .addComponent(jLabel55)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(imei_quick_activate_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(83, 83, 83)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel3Layout.createSequentialGroup()
@@ -1598,7 +1655,7 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
                                 .addComponent(cx_address_1, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton15)))))
-                .addContainerGap(110, Short.MAX_VALUE))
+                .addContainerGap(131, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1630,7 +1687,11 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cx_address_2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cx_city, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cx_city, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel55)
+                        .addComponent(imei_quick_activate_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
@@ -1642,7 +1703,8 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel41)
-                            .addComponent(jTextField31, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTextField31, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(quick_activate_bttn))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel40)
@@ -1682,6 +1744,14 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
             }
         });
         jMenu1.add(jMenuItem2);
+
+        jMenuItem4.setText("Open Output");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem4);
 
         jMenuBar1.add(jMenu1);
 
@@ -2049,8 +2119,12 @@ java.sql.Timestamp sqlNow = new java.sql.Timestamp(date.getTime());
 
 
         try {
-            vars.conn = rms.clone.business.database.actions.getConnection();
-                        System.out.println("Connection Sucesfull.");
+            if (vars.conn == null) {
+             vars.conn = rms.clone.business.database.actions.getConnection();
+                        System.out.println("Connection Sucesfull.");    
+            }
+            
+           
                         
                         
            setEnabledRecursive(jPanel8, false);
@@ -2750,6 +2824,54 @@ new send_feedback_agent().setVisible(true);
         // TODO add your handling code here:
     }//GEN-LAST:event_pay_bill_bttnActionPerformed
 
+    private void quick_activate_bttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quick_activate_bttnActionPerformed
+
+
+        try {
+            String SQL = "Select * from devices where device_imei = ?;";
+            
+            PreparedStatement ps = vars.conn.prepareStatement(SQL);
+            
+            
+            ps.setString(1, imei_quick_activate_txt.getText().toString());
+            
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                
+                
+                
+                
+                actions.launchNewActivationWindowWithData(
+                        rs.getString("device_imei"),
+                        rs.getString("device_type"),
+                        rs.getString("device_make"),
+                        rs.getString("device_model"),
+                        rs.getBoolean("payment_plan_eligable"),
+                        rs.getDouble("up_front_cost"),
+                        rs.getDouble("payment_plan_monthly_cost"),
+                        vars.selectedCx.getDownpaymentNeeded(),
+                        vars.selectedCx.getDownpayPerc()
+                );
+            }
+            
+            
+            
+            
+            // TODO add your handling code here:
+        } catch (SQLException ex) {
+            Logger.getLogger(RMS_Clone_CSR.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_quick_activate_bttnActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+
+   output_console window = new output_console();
+            window.setVisible(true);
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -2835,6 +2957,7 @@ new send_feedback_agent().setVisible(true);
     private javax.swing.JTextField fname_txt;
     private javax.swing.JComboBox<String> gender_dd;
     private javax.swing.JPanel home_pannel;
+    private javax.swing.JTextField imei_quick_activate_txt;
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton2;
@@ -2890,6 +3013,7 @@ new send_feedback_agent().setVisible(true);
     private javax.swing.JLabel jLabel52;
     private javax.swing.JLabel jLabel53;
     private javax.swing.JLabel jLabel54;
+    private javax.swing.JLabel jLabel55;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -2902,6 +3026,7 @@ new send_feedback_agent().setVisible(true);
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPanel jPanel1;
     public static javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
@@ -2942,6 +3067,7 @@ new send_feedback_agent().setVisible(true);
     private javax.swing.JButton postapid_acct_bttn;
     private javax.swing.JComboBox<String> prefix_dd;
     private javax.swing.JButton prepaid_acct_bttn;
+    private javax.swing.JButton quick_activate_bttn;
     private javax.swing.JButton recheck_credit_bttn;
     public static javax.swing.JButton recycle_bttn;
     public static javax.swing.JButton reset_bttn;
