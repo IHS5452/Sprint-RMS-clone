@@ -4,6 +4,9 @@
  */
 package rms.clone.main.system;
 
+import java.awt.Desktop;
+import java.awt.desktop.AboutEvent;
+import java.awt.desktop.AboutHandler;
 import java.sql.SQLException;
 import rms.clone.main.UI.main.aboutApp;
 import rms.clone.main.UI.main.RMS_Clone_CSR;
@@ -25,6 +28,37 @@ public class starter {
     
     
     public static void main(String[] args){
+                System.setProperty("apple.awt.application.name", "Sprint Retail Managment System (RMS) Clone");
+
+        if (Desktop.isDesktopSupported()) {
+            Desktop desktop = Desktop.getDesktop();
+
+            desktop.setAboutHandler(new AboutHandler() {
+                @Override
+                public void handleAbout(AboutEvent e) {
+  Map<String, String> devs = new LinkedHashMap<>();
+    devs.put("Ian Schrauth", "contact@ianschrauth.com");
+
+    Map<String, String> info = new LinkedHashMap<>();
+    info.put("App Name", version.APPLICATION_NAME);
+    info.put("App Version", "V" + version.VERSION_NUMBER);
+    info.put("App Build Number", version.VERISON_BUILD_NUMBER);
+    info.put("Last Build Date", version.DATE_OF_LAST_BUILD);
+    info.put("Database Instance", version.DATABASE_INSTANCE);
+
+    aboutApp w = new aboutApp(null, "", "", "", 
+                              version.IS_IN_BETA, 
+                              version.BETA_NUMBER, 
+                              devs, info);
+    w.setVisible(true);
+    return;                 }
+            });
+        }
+
+        
+        
+        
+        
         
       try {
     Class.forName(db.CLASS_FILE);
@@ -94,7 +128,7 @@ if (isDev) {
 }
 
 // 4. Launch Main App with Auto-Login data
-RMS_Clone_CSR mainApp = new RMS_Clone_CSR();
+//new RMS_Clone_CSR().setVisible(true);
 
 // If both PID and Password were provided, trigger auto-login
 if (profileId != -1 && !autoPassword.isEmpty()) {
@@ -107,10 +141,15 @@ if (profileId != -1 && !autoPassword.isEmpty()) {
           } catch (SQLException ex) {
               Logger.getLogger(starter.class.getName()).log(Level.SEVERE, null, ex);
           }
+} else {
+    new RMS_Clone_CSR().setVisible(true);
+
 }
 
 
     }
+    
+    
     
     
     

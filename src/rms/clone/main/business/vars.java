@@ -22,4 +22,5 @@ public class vars {
     public static boolean hasManagerAuth = false;
     public static String currentOrderNumber = "";
     
+    
 }

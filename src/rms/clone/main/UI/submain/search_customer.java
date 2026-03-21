@@ -8,11 +8,18 @@ import rms.clone.main.UI.main.RMS_Clone_CSR;
 import classes.Cx;
 import classes.phoneNumbers;
 import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.swing.AbstractAction;
+import javax.swing.ActionMap;
+import javax.swing.InputMap;
+import javax.swing.JComponent;
 import javax.swing.JOptionPane;
+import javax.swing.KeyStroke;
 import javax.swing.table.DefaultTableModel;
 import static rms.clone.main.UI.main.RMS_Clone_CSR.pay_bill_bttn;
 import rms.clone.main.business.actions;
@@ -29,6 +36,72 @@ public class search_customer extends javax.swing.JFrame {
      */
     public search_customer() {
         initComponents();
+        tableEnterPressInit();
+        searchInit();
+    }
+    
+    
+    
+    private void searchInit() {
+
+    // Reusable ENTER action
+    AbstractAction enterAction = new AbstractAction() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+            System.out.println("ENTER pressed.");
+
+            boolean hasPhone = !phoneNumber_txt.getText().trim().isEmpty();
+            boolean hasAcct = !acct_num_txt.getText().trim().isEmpty();
+            boolean hasFullName =
+                !fname_txt.getText().trim().isEmpty() &&
+                !lname_txt.getText().trim().isEmpty();
+
+            if (hasPhone || hasAcct || hasFullName) {
+                System.out.println("Conditions met. Performing action...");
+                searchForACX();
+            } else {
+                System.out.println("Conditions NOT met.");
+            }
+        }
+    };
+
+    // Bind ENTER to all relevant fields
+    bindEnterKey(phoneNumber_txt, enterAction);
+    bindEnterKey(acct_num_txt, enterAction);
+    bindEnterKey(fname_txt, enterAction);
+    bindEnterKey(lname_txt, enterAction);
+}
+
+
+// Helper method to reduce repetition
+private void bindEnterKey(JComponent comp, AbstractAction action) {
+    InputMap im = comp.getInputMap(JComponent.WHEN_FOCUSED);
+    ActionMap am = comp.getActionMap();
+
+    im.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "enterPressed");
+    am.put("enterPressed", action);
+}
+    
+    
+    
+    private void tableEnterPressInit() {
+        sleectCustomer_tbl.getInputMap(javax.swing.JComponent.WHEN_FOCUSED)
+      .put(javax.swing.KeyStroke.getKeyStroke("ENTER"), "enterPressed");
+
+sleectCustomer_tbl.getActionMap().put("enterPressed", new javax.swing.AbstractAction() {
+    @Override
+    public void actionPerformed(java.awt.event.ActionEvent e) {
+int row = sleectCustomer_tbl.getSelectedRow();
+int numberOfTotalRows = sleectCustomer_tbl.getRowCount();
+System.out.println("Number of rows: " + numberOfTotalRows);
+
+    if (row != -1) {
+        selectCx();
+    }
+    
+    }
+});
     }
 
     /**
@@ -189,6 +262,16 @@ public class search_customer extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        sleectCustomer_tbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                sleectCustomer_tblMouseClicked(evt);
+            }
+        });
+        sleectCustomer_tbl.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                sleectCustomer_tblKeyPressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(sleectCustomer_tbl);
 
         jButton2.setText("Select Customer");
@@ -203,39 +286,40 @@ public class search_customer extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)))
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(19, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(13, 13, 13))))
         );
 
         pack();
@@ -260,48 +344,10 @@ DefaultTableModel model;
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+   
         
-int row = sleectCustomer_tbl.getSelectedRow();
-if (row < 0) {
-    JOptionPane.showMessageDialog(this, "Please select a customer first.");
-    return;
-}
-
-String phoneNumberFromTable = sleectCustomer_tbl.getModel().getValueAt(row, 0).toString();
-String acctNumberFromTable  = sleectCustomer_tbl.getModel().getValueAt(row, 1).toString();
-
-rms.clone.main.business.vars.selectedCx = actions.selectCustomerByAccountNumber(acctNumberFromTable);
-
-if (rms.clone.main.business.vars.selectedCx == null) {
-    JOptionPane.showMessageDialog(this, "Could not load customer for phone: " + phoneNumberFromTable);
-    return;
-}
-
+        selectCx();
         
-        
-        RMS_Clone_CSR.fillInPhoneNumbersTable(acctNumberFromTable);
-        RMS_Clone_CSR.getAlerts(acctNumberFromTable);
-        RMS_Clone_CSR.getNotes(acctNumberFromTable);
-        RMS_Clone_CSR.fillActivePhoneNumbers();
-        RMS_Clone_CSR.getServices(phoneNumberFromTable);
-        RMS_Clone_CSR.fillInCXInfoInSalesTab();
-        RMS_Clone_CSR.add_note_bttn.setEnabled(true);
-        RMS_Clone_CSR.setEnabledRecursive(jPanel3, true);
-        RMS_Clone_CSR.pay_bill_bttn.setEnabled(true);
-                          RMS_Clone_CSR.sales_bttn.setEnabled(true);
-                  RMS_Clone_CSR.tender_bttn.setEnabled(true);
-                  RMS_Clone_CSR.find_item_bttn.setEnabled(true);
-
-        RMS_Clone_CSR.new_sale_bttn.setEnabled(true);
-        RMS_Clone_CSR.send_feedback_bttn.setEnabled(true);
-
-        
-        
-        
-        
-        
-        this.dispose();
-
 
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -336,6 +382,29 @@ if (rms.clone.main.business.vars.selectedCx == null) {
         
         
     }//GEN-LAST:event_formWindowOpened
+
+    private void sleectCustomer_tblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sleectCustomer_tblMouseClicked
+
+if (evt.getClickCount() == 2) { // Double-click detected
+            
+            int row = sleectCustomer_tbl.getSelectedRow();
+
+            if (row != -1) {
+                
+
+                selectCx();
+            }
+        }
+    
+
+
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_sleectCustomer_tblMouseClicked
+
+    private void sleectCustomer_tblKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_sleectCustomer_tblKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_sleectCustomer_tblKeyPressed
 
     /**
      * @param args the command line arguments
@@ -444,6 +513,52 @@ for (Map.Entry<phoneNumbers, Cx> entry : cxList) {
 
 
 
+    
+    
+    public void selectCx() {
+              
+int row = sleectCustomer_tbl.getSelectedRow();
+if (row < 0) {
+    JOptionPane.showMessageDialog(this, "Please select a customer first.");
+    return;
+}
+
+String phoneNumberFromTable = sleectCustomer_tbl.getModel().getValueAt(row, 0).toString();
+String acctNumberFromTable  = sleectCustomer_tbl.getModel().getValueAt(row, 1).toString();
+
+rms.clone.main.business.vars.selectedCx = actions.selectCustomerByAccountNumber(acctNumberFromTable);
+
+if (rms.clone.main.business.vars.selectedCx == null) {
+    JOptionPane.showMessageDialog(this, "Could not load customer for phone: " + phoneNumberFromTable);
+    return;
+}
+
+        
+        
+        RMS_Clone_CSR.fillInPhoneNumbersTable(acctNumberFromTable);
+        RMS_Clone_CSR.getAlerts(acctNumberFromTable);
+        RMS_Clone_CSR.getNotes(acctNumberFromTable);
+        RMS_Clone_CSR.fillActivePhoneNumbers();
+        RMS_Clone_CSR.getServices(phoneNumberFromTable);
+        RMS_Clone_CSR.fillInCXInfoInSalesTab();
+        RMS_Clone_CSR.add_note_bttn.setEnabled(true);
+        RMS_Clone_CSR.setEnabledRecursive(jPanel3, true);
+        RMS_Clone_CSR.pay_bill_bttn.setEnabled(true);
+                          RMS_Clone_CSR.sales_bttn.setEnabled(true);
+                  RMS_Clone_CSR.tender_bttn.setEnabled(true);
+                  RMS_Clone_CSR.find_item_bttn.setEnabled(true);
+
+        RMS_Clone_CSR.new_sale_bttn.setEnabled(true);
+        RMS_Clone_CSR.send_feedback_bttn.setEnabled(true);
+
+        
+        
+        
+        
+        
+        this.dispose();
+    }
+    
 
 
 

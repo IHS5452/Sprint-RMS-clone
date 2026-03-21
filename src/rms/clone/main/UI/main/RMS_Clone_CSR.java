@@ -88,6 +88,7 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
         } else  {
             new RMS_Clone_CSR().setVisible(true);
             vars.isLoggedIn = true;
+            RMS_Clone_CSR.pid_txt_main.setText(Integer.toString(profileId));
             RMS_Clone_CSR.isLoggedIn = true;
             vars.loggedInUID = PID;
             java.util.Date currentDate = new java.util.Date();
@@ -135,9 +136,15 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
             System.out.println("TAB pressed.");
 
 
-                    pid_txt_main.setEnabled(false);
+                if (!vars.isLoggedIn) {
+                    
+                     pid_txt_main.setEnabled(false);
                     login.PID = pid_txt_main.getText().toString();
         new login().setVisible(true);
+  
+            } else {
+                    System.out.println("Already logged in.");
+                }
 
             // 🔹 Then manually move focus to next field
             pid_txt_main.transferFocus();
@@ -383,7 +390,7 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
             }
         });
 
-        sales_bttn.setText("Sales");
+        sales_bttn.setText("Trade in");
         sales_bttn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 sales_bttnActionPerformed(evt);
@@ -608,8 +615,8 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(17, 17, 17)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
@@ -1687,11 +1694,11 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cx_address_2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cx_city, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel55)
-                        .addComponent(imei_quick_activate_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(imei_quick_activate_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cx_city, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
@@ -2077,7 +2084,7 @@ public static DefaultTableModel cart_model;
     }//GEN-LAST:event_new_bttnActionPerformed
 
     private void add_note_bttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_note_bttnActionPerformed
-
+        
         String note = note_txt.getText().toString();
         
         int PID = Integer.parseInt(pid_txt_main.getText());
@@ -2088,7 +2095,7 @@ public static DefaultTableModel cart_model;
              PreparedStatement pstmt = vars.conn.prepareStatement(SQL);
 java.util.Date date = new java.util.Date();
 java.sql.Timestamp sqlNow = new java.sql.Timestamp(date.getTime());
-            
+            pstmt.setInt(1, Integer.parseInt(generateConfNumber("note")));
             pstmt.setInt(2, PID);
             pstmt.setString(3, note);
                         pstmt.setString(4, vars.selectedCx.getAccountNumber());
@@ -3527,9 +3534,19 @@ public static void fillActivePhoneNumbers() {
 
 public static String generateConfNumber(String transactionType) {
             Random random = new Random();
+   long min; // Smallest 10-digit number
+        long max;
+            
+            if (transactionType == "note") {
+                min = 10_000_000L; // Smallest 10-digit number
+         max = 99_999_999L; // Largest 10-digit number
+            } else {
+                min = 1_000_000_000L; // Smallest 10-digit number
+         max = 9_999_999_999L; // Largest 10-digit number
+            }
+            
+            
 
-    long min = 1_000_000_000L; // Smallest 10-digit number
-        long max = 9_999_999_999L; // Largest 10-digit number
         long randomNumber = min + (long)(random.nextDouble() * (max - min + 1));
         
         
@@ -3591,7 +3608,11 @@ public static String generateConfNumber(String transactionType) {
 } else if (transactionType == "Startup") {
     return "IS" + randomNumber;
 }
- else {
+ else if (transactionType == "note"){
+     
+     return "" + randomNumber;
+} else {
+     
     return "OT" + randomNumber;
 }
 
