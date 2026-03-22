@@ -47,7 +47,15 @@ When I was a cell phone sales represanative at Sprint, we used thier older-style
 <ul>
   <li>Adding a new phone sale, and everything assosited with a sale</li>
   <li>Anything with Discounts</li>
-  <li>Anything with finding a SKU/Item</li>
+  <li>Managment Portal for tasks like:</li>
+  <ul>
+    <li>Adding new items and phones to the inventory (Store Verison Only)</li>
+    <li>Adding discounts and making them active/not active</li>
+    <li>Authorising tasks for workers</li>
+    <li>Running reports</li>
+    <li>Revieweing feedback sent to Manager's workers</li>
+
+  </ul>
 </ul>
 
 
