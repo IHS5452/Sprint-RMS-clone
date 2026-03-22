@@ -242,7 +242,7 @@ Component frame = null;
             
         } else {
             try {
-                String SQL = "insert into transactions_all VALUES(?,?,?,?,?,?,?,?,?,NOW(),?,?);";
+                String SQL = "insert into transactions_all VALUES(?,?,?,?,?,?,?,?,?,NOW(),?,?,?);";
                 PreparedStatement ps = vars.conn.prepareStatement(SQL);
                 ps.setInt(1, 0);
                 ps.setString(2, getTransactionType());
@@ -255,6 +255,7 @@ Component frame = null;
                 ps.setDouble(9, cx_change);
                 ps.setBoolean(10, true);
                 ps.setInt(11, Integer.parseInt(vars.loggedInUID));
+                ps.setString(12, vars.selectedCx.getAccountNumber());
                 
                 int rs = ps.executeUpdate();
                 

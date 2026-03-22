@@ -53,6 +53,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.HashMap;
 import static rms.clone.main.UI.main.login.PID;
+import rms.clone.main.UI.manager.employee_managment;
 import rms.clone.main.UI.submain.find_item;
 import rms.clone.main.UI.submain.output_console;
 import rms.clone.main.UI.submain.pay_bill;
@@ -285,6 +286,7 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
         jLabel51 = new javax.swing.JLabel();
         search_zip_code_bttn = new javax.swing.JButton();
         postapid_acct_bttn = new javax.swing.JButton();
+        sensitive_cx_cb = new javax.swing.JCheckBox();
         jLabel35 = new javax.swing.JLabel();
         jPanel10 = new javax.swing.JPanel();
         jLabel28 = new javax.swing.JLabel();
@@ -344,6 +346,7 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
         jMenuItem8 = new javax.swing.JMenuItem();
         jMenuItem9 = new javax.swing.JMenuItem();
         jMenuItem10 = new javax.swing.JMenuItem();
+        jMenuItem12 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
 
@@ -1271,6 +1274,14 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
             }
         });
 
+        sensitive_cx_cb.setText("Set Sensitive Customer");
+        sensitive_cx_cb.setEnabled(false);
+        sensitive_cx_cb.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sensitive_cx_cbActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
@@ -1314,13 +1325,15 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel9Layout.createSequentialGroup()
-                                .addComponent(jLabel11)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(employee_type_dd, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel9Layout.createSequentialGroup()
                                 .addComponent(jLabel51)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(biz_type_dd, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(biz_type_dd, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel9Layout.createSequentialGroup()
+                                .addComponent(jLabel11)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(sensitive_cx_cb)
+                                    .addComponent(employee_type_dd, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addComponent(search_zip_code_bttn))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -1372,9 +1385,12 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
                                     .addComponent(employee_type_dd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel11))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(employee_acct_bttn, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(employee_acct_bttn, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(sensitive_cx_cb))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(prepaid_acct_bttn, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(prepaid_acct_bttn, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(50, 50, 50))
         );
 
@@ -1816,6 +1832,9 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
         jMenuItem10.setText("Review Team Feedbacks");
         jMenu5.add(jMenuItem10);
 
+        jMenuItem12.setText("Account Search History");
+        jMenu5.add(jMenuItem12);
+
         jMenuBar1.add(jMenu5);
 
         jMenu4.setText("Help");
@@ -2111,6 +2130,7 @@ public static DefaultTableModel cart_model;
         
          main_menu.setSelectedIndex(4);
                  recheck_credit_bttn.setEnabled(false);
+                 sensitive_cx_cb.setEnabled(true);
 
         //set the tabbed pane to be the 
 
@@ -2414,8 +2434,8 @@ String SQL =
     "streetNumber, streetName, addressLine2, city, state, zip, " +         // 16-21
     "employer, isNvp, assignToBusinessAccount, attachToHierarchy, " +      // 22-25
     "accountType, creditSsn, creditClass, approvedLines, lastDateChecked, "+// 26-30
-    "typeOfAccount, groupId, account_number, downpay_perc, downpayment_needed" +                             // 31-33
-    ") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+    "typeOfAccount, groupId, account_number, downpay_perc, downpayment_needed, is_sensitive" +                             // 31-33
+    ") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
                 
                 PreparedStatement ps = vars.conn.prepareStatement(SQL);
 
@@ -2520,6 +2540,15 @@ ps.setTimestamp(30, new java.sql.Timestamp(System.currentTimeMillis()));
 ps.setString(31, ""); // typeOfAccount – TODO: fill in later
 ps.setString(32, ""); // groupId – TODO: fill in later
 ps.setString(33, ""); // account_number – TODO: generate later
+
+
+if (sensitive_cx_cb.isSelected()) {
+    ps.setBoolean(34, true); // false for now, until UI e
+
+} else {
+    ps.setBoolean(34, false); // false for now, until UI e
+
+}
 
 int rs = ps.executeUpdate();
 System.out.println(rs + " rows added.");
@@ -2921,12 +2950,20 @@ new send_feedback_agent().setVisible(true);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+ new employee_managment().setVisible(true);
+
+        
+
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem8ActionPerformed
+
+    private void sensitive_cx_cbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sensitive_cx_cbActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_sensitive_cx_cbActionPerformed
 
     /**
      * @param args the command line arguments
@@ -3083,6 +3120,7 @@ new send_feedback_agent().setVisible(true);
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem11;
+    private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
@@ -3140,6 +3178,7 @@ new send_feedback_agent().setVisible(true);
     public static javax.swing.JButton search_bttn;
     private javax.swing.JButton search_zip_code_bttn;
     public static javax.swing.JButton send_feedback_bttn;
+    private javax.swing.JCheckBox sensitive_cx_cb;
     public static javax.swing.JTextArea service_desc_txt;
     public static javax.swing.JTextField service_id_txt;
     public static javax.swing.JTextField service_name_txt;

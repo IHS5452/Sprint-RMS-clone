@@ -24,6 +24,9 @@ import javax.swing.table.DefaultTableModel;
 import static rms.clone.main.UI.main.RMS_Clone_CSR.pay_bill_bttn;
 import rms.clone.main.business.actions;
 import rms.clone.main.business.vars;
+import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -333,11 +336,14 @@ DefaultTableModel model;
  static Cx cx = null;
  public static Boolean autoSearch = false;
  public static String autoSearchPhoneNumber = "";
+ 
+ 
+ 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         
         searchForACX();
-        
+        recordSearch();
         
         
         // TODO add your handling code here:
@@ -464,9 +470,6 @@ if (evt.getClickCount() == 2) { // Double-click detected
 model = (DefaultTableModel) sleectCustomer_tbl.getModel();
 Component frame = null;
 
-boolean usingAcctNumber = true;
-boolean usingFaLName = true;
-boolean usingPhoneNumber = true;
 
 if (acct_num_txt.getText().toString().strip().isEmpty()) {
     usingAcctNumber = false;
@@ -557,6 +560,48 @@ if (rms.clone.main.business.vars.selectedCx == null) {
         
         
         this.dispose();
+    }
+
+    private void recordSearch() {
+
+        try {
+            String SQL = "insert into acct_search_history VALUES(?,?,?,?,?,?,NOW());";
+            PreparedStatement ps = vars.conn.prepareStatement(SQL);
+            
+            ps.setInt(1, 0); // repalce with a randonly generated number
+            ps.setInt(2, Integer.parseInt(RMS_Clone_CSR.pid_txt_main.getText()));
+            if (usingAcctNumber) {
+                ps.setString(3, "Account Number");
+            } else if (usingPhoneNumber) {
+                ps.setString(3, "Phone Number");
+                
+            }else {
+                ps.setString(3, "Name");
+            }
+            
+            if (sleectCustomer_tbl.getRowCount() == 0) {
+                ps.setBoolean(4, false);
+            } else {
+                                ps.setBoolean(4, true);
+
+            }
+            
+            ps.setString(5, "PENDING"); // fix witn the account number that pulls up
+            ps.setBoolean(6, false); // is false for now. fix when account number aboe is fixed
+            
+            
+            int rs = ps.executeUpdate();
+            
+          
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(search_customer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+
+
+
     }
     
 

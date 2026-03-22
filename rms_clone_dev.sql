@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.43, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 9.5.0, for macos26.1 (arm64)
 --
 -- Host: localhost    Database: rms_clone_dev
 -- ------------------------------------------------------
--- Server version	8.0.43
+-- Server version	9.5.0
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -14,6 +14,15 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+SET @MYSQLDUMP_TEMP_LOG_BIN = @@SESSION.SQL_LOG_BIN;
+SET @@SESSION.SQL_LOG_BIN= 0;
+
+--
+-- GTID state at the beginning of the backup 
+--
+
+SET @@GLOBAL.GTID_PURGED=/*!80000 '+'*/ 'c47ffed8-efbb-11f0-965d-714c29ea1bc5:1-135,
+e936b2ec-d69a-11f0-ad36-7944e8bf04d5:1-425';
 
 --
 -- Table structure for table `accessories`
@@ -32,7 +41,7 @@ CREATE TABLE `accessories` (
   `price_usd` double DEFAULT NULL,
   `is_preorder` tinyint(1) DEFAULT NULL,
   `item_desc` text
-);
+) ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -60,7 +69,7 @@ CREATE TABLE `account_notes` (
   `account_number` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`note_id`),
   KEY `idx_account_notes_account_number` (`account_number`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=58764025 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -69,8 +78,36 @@ CREATE TABLE `account_notes` (
 
 LOCK TABLES `account_notes` WRITE;
 /*!40000 ALTER TABLE `account_notes` DISABLE KEYS */;
-INSERT INTO `account_notes` VALUES (1,1,'Customer requested plan review.','2025-12-14 20:12:42','ACC-10001'),(2,2,'Billing verified and confirmed.','2025-12-14 20:12:42','ACC-10001'),(3,1,'Customer asked about plan options.','2025-12-14 20:12:42','ACC-20002');
+INSERT INTO `account_notes` VALUES (1,1,'Customer requested plan review.','2025-12-14 20:12:42','ACC-10001'),(2,2,'Billing verified and confirmed.','2025-12-14 20:12:42','ACC-10001'),(3,1,'Customer asked about plan options.','2025-12-14 20:12:42','ACC-20002'),(2576937,1,'test','2026-03-21 17:38:07','ACC-10001'),(58764024,1,'test 2','2026-03-21 17:40:27','ACC-10001');
 /*!40000 ALTER TABLE `account_notes` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `acct_search_history`
+--
+
+DROP TABLE IF EXISTS `acct_search_history`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `acct_search_history` (
+  `sid` int DEFAULT NULL,
+  `employee_pid` int DEFAULT NULL,
+  `search_method` text,
+  `search_gave_results` tinyint(1) DEFAULT NULL,
+  `located_account_number` text,
+  `is_sensitive_account` tinyint(1) DEFAULT NULL,
+  `date_time_searched` datetime DEFAULT NULL
+) ;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `acct_search_history`
+--
+
+LOCK TABLES `acct_search_history` WRITE;
+/*!40000 ALTER TABLE `acct_search_history` DISABLE KEYS */;
+INSERT INTO `acct_search_history` VALUES (0,1,'Phone Number',1,'PENDING',0,'2026-03-22 14:02:48');
+/*!40000 ALTER TABLE `acct_search_history` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -92,7 +129,7 @@ CREATE TABLE `agent_feedback` (
   `needs_coaching` tinyint(1) DEFAULT NULL,
   `mgr_comments` text,
   `agent_comments` text
-);
+) ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -120,14 +157,14 @@ CREATE TABLE `company_logins` (
   `company_email` varchar(255) NOT NULL,
   `password_to_rms` varchar(255) NOT NULL,
   `is_contractor` tinyint(1) NOT NULL,
-  `is_active_in_payroll` tinyint(1) NOT NULL,
+  `is_active` tinyint(1) NOT NULL,
   `hire_date` date NOT NULL,
   `is_manager` tinyint(1) NOT NULL DEFAULT '0',
   `is_leadership` tinyint(1) NOT NULL DEFAULT '0',
   `can_access_RMS_lite` tinyint(1) NOT NULL,
   `is_franchise_employee` tinyint(1) NOT NULL,
   PRIMARY KEY (`PID`)
-);
+) ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -136,7 +173,7 @@ CREATE TABLE `company_logins` (
 
 LOCK TABLES `company_logins` WRITE;
 /*!40000 ALTER TABLE `company_logins` DISABLE KEYS */;
-INSERT INTO `company_logins` VALUES (1,'Alice','Brown','Customer Service Rep','alice@company.com','password123',0,1,'2023-01-10',0,0,1,0),(2,'Bob','Green','Sales Manager','bob@company.com','password123',0,1,'2021-06-15',1,1,1,0),(3,'Charlie','Davis','Tech Support','charlie@company.com','password123',1,1,'2020-11-20',0,0,1,1);
+INSERT INTO `company_logins` VALUES (1,'Alice','Brown','Customer Service Rep','alice@company.com','password123',0,1,'2023-01-10',0,0,1,0),(2,'Bob','Green','Sales Manager','bob@company.com','password123',0,1,'2021-06-15',1,0,1,0),(3,'Charlie','Davis','Tech Support','charlie@company.com','password123',1,0,'2020-11-20',0,0,1,1);
 /*!40000 ALTER TABLE `company_logins` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -243,6 +280,7 @@ CREATE TABLE `customer_info` (
   `downpay_perc` int DEFAULT NULL,
   `downpayment_needed` tinyint(1) DEFAULT NULL,
   `current_credits` double DEFAULT NULL,
+  `is_sensitive` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `idx_customer_info_account_number` (`account_number`),
   KEY `idx_customer_info_name` (`lastName`,`firstName`),
@@ -256,7 +294,7 @@ CREATE TABLE `customer_info` (
 
 LOCK TABLES `customer_info` WRITE;
 /*!40000 ALTER TABLE `customer_info` DISABLE KEYS */;
-INSERT INTO `customer_info` VALUES (1,'Mr.','John','A','Doe',NULL,'john.doe@example.com',0,'123-45-6789','1985-06-15 00:00:00','D1234567','MO','2028-05-01 00:00:00','5125552000',NULL,NULL,'1500','Corporate Woods Dr',NULL,'Chesterfield','MO','63017','MegaCorp LLC',1,1,1,'Business','123-45-6789','A',5,'2025-12-14 14:12:42','Corporate','ACC-10001',0,0,100),(2,'Ms.','Jane',NULL,'Smith',NULL,'jane.smith@example.com',0,'987-65-4321','1990-02-20 00:00:00','S7654321','MO','2027-09-30 00:00:00','6365553333','REDACTED',NULL,'42','Market St','Apt 5','St. Louis','MO','63101','Acme Co',0,0,0,'Personal','987-65-4321','B',2,'2025-12-14 14:12:42','Consumer','ACC-20002',20,1,0);
+INSERT INTO `customer_info` VALUES (1,'Mr.','John','A','Doe',NULL,'john.doe@example.com',0,'123-45-6789','1985-06-15 00:00:00','D1234567','MO','2028-05-01 00:00:00','5125552000',NULL,NULL,'1500','Corporate Woods Dr',NULL,'Chesterfield','MO','63017','MegaCorp LLC',1,1,1,'Business','123-45-6789','A',5,'2025-12-14 14:12:42','Corporate','ACC-10001',0,0,100,NULL),(2,'Ms.','Jane',NULL,'Smith',NULL,'jane.smith@example.com',0,'987-65-4321','1990-02-20 00:00:00','S7654321','MO','2027-09-30 00:00:00','6365553333','REDACTED',NULL,'42','Market St','Apt 5','St. Louis','MO','63101','Acme Co',0,0,0,'Personal','987-65-4321','B',2,'2025-12-14 14:12:42','Consumer','ACC-20002',20,1,0,NULL);
 /*!40000 ALTER TABLE `customer_info` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -313,7 +351,7 @@ CREATE TABLE `devices` (
   `is_pending_shipment` tinyint(1) DEFAULT NULL,
   `is_refurb` tinyint(1) DEFAULT NULL,
   `return_eligable` tinyint(1) DEFAULT NULL
-);
+) ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -342,7 +380,7 @@ CREATE TABLE `discounts` (
   `discount_description` text,
   `discount_use` text,
   `is_active` tinyint(1) DEFAULT NULL
-);
+) ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -368,7 +406,7 @@ CREATE TABLE `homepage_news` (
   `content` text,
   `is_active` tinyint(1) DEFAULT NULL,
   `date_added` datetime DEFAULT NULL
-);
+) ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -394,7 +432,7 @@ CREATE TABLE `manager_signoffs` (
   `for_assosiate_pid` int DEFAULT NULL,
   `mgr_pid` int DEFAULT NULL,
   `reason_for_signoff` text
-);
+) ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -568,7 +606,7 @@ CREATE TABLE `recycled_devices` (
   `status_desc` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `trade_in_date` datetime DEFAULT NULL,
   PRIMARY KEY (`rid`)
-);
+) ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -602,7 +640,7 @@ CREATE TABLE `returns` (
   `method_of_return` text,
   `store_number` text,
   `email` text
-);
+) ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -663,8 +701,9 @@ CREATE TABLE `transactions_all` (
   `change_given` double DEFAULT NULL,
   `date_time_of_transaction` datetime DEFAULT NULL,
   `is_finalized` tinyint(1) DEFAULT NULL,
-  `pid_of_assosiate` int DEFAULT NULL
-);
+  `pid_of_assosiate` int DEFAULT NULL,
+  `cx_acct_number` text
+) ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -673,7 +712,6 @@ CREATE TABLE `transactions_all` (
 
 LOCK TABLES `transactions_all` WRITE;
 /*!40000 ALTER TABLE `transactions_all` DISABLE KEYS */;
-INSERT INTO `transactions_all` VALUES (0,'Bill Pay',136,0,0,136,'Cash',0,4,'2026-03-16 09:09:50',1,1),(0,'Bill Pay',135,0,0,135,'Cash',0,5,'2026-03-16 09:11:57',1,1),(0,'Bill Pay',155,0,0,155,'Cash',0,5,'2026-03-16 09:14:56',1,1),(0,'Bill Pay',155,0,0,155,'Cash',0,5,'2026-03-16 09:15:29',1,1),(0,'Bill Pay',5,0,0,5,'Cash',0,0,'2026-03-16 09:19:28',1,1),(0,'Bill Pay',600,0,0,600,'Cash',0,0,'2026-03-16 09:22:40',1,1),(0,'Bill Pay',600,0,0,600,'Cash',0,0,'2026-03-16 09:26:37',1,1),(0,'Bill Pay',600,0,0,600,'Cash',0,0,'2026-03-16 09:28:15',1,1),(0,'Bill Pay',600,0,0,600,'Cash',0,0,'2026-03-16 09:35:18',1,1),(0,'Bill Pay',600,0,0,600,'Cash',0,0,'2026-03-16 09:38:08',1,1),(0,'Bill Pay',600,0,0,600,'Cash',0,100,'2026-03-16 09:40:23',1,1),(0,'Bill Pay',600,0,0,600,'Cash',0,0,'2026-03-16 09:41:05',1,1),(0,'Bill Pay',600,0,0,600,'Cash',0,0,'2026-03-16 09:43:35',1,1),(0,'Bill Pay',600,0,0,600,'Cash',0,400,'2026-03-16 09:45:17',1,1),(0,'Bill Pay',600,0,0,600,'Cash',0,0,'2026-03-16 09:47:31',1,1),(0,'Bill Pay',600,0,0,600,'Cash',0,0,'2026-03-16 09:50:53',1,1),(0,'Bill Pay',600,0,0,600,'Cash',0,0,'2026-03-16 09:54:29',1,1);
 /*!40000 ALTER TABLE `transactions_all` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -694,7 +732,7 @@ CREATE TABLE `transactions_pending` (
   `for_account_number` text,
   `handeling_agent_pid` int DEFAULT NULL,
   `status` text
-);
+) ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -804,7 +842,7 @@ CREATE TABLE `vars` (
   `row_updated_date` date DEFAULT NULL,
   `is_in_beta` tinyint(1) DEFAULT NULL,
   `is_active` tinyint(1) DEFAULT NULL
-);
+) ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -816,6 +854,7 @@ LOCK TABLES `vars` WRITE;
 INSERT INTO `vars` VALUES (1,'REDACTED','0.0.1','202512-0001-01','2025-12-18','2025-12-18',1,1);
 /*!40000 ALTER TABLE `vars` ENABLE KEYS */;
 UNLOCK TABLES;
+SET @@SESSION.SQL_LOG_BIN = @MYSQLDUMP_TEMP_LOG_BIN;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -826,4 +865,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-03-20 15:29:13
+-- Dump completed on 2026-03-22 14:04:48

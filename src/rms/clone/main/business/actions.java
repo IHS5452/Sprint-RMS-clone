@@ -135,7 +135,7 @@ public static String login(String pid, String password) {
         Agents agent = new Agents();
         agent.setPid(rs.getInt("PID"));
         agent.setPasswordToRms(correctPassword);
-        agent.setActiveInPayroll(rs.getBoolean("is_active_in_payroll"));
+        agent.setActiveInPayroll(rs.getBoolean("is_active"));
         agent.setFranchiseEmployee(rs.getBoolean("is_franchise_employee"));
 
         if (!agent.isActiveInPayroll()) {
