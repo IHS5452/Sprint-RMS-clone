@@ -1903,6 +1903,9 @@ public String acctType = "postpaid_p";
 public static Boolean isLoggedIn = false;
 
  public static double billTotal = 0.00;
+ public static double discountTotal = 0.00;
+ 
+ public static boolean tenderOpenedOnce = false;
 
 
 
@@ -1965,7 +1968,17 @@ public static DefaultTableModel cart_model;
 
     private void tender_bttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tender_bttnActionPerformed
 
-               int rowCount = cart_model.getRowCount();
+        
+        
+        
+        if (tenderOpenedOnce) {
+                            new tender().setVisible(true);
+            
+            
+            
+            
+        } else {
+           int rowCount = cart_model.getRowCount();
                 int column_itemType = 1;
                 int column_itemPrice = 2;
 
@@ -1973,21 +1986,24 @@ public static DefaultTableModel cart_model;
 
 
                 // Read cart rows safely
-                for (int i = 0; i < rowCount; i++) {
-                    String itemType = cart_model.getValueAt(i, column_itemType).toString();
-                    double itemPrice = Double.parseDouble(
-                            cart_model.getValueAt(i, column_itemPrice).toString()
-                    );
+             for (int i = 0; i < rowCount; i++) {
+    String itemType = cart_model.getValueAt(i, column_itemType).toString();
+    double itemPrice = Double.parseDouble(
+            cart_model.getValueAt(i, column_itemPrice).toString()
+    );
 
-                    // Store (or accumulate) item types
-                    types_of_items_in_cart.merge(itemType, itemPrice, Double::sum);
+    // Store (or accumulate) item types
+    types_of_items_in_cart.merge(itemType, itemPrice, Double::sum);
 
-                    // Accumulate total
-                    billTotal += itemPrice;
+    // If it's a discount, subtract it instead of adding
+    if ("DISCOUNT".equalsIgnoreCase(itemType)) {
+        billTotal -= itemPrice;
+    } else {
+        billTotal += itemPrice;
+    }
 
-                    System.out.println(itemType + " -> " + itemPrice);
-                }
-
+    System.out.println(itemType + " -> " + itemPrice);
+}
                 // Handle Bill Pay logic
                 if (types_of_items_in_cart.containsKey("Bill Pay")) {
                     tender.includesBillPay = true;
@@ -2036,7 +2052,7 @@ public static DefaultTableModel cart_model;
                 // Final totals
                 tender.orig_subtotal = billTotal;
                 tender.orig_tax_total = 0.00;
-                tender.orig_discount_total = 0.00;
+                tender.orig_discount_total = discountTotal;
                 tender.orig_final_total = billTotal;
 
                 System.out.println("Bill total: " + billTotal);
@@ -2044,7 +2060,14 @@ public static DefaultTableModel cart_model;
                 new tender().setVisible(true);
 
                 
-                    
+                      
+        }
+        
+        
+        
+        
+        
+              
 
 
         // TODO add your handling code here:

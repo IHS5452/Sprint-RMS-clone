@@ -445,13 +445,14 @@ ps.setString(2, lastName.trim() + "%");
 
   public static boolean checkIfDiscountAppliesToCart(DefaultTableModel cart_model) {
 
+    // things that do not apply to this order: 
+    // bill pays
+    // activation fees
+    // flip phones (being bought outright)
   
   
   
-  
-  
-  
-  return false;
+  return true;
   }
   
   

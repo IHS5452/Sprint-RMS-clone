@@ -7,6 +7,8 @@ package rms.clone.main.UI.submain;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
@@ -43,14 +45,14 @@ public class discounts extends javax.swing.JFrame {
         discounts_tbl = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
+        perm_off_cb = new javax.swing.JRadioButton();
+        dol_amt_cb = new javax.swing.JRadioButton();
+        full_discount_name_txt = new javax.swing.JTextField();
+        perc_ammt = new javax.swing.JTextField();
+        dl_ammt = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        discount_desc = new javax.swing.JTextArea();
         apply_to_cart_bttn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -65,6 +67,11 @@ public class discounts extends javax.swing.JFrame {
         jLabel2.setText("Discount Use");
 
         discount_use_cb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Select A Discount use--", "-Phones-", "Apple Phones", "Android Phones", "Flip Phones", "-Accessories-", "Apple Phone Cases", "Apple Phone Screen Protectors", "Old Apple Phone Chargers", "Other Apple Phone Accessories ", "Android Phone Cases", "Android Phone Screen Protectors", "Android/New Apple Phone Chargers", "Other Android Phone Accessories ", "-Bluetooth-", "Bluetooth Speakers", "Bluetooth Headphones", "Other Accessories" }));
+        discount_use_cb.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                discount_use_cbActionPerformed(evt);
+            }
+        });
 
         discounts_tbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -89,6 +96,11 @@ public class discounts extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        discounts_tbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                discounts_tblMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(discounts_tbl);
 
         jButton1.setText("Search");
@@ -100,15 +112,26 @@ public class discounts extends javax.swing.JFrame {
 
         jLabel3.setText("Full Discount Name");
 
-        jRadioButton1.setText("Percentage off");
+        perm_off_cb.setText("Percentage off");
+        perm_off_cb.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                perm_off_cbActionPerformed(evt);
+            }
+        });
 
-        jRadioButton2.setText("Dollar Amount off");
+        dol_amt_cb.setText("Dollar Amount off");
+
+        dl_ammt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dl_ammtActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("Full Discount Description");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane2.setViewportView(jTextArea1);
+        discount_desc.setColumns(20);
+        discount_desc.setRows(5);
+        jScrollPane2.setViewportView(discount_desc);
 
         apply_to_cart_bttn.setText("Apply to cart");
         apply_to_cart_bttn.addActionListener(new java.awt.event.ActionListener() {
@@ -140,15 +163,15 @@ public class discounts extends javax.swing.JFrame {
                                         .addComponent(discount_use_cb, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField2)
+                                    .addComponent(full_discount_name_txt)
                                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jRadioButton1)
-                                            .addComponent(jRadioButton2))
+                                            .addComponent(perm_off_cb)
+                                            .addComponent(dol_amt_cb))
                                         .addGap(19, 19, 19)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jTextField4, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
-                                            .addComponent(jTextField3)))
+                                            .addComponent(dl_ammt, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
+                                            .addComponent(perc_ammt)))
                                     .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)))))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
@@ -175,15 +198,15 @@ public class discounts extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(full_discount_name_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jRadioButton1)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(perm_off_cb)
+                            .addComponent(perc_ammt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jRadioButton2)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(dol_amt_cb)
+                            .addComponent(dl_ammt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -198,8 +221,10 @@ public class discounts extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
             public static DefaultTableModel discounts_tbl_dtm;
 
-       
             
+            public static Map<String, String> descriptions = new HashMap<String, String>();
+       
+
             
             
             
@@ -260,6 +285,9 @@ public class discounts extends javax.swing.JFrame {
             };
         }
 
+        descriptions.put(rs.getString("discount_name"), rs.getString("discount_description"));
+        
+        
         discounts_tbl_dtm.addRow(row);
     }
 
@@ -278,17 +306,113 @@ public class discounts extends javax.swing.JFrame {
 
     private void apply_to_cart_bttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apply_to_cart_bttnActionPerformed
 
+        double orig_total = RMS_Clone_CSR.billTotal;
+        
+        
+double round1_perc_off = 0;
         
         boolean applies =  rms.clone.main.business.actions.checkIfDiscountAppliesToCart(RMS_Clone_CSR.cart_model);
         
-        
-        
+         if (perm_off_cb.isSelected() && (applies)) {
+            double perc_ammt_temp = Double.parseDouble(perc_ammt.getText().toString()) * 0.01;
+          round1_perc_off = orig_total * perc_ammt_temp;
+          orig_total = orig_total - round1_perc_off;
+     
+         
+          
+       
+        } else if (dol_amt_cb.isSelected() && (applies)) {
+            orig_total = orig_total - Double.parseDouble(dl_ammt.getText());
+        } else if (!applies) {
+             System.out.println("Discount does not apply to this order.");
+             
+        }
+         
+         
+         
+         
+         
+         
+         
+          if (perm_off_cb.isSelected()) {
+          Object[] row_item = {"D", "DISCOUNT", round1_perc_off, 1, false};
+   RMS_Clone_CSR.cart_model.addRow(row_item);
+   RMS_Clone_CSR.discountTotal += round1_perc_off;
+RMS_Clone_CSR.cw.rebind();
+    this.dispose();
 
+          } else if (dol_amt_cb.isSelected()) {
+                        Object[] row_item = {"D", "DISCOUNT", Double.parseDouble(dl_ammt.getText()), 1, false};
+   RMS_Clone_CSR.cart_model.addRow(row_item);
+   RMS_Clone_CSR.discountTotal += Double.parseDouble(dl_ammt.getText());
+RMS_Clone_CSR.cw.rebind();
+    this.dispose();
+
+          }
+         
+         
+         
+         
+       
+
+ 
+          
 
 
 
         // TODO add your handling code here:
     }//GEN-LAST:event_apply_to_cart_bttnActionPerformed
+
+    private void discounts_tblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_discounts_tblMouseClicked
+
+        int row = discounts_tbl.getSelectedRow();
+        int column_name = 0;
+        int column_discountType = 2;
+        
+        String itemName = discounts_tbl.getModel().getValueAt(row, column_name).toString();
+        String discountType = discounts_tbl.getModel().getValueAt(row, column_discountType).toString();
+        
+
+            full_discount_name_txt.setText(itemName);
+            discount_desc.setText(descriptions.get(itemName));
+
+
+        
+        if (discountType.contains("$")) {
+            dol_amt_cb.setSelected(true);
+            perm_off_cb.setSelected(false);
+            dl_ammt.setText(discountType.replace("$", ""));
+            perc_ammt.setText("");
+            
+        } else {
+                    dol_amt_cb.setSelected(false);
+            perm_off_cb.setSelected(true);
+            perc_ammt.setText(discountType.replace("$", ""));
+            dl_ammt.setText("");
+        }
+        
+        
+        
+        
+        
+ 
+
+
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_discounts_tblMouseClicked
+
+    private void perm_off_cbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_perm_off_cbActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_perm_off_cbActionPerformed
+
+    private void dl_ammtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dl_ammtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dl_ammtActionPerformed
+
+    private void discount_use_cbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_discount_use_cbActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_discount_use_cbActionPerformed
 
     /**
      * @param args the command line arguments
@@ -327,22 +451,22 @@ public class discounts extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton apply_to_cart_bttn;
+    private javax.swing.JTextArea discount_desc;
     private javax.swing.JTextField discount_name_txt;
     private javax.swing.JComboBox<String> discount_use_cb;
     private javax.swing.JTable discounts_tbl;
+    private javax.swing.JTextField dl_ammt;
+    private javax.swing.JRadioButton dol_amt_cb;
+    private javax.swing.JTextField full_discount_name_txt;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField perc_ammt;
+    private javax.swing.JRadioButton perm_off_cb;
     // End of variables declaration//GEN-END:variables
 
   
