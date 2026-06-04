@@ -87,6 +87,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Reports"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem9ActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem10">
               <Properties>
@@ -97,6 +100,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Account Search History"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem12ActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>

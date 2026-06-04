@@ -1827,12 +1827,22 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
         jMenu5.add(jMenuItem8);
 
         jMenuItem9.setText("Reports");
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
         jMenu5.add(jMenuItem9);
 
         jMenuItem10.setText("Review Team Feedbacks");
         jMenu5.add(jMenuItem10);
 
         jMenuItem12.setText("Account Search History");
+        jMenuItem12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem12ActionPerformed(evt);
+            }
+        });
         jMenu5.add(jMenuItem12);
 
         jMenuBar1.add(jMenu5);
@@ -2987,6 +2997,20 @@ new send_feedback_agent().setVisible(true);
     private void sensitive_cx_cbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sensitive_cx_cbActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_sensitive_cx_cbActionPerformed
+
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+
+        new rms.clone.main.UI.manager.reports().setVisible(true);
+        
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
+
+    private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
+        new rms.clone.main.UI.manager.search_history_employees().setVisible(true);
+
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem12ActionPerformed
 
     /**
      * @param args the command line arguments

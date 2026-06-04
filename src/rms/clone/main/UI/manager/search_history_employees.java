@@ -4,6 +4,12 @@
  */
 package rms.clone.main.UI.manager;
 
+import javax.swing.table.DefaultTableModel;
+import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import rms.clone.main.business.vars;
+
 /**
  *
  * @author ianschrauth
@@ -27,16 +33,16 @@ public class search_history_employees extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        employee_pid_txt = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        search_history_results_tbl = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Employee PID");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        search_history_results_tbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -59,9 +65,14 @@ public class search_history_employees extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(search_history_results_tbl);
 
         jButton1.setText("Search");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -74,7 +85,7 @@ public class search_history_employees extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(employee_pid_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -86,7 +97,7 @@ public class search_history_employees extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(employee_pid_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -95,6 +106,48 @@ public class search_history_employees extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    
+    
+    
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+            DefaultTableModel model = (DefaultTableModel) search_history_results_tbl.getModel();
+            
+                    Object[] row;
+
+            
+            model.setRowCount(0);
+            
+            ResultSet rs;
+            PreparedStatement ps;
+            
+            String SQL = "SELECT * FROM acct_search_history where employee_pid = ?";
+            
+            ps = vars.conn.prepareStatement(SQL);
+            ps.setInt(1, Integer.parseInt(employee_pid_txt.getText().toString()));
+            rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                  row = new Object[]{
+                rs.getDate("date_time_searched"),
+                rs.getString("search_method"),
+                rs.getString("located_account_number"),
+                rs.getBoolean("is_sensitive_account")
+                  };
+            model.addRow(row);
+            
+            }
+            
+            
+            
+            
+            
+            // TODO add your handling code here:
+        } catch (SQLException ex) {
+            Logger.getLogger(search_history_employees.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -132,10 +185,10 @@ public class search_history_employees extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField employee_pid_txt;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTable search_history_results_tbl;
     // End of variables declaration//GEN-END:variables
 }
