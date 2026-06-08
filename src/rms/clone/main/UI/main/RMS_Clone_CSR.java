@@ -3004,7 +3004,15 @@ new send_feedback_agent().setVisible(true);
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
-        // TODO add your handling code here:
+   if (actions.isManager()) {
+                    new rms.clone.main.UI.manager.discount_managment().setVisible(true);
+
+        } else {
+            JOptionPane.showMessageDialog(frame, "You are not a manager. Error: 500.", "Error: 500", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        
+                // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     private void sensitive_cx_cbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sensitive_cx_cbActionPerformed

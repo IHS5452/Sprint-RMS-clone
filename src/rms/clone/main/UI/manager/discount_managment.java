@@ -4,6 +4,10 @@
  */
 package rms.clone.main.UI.manager;
 
+import java.sql.*;
+import javax.swing.table.DefaultTableModel;
+import rms.clone.main.business.vars;
+
 /**
  *
  * @author ianschrauth
@@ -28,7 +32,7 @@ public class discount_managment extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        discount_table = new javax.swing.JTable();
         jTextField1 = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
@@ -41,24 +45,35 @@ public class discount_managment extends javax.swing.JFrame {
         jTextField3 = new javax.swing.JTextField();
         jCheckBox1 = new javax.swing.JCheckBox();
         jButton1 = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        edit_disc_bttn = new javax.swing.JButton();
+        delete_disc_bttn = new javax.swing.JButton();
+        enable_disc_bttn = new javax.swing.JButton();
+        disable_disc_bttn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jLabel1.setText("Discount Name");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        discount_table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Name", "Perc/USD Off", "Discount Use", "Requires Mgr Approval"
+                "Name", "Discount Type", "Amount off", "Used for", "Requires Mgr Approval", "Active"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.Boolean.class
+                java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.Boolean.class, java.lang.Boolean.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -69,7 +84,22 @@ public class discount_managment extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        discount_table.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                discount_tableFocusLost(evt);
+            }
+        });
+        discount_table.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                discount_tableMouseClicked(evt);
+            }
+        });
+        discount_table.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                discount_tablePropertyChange(evt);
+            }
+        });
+        jScrollPane1.setViewportView(discount_table);
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -99,6 +129,56 @@ public class discount_managment extends javax.swing.JFrame {
             }
         });
 
+        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
+
+        jLabel4.setText("Options");
+
+        edit_disc_bttn.setText("Edit Selected Disc.");
+        edit_disc_bttn.setEnabled(false);
+
+        delete_disc_bttn.setText("Delete Selected Disc.");
+        delete_disc_bttn.setEnabled(false);
+
+        enable_disc_bttn.setText("Enable Selected Disc.");
+        enable_disc_bttn.setEnabled(false);
+
+        disable_disc_bttn.setText("Disable Selected Disc.");
+        disable_disc_bttn.setEnabled(false);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(edit_disc_bttn)
+                            .addComponent(enable_disc_bttn))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(disable_disc_bttn)
+                            .addComponent(delete_disc_bttn))))
+                .addContainerGap(14, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(enable_disc_bttn)
+                    .addComponent(disable_disc_bttn))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(edit_disc_bttn)
+                    .addComponent(delete_disc_bttn))
+                .addContainerGap(16, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -123,42 +203,50 @@ public class discount_managment extends javax.swing.JFrame {
                                     .addComponent(jTextField4)
                                     .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(jCheckBox1))
-                        .addGap(0, 33, Short.MAX_VALUE))
+                        .addGap(0, 7, Short.MAX_VALUE))
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(8, 8, 8)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton2)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jCheckBox1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1)
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(35, 35, 35)
+                        .addComponent(jLabel2)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(8, 8, 8)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jRadioButton1)
+                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jRadioButton2)
+                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jCheckBox1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
 
         pack();
@@ -171,6 +259,68 @@ public class discount_managment extends javax.swing.JFrame {
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+
+
+        getAllDiscountsAndPutThemInTable();
+
+
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formWindowOpened
+
+    private void discount_tablePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_discount_tablePropertyChange
+
+
+
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_discount_tablePropertyChange
+
+    private void discount_tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_discount_tableMouseClicked
+
+
+        int row = discount_table.getSelectedRow();
+        
+        
+        
+        if (row != -1) {
+        // enable the buttons on the top
+        enable_disc_bttn.setEnabled(true);
+        disable_disc_bttn.setEnabled(true);
+        edit_disc_bttn.setEnabled(true);
+        delete_disc_bttn.setEnabled(true);
+            
+            
+            
+        } 
+        
+        
+     
+
+
+
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_discount_tableMouseClicked
+
+    private void discount_tableFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_discount_tableFocusLost
+
+        // clerar selection
+discount_table.clearSelection();
+        
+                //disable them when focus is shifted
+                    enable_disc_bttn.setEnabled(false);
+        disable_disc_bttn.setEnabled(false);
+        edit_disc_bttn.setEnabled(false);
+        delete_disc_bttn.setEnabled(false);
+        
+
+
+
+// TODO add your handling code here:
+    }//GEN-LAST:event_discount_tableFocusLost
 
     /**
      * @param args the command line arguments
@@ -208,20 +358,86 @@ public class discount_managment extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton delete_disc_bttn;
+    private javax.swing.JButton disable_disc_bttn;
+    private javax.swing.JTable discount_table;
+    private javax.swing.JButton edit_disc_bttn;
+    private javax.swing.JButton enable_disc_bttn;
     private javax.swing.JButton jButton1;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     // End of variables declaration//GEN-END:variables
+
+    private void getAllDiscountsAndPutThemInTable() {
+
+        
+        DefaultTableModel disc_tbl = (DefaultTableModel) discount_table.getModel();
+        
+        
+        try {
+            String sql_discounts = "Select * from discounts;";
+            
+            Statement stmt = vars.conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql_discounts);
+            
+            
+            String disc_off = "";
+            String isItPercOrUSDOff = "";
+            
+            while (rs.next()) {
+                
+                
+                if (rs.getDouble("discount_perc_off") == -1.0) {
+                    disc_off = "$" + Double.toString(rs.getDouble("discount_usd_off"));
+                    isItPercOrUSDOff = "Set Dollar Amount off total.";
+                    
+                } else if (rs.getDouble("discount_usd_off") == -1.0) {
+                  disc_off = Double.toString(rs.getDouble("discount_perc_off")) + "%";
+                                      isItPercOrUSDOff = "Percentage off total.";
+
+                }
+                
+                
+                
+                Object[] row = {
+                    rs.getInt("dscid"),
+                    isItPercOrUSDOff,
+                    disc_off,
+                    rs.getString("discount_use"),
+                    rs.getBoolean("requires_mgr_approval"),
+                    rs.getBoolean("is_active")
+                    
+                    
+                    
+                };
+                
+                disc_tbl.addRow(row);
+                
+                
+                
+                
+            }
+        } catch (SQLException ex) {
+            System.getLogger(discount_managment.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+        
+        
+
+
+
+
+    }
 }
