@@ -21,6 +21,7 @@ public class vars {
     public static Cx selectedCx;
     public static boolean hasManagerAuth = false;
     public static String currentOrderNumber = "";
+    public static int team_number = 0;
     
     
 }

@@ -34,6 +34,10 @@ import rms.clone.main.UI.submain.new_activation;
  */
 public class actions {
     
+    
+            static Agents agent = new Agents();
+
+    
     public static Cx selectCustomerByAccountNumber(String accountNumber) {
     String SQL = "SELECT * FROM customer_info WHERE account_number = ? LIMIT 1";
 
@@ -132,7 +136,6 @@ public static String login(String pid, String password) {
             return classes.Strings.PASSWD_WRONG;
         }
 
-        Agents agent = new Agents();
         agent.setPid(rs.getInt("PID"));
         agent.setPasswordToRms(correctPassword);
         agent.setActiveInPayroll(rs.getBoolean("is_active"));
@@ -156,6 +159,8 @@ public static String login(String pid, String password) {
         agent.setManager(rs.getBoolean("is_manager"));
         agent.setLeadership(rs.getBoolean("is_leadership"));
         agent.setCanAccessRmsLite(rs.getBoolean("can_access_RMS_lite"));
+        agent.setTeamNumber(rs.getInt("team_number"));
+        vars.team_number = rs.getInt("team_number");
 
         return classes.Strings.SUCCESS;
 
@@ -512,6 +517,15 @@ public static void launchNewActivationWindowWithData(String imei, String typeOfD
     }
 
 
+    
+    public static boolean isManager() {
+        
+        return agent.getIfManager();
+        
+        
+    }
+    
+    
 
 
 }

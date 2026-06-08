@@ -4,6 +4,10 @@
  */
 package rms.clone.main.UI.manager;
 
+import java.awt.Component;
+import javax.swing.JOptionPane;
+import rms.clone.main.business.vars;
+
 /**
  *
  * @author ianschrauth
@@ -36,24 +40,31 @@ public class reports extends javax.swing.JFrame {
         start_date_txt = new javax.swing.JTextField();
         end_date_txt = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        team_number_cc = new javax.swing.JTextField();
-        team_number_cc1 = new javax.swing.JTextField();
+        team_number_txt = new javax.swing.JTextField();
+        pid_txt = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jLabel1.setText("Report Type");
 
         report_type.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Daily New Sales (PID)", "Daily New Sales (Team)", "Daily Exising Sales (PID)", "Daily Exising Sales (Team)", "Daily Upgrades (PID)", "Daily Upgrades (Team)", "Daily Accessory Sales (PID)", "Daily Accessory Sales (Team)", "Daily Returns (PID)", "Daily Returns (Team)", "Timeclock entries (PID)", "Timeclock entries (Team)" }));
 
         jButton1.setText("Generate");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Title 1", "Title 2", "Title 3", "Title 4"
@@ -66,20 +77,37 @@ public class reports extends javax.swing.JFrame {
         jLabel3.setText("End Date");
 
         start_date_txt.setText("XX-XX-XXXX");
-
-        end_date_txt.setText("XX-XX-XXXX");
-
-        jLabel4.setText("Team Number");
-
-        team_number_cc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                team_number_ccActionPerformed(evt);
+        start_date_txt.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                start_date_txtFocusLost(evt);
             }
         });
 
-        team_number_cc1.addActionListener(new java.awt.event.ActionListener() {
+        end_date_txt.setText("XX-XX-XXXX");
+        end_date_txt.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                end_date_txtFocusLost(evt);
+            }
+        });
+        end_date_txt.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+                end_date_txtInputMethodTextChanged(evt);
+            }
+        });
+
+        jLabel4.setText("Team Number");
+
+        team_number_txt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                team_number_cc1ActionPerformed(evt);
+                team_number_txtActionPerformed(evt);
+            }
+        });
+
+        pid_txt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pid_txtActionPerformed(evt);
             }
         });
 
@@ -114,8 +142,8 @@ public class reports extends javax.swing.JFrame {
                             .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(team_number_cc, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
-                            .addComponent(team_number_cc1))
+                            .addComponent(team_number_txt, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
+                            .addComponent(pid_txt))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(53, 53, 53)
@@ -130,13 +158,13 @@ public class reports extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addComponent(report_type, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
-                    .addComponent(team_number_cc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(team_number_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(start_date_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
-                    .addComponent(team_number_cc1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pid_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -150,14 +178,73 @@ public class reports extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+Component frame = null;
 
-    private void team_number_ccActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_team_number_ccActionPerformed
+    private void team_number_txtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_team_number_txtActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_team_number_ccActionPerformed
+    }//GEN-LAST:event_team_number_txtActionPerformed
 
-    private void team_number_cc1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_team_number_cc1ActionPerformed
+    private void pid_txtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pid_txtActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_team_number_cc1ActionPerformed
+    }//GEN-LAST:event_pid_txtActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        String defaultDateText = "XX-XX-XXXX";
+        String startDate = start_date_txt.getText().toString();
+        String endDate = end_date_txt.getText().toString();
+        String pid = pid_txt.getText().toString();
+        String teamNumber = team_number_txt.getText().toString();
+
+
+
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void start_date_txtFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_start_date_txtFocusLost
+
+
+        if (start_date_txt.getText().matches("\\d{8}")) {
+            System.out.println("8 numbers deteected. Formatting as date MM-DD-YYYY");
+            String formatted = start_date_txt.getText().replaceAll("(.{2})(.{2})(.*)", "$1-$2-$3");
+            start_date_txt.setText(formatted);
+        } else {
+            JOptionPane.showMessageDialog(frame, "Please input 8 numbers representing a month, date, and year (Ex: 01012020)");
+            start_date_txt.setText("");
+        }
+
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_start_date_txtFocusLost
+
+    private void end_date_txtInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_end_date_txtInputMethodTextChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_end_date_txtInputMethodTextChanged
+
+    private void end_date_txtFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_end_date_txtFocusLost
+
+        if (end_date_txt.getText().matches("\\d{8}")) {
+            System.out.println("8 numbers deteected. Formatting as date MM-DD-YYYY");
+            String formatted = end_date_txt.getText().replaceAll("(.{2})(.{2})(.*)", "$1-$2-$3");
+            end_date_txt.setText(formatted);
+        } else {
+            JOptionPane.showMessageDialog(frame, "Please input 8 numbers representing a month, date, and year (Ex: 01012020)");
+            end_date_txt.setText("");
+        }
+
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_end_date_txtFocusLost
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+
+
+        team_number_txt.setText(Integer.toString(vars.team_number));
+
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
@@ -204,9 +291,9 @@ public class reports extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTextField pid_txt;
     private javax.swing.JComboBox<String> report_type;
     private javax.swing.JTextField start_date_txt;
-    private javax.swing.JTextField team_number_cc;
-    private javax.swing.JTextField team_number_cc1;
+    private javax.swing.JTextField team_number_txt;
     // End of variables declaration//GEN-END:variables
 }

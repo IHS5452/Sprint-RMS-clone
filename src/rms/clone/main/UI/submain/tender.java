@@ -394,7 +394,7 @@ Component frame = null;
           return "Return - Accessory";
 
         } else {
-            return "Multiple or Unknown";
+            return "Multiple Sale or Unknown";
         }
         
         

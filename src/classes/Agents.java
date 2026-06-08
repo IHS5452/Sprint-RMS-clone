@@ -24,6 +24,7 @@ public class Agents {
     private boolean isLeadership;
     private boolean canAccessRmsLite;
     private boolean isFranchiseEmployee;
+   private int teamNumber;
 
     // Getters and Setters
     public int getPid() {
@@ -98,7 +99,7 @@ public class Agents {
         this.hireDate = hireDate;
     }
 
-    public boolean isManager() {
+    public boolean getIfManager() {
         return isManager;
     }
 
@@ -129,5 +130,15 @@ public class Agents {
     public void setFranchiseEmployee(boolean isFranchiseEmployee) {
         this.isFranchiseEmployee = isFranchiseEmployee;
     }
+
+    public int getTeamNumber() {
+        return teamNumber;
+    }
+
+    public void setTeamNumber(int teamNumber) {
+        this.teamNumber = teamNumber;
+    }
+    
+    
 }
 

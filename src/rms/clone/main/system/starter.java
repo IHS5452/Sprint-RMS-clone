@@ -28,9 +28,14 @@ public class starter {
     
     
     public static void main(String[] args){
+        
+                String osName = System.getProperty("os.name").toLowerCase();
+
+        
+        
                 System.setProperty("apple.awt.application.name", "Sprint Retail Managment System (RMS) Clone");
 
-        if (Desktop.isDesktopSupported()) {
+        if (Desktop.isDesktopSupported() && (osName.contains("mac")) ) {
             Desktop desktop = Desktop.getDesktop();
 
             desktop.setAboutHandler(new AboutHandler() {

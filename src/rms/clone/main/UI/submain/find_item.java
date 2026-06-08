@@ -592,6 +592,7 @@ if (hasNewActivationCatInput) {
         itemname,
         itemTruePrice,
         quantity,
+        "Accessory sale",
         false
     };
 
