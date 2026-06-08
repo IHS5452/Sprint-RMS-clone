@@ -670,7 +670,7 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
             .addGroup(home_pannelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(home_pannelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 940, Short.MAX_VALUE)
+                    .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 981, Short.MAX_VALUE)
                     .addGroup(home_pannelLayout.createSequentialGroup()
                         .addComponent(news_title)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -1120,7 +1120,7 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addComponent(jLabel20, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
+                        .addComponent(jLabel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(contact_phone_3_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel8Layout.createSequentialGroup()
@@ -1543,14 +1543,14 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
 
             },
             new String [] {
-                "SKU/IMEI", "Item Name", "Price", "Quanitity", "Activation"
+                "SKU/IMEI", "Item Name", "Price", "Quanitity", "Entry Type", "Activation"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.String.class, java.lang.Boolean.class
+                java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.String.class, java.lang.String.class, java.lang.Boolean.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -1989,7 +1989,7 @@ public static DefaultTableModel cart_model;
             
         } else {
            int rowCount = cart_model.getRowCount();
-                int column_itemType = 1;
+                int column_itemType = 4;
                 int column_itemPrice = 2;
 
                 Map<String, Double> types_of_items_in_cart = new HashMap<>();
@@ -2035,21 +2035,28 @@ public static DefaultTableModel cart_model;
                 }
                 
                  
-                if (types_of_items_in_cart.containsKey("Return")) {
-                    tender.includesPrepaidSale = true;
-                    
-                    
-                }
-                
-                  if (types_of_items_in_cart.containsKey("Service addon")) {
-                    tender.includesPrepaidSale = true;
+                if (types_of_items_in_cart.containsKey("Return - Phone")) {
+                    tender.includesReturnedPhone = true;
                     
                     
                 }
                 
                 
-                if (types_of_items_in_cart.containsKey("Accessory")) {
-                    tender.includesPrepaidSale = true;
+                 if (types_of_items_in_cart.containsKey("Return - Accessory")) {
+                    tender.includesReturnedAcc = true;
+                    
+                    
+                }
+                
+//                  if (types_of_items_in_cart.containsKey("Service addon")) {
+//                    tender.inc = true;
+//                    
+//                    
+//                }
+//                
+                
+                if (types_of_items_in_cart.containsKey("Accessory Sale")) {
+                    tender.includesAccessorySale = true;
                     
                     
                 }
@@ -2983,8 +2990,14 @@ new send_feedback_agent().setVisible(true);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+
+            if (actions.isManager()) {
  new employee_managment().setVisible(true);
 
+        } else {
+            JOptionPane.showMessageDialog(frame, "You are not a manager. Error: 500.", "Error: 500", JOptionPane.ERROR_MESSAGE);
+        }
+        
         
 
         // TODO add your handling code here:
@@ -3000,14 +3013,31 @@ new send_feedback_agent().setVisible(true);
 
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
 
-        new rms.clone.main.UI.manager.reports().setVisible(true);
+        
+        if (actions.isManager()) {
+                    new rms.clone.main.UI.manager.reports().setVisible(true);
+
+        } else {
+            JOptionPane.showMessageDialog(frame, "You are not a manager. Error: 500.", "Error: 500", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        
         
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
+
+        
+             
+        if (actions.isManager()) {
         new rms.clone.main.UI.manager.search_history_employees().setVisible(true);
 
+        } else {
+            JOptionPane.showMessageDialog(frame, "You are not a manager. Error: 500.", "Error: 500", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        
 
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem12ActionPerformed

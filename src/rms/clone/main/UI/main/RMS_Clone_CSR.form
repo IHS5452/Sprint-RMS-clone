@@ -623,7 +623,7 @@
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jScrollPane9" alignment="0" pref="940" max="32767" attributes="0"/>
+                          <Component id="jScrollPane9" alignment="0" pref="981" max="32767" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="news_title" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -1347,7 +1347,7 @@
                           <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
                               <Group type="102" alignment="1" attributes="0">
-                                  <Component id="jLabel20" pref="103" max="32767" attributes="0"/>
+                                  <Component id="jLabel20" max="32767" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Component id="contact_phone_3_txt" min="-2" pref="157" max="-2" attributes="0"/>
                               </Group>
@@ -2276,16 +2276,22 @@
                 <Component class="javax.swing.JTable" name="cart_table">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="5" rowCount="0">
+                      <Table columnCount="6" rowCount="0">
                         <Column editable="false" title="SKU/IMEI" type="java.lang.String"/>
                         <Column editable="false" title="Item Name" type="java.lang.String"/>
                         <Column editable="false" title="Price" type="java.lang.Double"/>
                         <Column editable="false" title="Quanitity" type="java.lang.String"/>
+                        <Column editable="false" title="Entry Type" type="java.lang.String"/>
                         <Column editable="false" title="Activation" type="java.lang.Boolean"/>
                       </Table>
                     </Property>
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                       <TableColumnModel selectionModel="0">
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
                         <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                           <Title/>
                           <Editor/>
