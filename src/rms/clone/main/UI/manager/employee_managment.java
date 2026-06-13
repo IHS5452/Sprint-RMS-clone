@@ -413,6 +413,10 @@ public class employee_managment extends javax.swing.JFrame {
     }
 
     private void clearFieldsAndTable() {
+        
+        
+        
+        DefaultTableModel model_order = (DefaultTableModel) order_table.getModel();
 
                 fname_txt.setText("");
                 lname_txt.setText("");
@@ -422,6 +426,8 @@ public class employee_managment extends javax.swing.JFrame {
                 is_leadership_cb.setSelected(false);
                 franchise_employee_cb.setSelected(false);
                 profile_deactivated_cb.setSelected(false);
+                model_order.setRowCount(0);
+          
 
     }
 
