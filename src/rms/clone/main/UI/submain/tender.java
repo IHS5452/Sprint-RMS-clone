@@ -7,6 +7,7 @@ package rms.clone.main.UI.submain;
 import java.awt.Component;
 import javax.swing.JOptionPane;
 import java.sql.*;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import rms.clone.main.UI.main.RMS_Clone_CSR;
@@ -334,7 +335,7 @@ Component frame = null;
             try {
                 String SQL = "insert into transactions_all VALUES(?,?,?,?,?,?,?,?,?,NOW(),?,?,?);";
                 PreparedStatement ps = vars.conn.prepareStatement(SQL);
-                ps.setInt(1, 0);
+                ps.setInt(1, getTID());
                 ps.setString(2, getTransactionType());
                 ps.setDouble(3, orig_subtotal);
                 ps.setDouble(4, orig_tax_total);
@@ -410,7 +411,7 @@ Component frame = null;
             try {
                 String SQL = "insert into transactions_all VALUES(?,?,?,?,?,?,?,?,?,NOW(),?,?,?);";
                 PreparedStatement ps = vars.conn.prepareStatement(SQL);
-                ps.setInt(1, 0);
+                ps.setInt(1, getTID());
                 ps.setString(2, getTransactionType());
                 ps.setDouble(3, orig_subtotal);
                 ps.setDouble(4, orig_tax_total);
@@ -643,6 +644,31 @@ Component frame = null;
     private void activateLine(String preOrpost) {
         // add the phone number to the database in the phone_numbers database, along with the correct plan info for the line (Priority GB, plan name and code, etc)
     }
+
+    private int getTID() {
+    Random rand = new Random();
+
+    while (true) {
+        int TID = rand.nextInt(999999999);
+
+        String sql = "SELECT tid FROM transactions_all WHERE tid=?";
+
+        try (
+            PreparedStatement ps = vars.conn.prepareStatement(sql)
+        ) {
+            ps.setInt(1, TID);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                if (!rs.next()) {
+                    return TID;
+                }
+            }
+
+        } catch (SQLException ex) {
+
+        }
+    }
+}
 
    
     

@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 9.5.0, for macos26.1 (arm64)
+-- MySQL dump 10.13  Distrib 9.6.0, for macos15.7 (arm64)
 --
 -- Host: localhost    Database: rms_clone_dev
 -- ------------------------------------------------------
--- Server version	9.5.0
+-- Server version	9.6.0
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -14,19 +14,6 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-SET @MYSQLDUMP_TEMP_LOG_BIN = @@SESSION.SQL_LOG_BIN;
-SET @@SESSION.SQL_LOG_BIN= 0;
-
---
--- GTID state at the beginning of the backup 
---
-
-SET @@GLOBAL.GTID_PURGED=/*!80000 '+'*/ 'c47ffed8-efbb-11f0-965d-714c29ea1bc5:1-135,
-e936b2ec-d69a-11f0-ad36-7944e8bf04d5:1-425';
-
---
--- Table structure for table `accessories`
---
 
 DROP TABLE IF EXISTS `accessories`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -41,7 +28,7 @@ CREATE TABLE `accessories` (
   `price_usd` double DEFAULT NULL,
   `is_preorder` tinyint(1) DEFAULT NULL,
   `item_desc` text
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -69,7 +56,7 @@ CREATE TABLE `account_notes` (
   `account_number` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`note_id`),
   KEY `idx_account_notes_account_number` (`account_number`)
-) ENGINE=InnoDB AUTO_INCREMENT=58764025 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -97,7 +84,7 @@ CREATE TABLE `acct_search_history` (
   `located_account_number` text,
   `is_sensitive_account` tinyint(1) DEFAULT NULL,
   `date_time_searched` datetime DEFAULT NULL
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -106,7 +93,7 @@ CREATE TABLE `acct_search_history` (
 
 LOCK TABLES `acct_search_history` WRITE;
 /*!40000 ALTER TABLE `acct_search_history` DISABLE KEYS */;
-INSERT INTO `acct_search_history` VALUES (0,1,'Phone Number',1,'PENDING',0,'2026-03-22 14:02:48');
+INSERT INTO `acct_search_history` VALUES (0,1,'Phone Number',1,'PENDING',0,'2026-03-22 14:02:48'),(0,1,'Phone Number',1,'PENDING',0,'2026-06-14 13:20:05'),(0,1,'Phone Number',1,'PENDING',0,'2026-06-14 13:20:18');
 /*!40000 ALTER TABLE `acct_search_history` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -129,7 +116,7 @@ CREATE TABLE `agent_feedback` (
   `needs_coaching` tinyint(1) DEFAULT NULL,
   `mgr_comments` text,
   `agent_comments` text
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -163,8 +150,9 @@ CREATE TABLE `company_logins` (
   `is_leadership` tinyint(1) NOT NULL DEFAULT '0',
   `can_access_RMS_lite` tinyint(1) NOT NULL,
   `is_franchise_employee` tinyint(1) NOT NULL,
+  `team_number` int DEFAULT NULL,
   PRIMARY KEY (`PID`)
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -173,7 +161,7 @@ CREATE TABLE `company_logins` (
 
 LOCK TABLES `company_logins` WRITE;
 /*!40000 ALTER TABLE `company_logins` DISABLE KEYS */;
-INSERT INTO `company_logins` VALUES (1,'Alice','Brown','Customer Service Rep','alice@company.com','password123',0,1,'2023-01-10',0,0,1,0),(2,'Bob','Green','Sales Manager','bob@company.com','password123',0,1,'2021-06-15',1,0,1,0),(3,'Charlie','Davis','Tech Support','charlie@company.com','password123',1,0,'2020-11-20',0,0,1,1);
+INSERT INTO `company_logins` VALUES (1,'Alice','Brown','Customer Service Rep','alice@company.com','password123',0,1,'2023-01-10',0,0,1,0,2213),(2,'Bob','Green','Sales Manager','bob@company.com','password123',0,1,'2021-06-15',1,0,1,0,2213),(3,'Charlie','Davis','Tech Support','charlie@company.com','password123',1,0,'2020-11-20',0,0,1,1,805);
 /*!40000 ALTER TABLE `company_logins` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -351,7 +339,7 @@ CREATE TABLE `devices` (
   `is_pending_shipment` tinyint(1) DEFAULT NULL,
   `is_refurb` tinyint(1) DEFAULT NULL,
   `return_eligable` tinyint(1) DEFAULT NULL
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -380,7 +368,7 @@ CREATE TABLE `discounts` (
   `discount_description` text,
   `discount_use` text,
   `is_active` tinyint(1) DEFAULT NULL
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -406,7 +394,7 @@ CREATE TABLE `homepage_news` (
   `content` text,
   `is_active` tinyint(1) DEFAULT NULL,
   `date_added` datetime DEFAULT NULL
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -432,7 +420,7 @@ CREATE TABLE `manager_signoffs` (
   `for_assosiate_pid` int DEFAULT NULL,
   `mgr_pid` int DEFAULT NULL,
   `reason_for_signoff` text
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -606,7 +594,7 @@ CREATE TABLE `recycled_devices` (
   `status_desc` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `trade_in_date` datetime DEFAULT NULL,
   PRIMARY KEY (`rid`)
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -640,7 +628,7 @@ CREATE TABLE `returns` (
   `method_of_return` text,
   `store_number` text,
   `email` text
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -702,8 +690,9 @@ CREATE TABLE `transactions_all` (
   `date_time_of_transaction` datetime DEFAULT NULL,
   `is_finalized` tinyint(1) DEFAULT NULL,
   `pid_of_assosiate` int DEFAULT NULL,
+  `team_number_of_pid` int DEFAULT NULL,
   `cx_acct_number` text
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -712,6 +701,7 @@ CREATE TABLE `transactions_all` (
 
 LOCK TABLES `transactions_all` WRITE;
 /*!40000 ALTER TABLE `transactions_all` DISABLE KEYS */;
+INSERT INTO `transactions_all` VALUES (1,'Prepaid Activation',99.99,1,0,100.99,'CARD-VISA',0,0,'2026-06-14 13:20:35',1,1,2213,'ACC-100001'),(2,'Bill Pay',100,2.5,0,102.5,'CARD-VISA',0,0,'2026-06-14 13:21:53',1,1,2213,'ACC-100001');
 /*!40000 ALTER TABLE `transactions_all` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -732,7 +722,7 @@ CREATE TABLE `transactions_pending` (
   `for_account_number` text,
   `handeling_agent_pid` int DEFAULT NULL,
   `status` text
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -842,27 +832,4 @@ CREATE TABLE `vars` (
   `row_updated_date` date DEFAULT NULL,
   `is_in_beta` tinyint(1) DEFAULT NULL,
   `is_active` tinyint(1) DEFAULT NULL
-) ;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `vars`
---
-
-LOCK TABLES `vars` WRITE;
-/*!40000 ALTER TABLE `vars` DISABLE KEYS */;
-INSERT INTO `vars` VALUES (1,'REDACTED','0.0.1','202512-0001-01','2025-12-18','2025-12-18',1,1);
-/*!40000 ALTER TABLE `vars` ENABLE KEYS */;
-UNLOCK TABLES;
-SET @@SESSION.SQL_LOG_BIN = @MYSQLDUMP_TEMP_LOG_BIN;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
-
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2026-03-22 14:04:48
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;

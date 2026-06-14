@@ -26,6 +26,7 @@ import static rms.clone.main.UI.main.RMS_Clone_CSR.alerts_table;
 import static rms.clone.main.UI.main.RMS_Clone_CSR.customer_line_table;
 import static rms.clone.main.UI.main.RMS_Clone_CSR.services_table;
 import static rms.clone.main.UI.main.RMS_Clone_CSR.notes_table;
+import static rms.clone.main.UI.manager.reports.reportsTable;
 import rms.clone.main.UI.submain.new_activation;
 
 /**
@@ -523,6 +524,81 @@ public static void launchNewActivationWindowWithData(String imei, String typeOfD
         return agent.getIfManager();
         
         
+    }
+    
+    /* 
+    
+Daily New Prepaid Sales (PID)
+Daily New Prepaid Sales (Team)
+Daily New Postpaid Sales (PID)
+Daily New Postpaid Sales (Team)
+Daily Exising Prepaid Sales (PID)
+Daily Exising Prepaid Sales (Team)
+Daily Exising Postpaid Sales (PID)
+Daily Exising Postpaid Sales (Team)
+Daily Upgrades (PID)
+Daily Upgrades (Team)
+Daily Accessory Sales (PID)
+Daily Accessory Sales (Team)
+Daily Returns (PID)
+Daily Returns (Team)
+Timeclock entries (PID)
+Timeclock entries (Team)
+
+*/
+    
+    
+    public static void getDailyNewPrepaidSales_PID(int PID, int TeamNumber) {
+                try {
+                    String SQL = "Select * from transactions_all where pid_of_assosiate = ? AND team_number_of_pid = ? AND type_of_transaction = \"Prepaid Activation\"";
+                    
+                    
+                    PreparedStatement ps = vars.conn.prepareStatement(SQL);
+                    ps.setInt(1, PID);
+                    ps.setInt(2, TeamNumber);
+                    
+                    ResultSet rs = ps.executeQuery();
+                    
+                    DefaultTableModel model = (DefaultTableModel) reportsTable.getModel();
+
+                    while (rs.next()) {
+                        Object[] row = {rs.getString("date_time_of_transaction"), Double.toString(rs.getDouble("grand_total")), rs.getString("cx_acct_number"), rs.getBoolean("is_finalized"), rs.getString("payment_method")};
+                        model.addRow(row);
+                    }        
+                } catch (SQLException ex) {
+                    System.getLogger(actions.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+                }
+       
+       
+    
+    
+    }
+    
+    
+    
+    public static void getDailyNewPrepaidSales_Team(int TeamNumber) {
+                try {
+                    String SQL = "Select * from transactions_all where team_number_of_pid = ? AND type_of_transaction = \"Prepaid Activation\"";
+                    
+                    
+                    PreparedStatement ps = vars.conn.prepareStatement(SQL);
+                    ps.setInt(1, TeamNumber);
+                    
+                    ResultSet rs = ps.executeQuery();
+                    
+                    DefaultTableModel model = (DefaultTableModel) reportsTable.getModel();
+
+                    while (rs.next()) {
+                        Object[] row = {rs.getString("date_time_of_transaction"), Double.toString(rs.getDouble("grand_total")), rs.getString("cx_acct_number"), rs.getBoolean("is_finalized"), rs.getString("payment_method")};
+                        model.addRow(row);
+                    }        
+                } catch (SQLException ex) {
+                    System.getLogger(actions.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+                }
+       
+       
+    
+    
     }
     
     

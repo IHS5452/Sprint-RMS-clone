@@ -7,6 +7,8 @@ package rms.clone.main.UI.manager;
 import java.awt.Component;
 import javax.swing.JOptionPane;
 import rms.clone.main.business.vars;
+import java.sql.*;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -34,7 +36,7 @@ public class reports extends javax.swing.JFrame {
         report_type = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        reportsTable = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         start_date_txt = new javax.swing.JTextField();
@@ -53,7 +55,7 @@ public class reports extends javax.swing.JFrame {
 
         jLabel1.setText("Report Type");
 
-        report_type.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Daily New Sales (PID)", "Daily New Sales (Team)", "Daily Exising Sales (PID)", "Daily Exising Sales (Team)", "Daily Upgrades (PID)", "Daily Upgrades (Team)", "Daily Accessory Sales (PID)", "Daily Accessory Sales (Team)", "Daily Returns (PID)", "Daily Returns (Team)", "Timeclock entries (PID)", "Timeclock entries (Team)" }));
+        report_type.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Daily New Prepaid Sales (PID)", "Daily New Prepaid Sales (Team)", "Daily New Postpaid Sales (PID)", "Daily New Postpaid Sales (Team)", "Daily Exising Prepaid Sales (PID)", "Daily Exising Prepaid Sales (Team)", "Daily Exising Postpaid Sales (PID)", "Daily Exising Postpaid Sales (Team)", "Daily Upgrades (PID)", "Daily Upgrades (Team)", "Daily Accessory Sales (PID)", "Daily Accessory Sales (Team)", "Daily Returns (PID)", "Daily Returns (Team)", "Timeclock entries (PID)", "Timeclock entries (Team)" }));
 
         jButton1.setText("Generate");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -62,15 +64,15 @@ public class reports extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        reportsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(reportsTable);
 
         jLabel2.setText("Start Date");
 
@@ -189,17 +191,86 @@ Component frame = null;
     }//GEN-LAST:event_pid_txtActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+ DefaultTableModel model = (DefaultTableModel) reportsTable.getModel();
 
-        String defaultDateText = "XX-XX-XXXX";
-        String startDate = start_date_txt.getText().toString();
-        String endDate = end_date_txt.getText().toString();
-        String pid = pid_txt.getText().toString();
-        String teamNumber = team_number_txt.getText().toString();
+        model.setColumnCount(0);
+        model.setRowCount(0);
+        
+        
+        
+        try {
+            String defaultDateText = "XX-XX-XXXX";
+            String startDate = start_date_txt.getText().toString();
+            String endDate = end_date_txt.getText().toString();
+            int pid = 0;
+            if (pid_txt.getText().toString().isEmpty()) {
+                pid = -1;
+            } else {
+            pid = Integer.parseInt(pid_txt.getText().toString());
+                
+            }
+            
+            
+            int teamNumber = Integer.parseInt(team_number_txt.getText().toString());
+            
+            
+            //search for the PID and see if they are apart of the manager's team
+            
+            
+            if (pid == -1) {
+                // this is for team reports ONLY
+                if ((report_type.getSelectedItem() == "Daily New Prepaid Sales (Team)")) {
+                       
+                         model.addColumn("Date & Time");
+                               model.addColumn("Grand Total");
+                               model.addColumn("Customer Acct. Number");
+                               model.addColumn("Sale FInalized");
+                              model.addColumn("Payment Type Used");
+                           rms.clone.main.business.actions.getDailyNewPrepaidSales_Team(teamNumber);
 
+                    }
+                
+            } else {
+            
+            String SQL = "SELECT team_number from company_logins where PID=?";
+            PreparedStatement ps = vars.conn.prepareStatement(SQL);
+            
+            ps.setInt(1, pid);
+            ResultSet rs = ps.executeQuery();
+            
 
+            
+            while (rs.next()) {
+                if (rs.getInt("team_number") != teamNumber) {
+                    JOptionPane.showMessageDialog(frame, "This employee is not on your team. Please limit your searches to employees on your team.", "Error: Employee not on your team.", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    
+                    // this section is for searching for PID reports ONLY.
+                    
+                    if (report_type.getSelectedItem() == "Daily New Prepaid Sales (PID)") {
+                                model.addColumn("Date & Time");
+                                model.addColumn("Grand Total");
+                                model.addColumn("Customer Acct. Number");
+                                model.addColumn("Sale FInalized");
+                                model.addColumn("Payment Type Used");
+                                rms.clone.main.business.actions.getDailyNewPrepaidSales_PID(pid, teamNumber);
+                    } 
 
-
-        // TODO add your handling code here:
+                    
+                    
+                    
+                }
+            }
+            
+            }
+            
+            
+            
+            
+            // TODO add your handling code here:
+        } catch (SQLException ex) {
+            System.getLogger(reports.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void start_date_txtFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_start_date_txtFocusLost
@@ -290,9 +361,9 @@ Component frame = null;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField pid_txt;
     private javax.swing.JComboBox<String> report_type;
+    public static javax.swing.JTable reportsTable;
     private javax.swing.JTextField start_date_txt;
     private javax.swing.JTextField team_number_txt;
     // End of variables declaration//GEN-END:variables

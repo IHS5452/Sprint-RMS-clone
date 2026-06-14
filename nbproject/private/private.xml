@@ -12,11 +12,9 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/ian/Documents/GitHub/Sprint-RMS-clone/src/rms/clone/main/UI/manager/discount_managment.java</file>
-            <file>file:/home/ian/Documents/GitHub/Sprint-RMS-clone/src/rms/clone/main/UI/manager/employee_managment.java</file>
-            <file>file:/home/ian/Documents/GitHub/Sprint-RMS-clone/src/rms/clone/main/UI/manager/search_history_employees.java</file>
-            <file>file:/home/ian/Documents/GitHub/Sprint-RMS-clone/src/rms/clone/main/UI/manager/view_run_reports.java</file>
-            <file>file:/home/ian/Documents/GitHub/Sprint-RMS-clone/src/rms/clone/main/UI/manager/order_summary.java</file>
+            <file>file:/Users/ianschrauth/Documents/GitHub/Sprint-RMS-clone/src/rms/clone/main/UI/main/RMS_Clone_CSR.java</file>
+            <file>file:/Users/ianschrauth/Documents/GitHub/Sprint-RMS-clone/src/rms/clone/vars/db.java</file>
+            <file>file:/Users/ianschrauth/Documents/GitHub/Sprint-RMS-clone/src/rms/clone/vars/version.java</file>
         </group>
     </open-files>
 </project-private>

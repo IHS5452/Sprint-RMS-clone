@@ -112,19 +112,23 @@
     <Component class="javax.swing.JComboBox" name="report_type">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="12">
-            <StringItem index="0" value="Daily New Sales (PID)"/>
-            <StringItem index="1" value="Daily New Sales (Team)"/>
-            <StringItem index="2" value="Daily Exising Sales (PID)"/>
-            <StringItem index="3" value="Daily Exising Sales (Team)"/>
-            <StringItem index="4" value="Daily Upgrades (PID)"/>
-            <StringItem index="5" value="Daily Upgrades (Team)"/>
-            <StringItem index="6" value="Daily Accessory Sales (PID)"/>
-            <StringItem index="7" value="Daily Accessory Sales (Team)"/>
-            <StringItem index="8" value="Daily Returns (PID)"/>
-            <StringItem index="9" value="Daily Returns (Team)"/>
-            <StringItem index="10" value="Timeclock entries (PID)"/>
-            <StringItem index="11" value="Timeclock entries (Team)"/>
+          <StringArray count="16">
+            <StringItem index="0" value="Daily New Prepaid Sales (PID)"/>
+            <StringItem index="1" value="Daily New Prepaid Sales (Team)"/>
+            <StringItem index="2" value="Daily New Postpaid Sales (PID)"/>
+            <StringItem index="3" value="Daily New Postpaid Sales (Team)"/>
+            <StringItem index="4" value="Daily Exising Prepaid Sales (PID)"/>
+            <StringItem index="5" value="Daily Exising Prepaid Sales (Team)"/>
+            <StringItem index="6" value="Daily Exising Postpaid Sales (PID)"/>
+            <StringItem index="7" value="Daily Exising Postpaid Sales (Team)"/>
+            <StringItem index="8" value="Daily Upgrades (PID)"/>
+            <StringItem index="9" value="Daily Upgrades (Team)"/>
+            <StringItem index="10" value="Daily Accessory Sales (PID)"/>
+            <StringItem index="11" value="Daily Accessory Sales (Team)"/>
+            <StringItem index="12" value="Daily Returns (PID)"/>
+            <StringItem index="13" value="Daily Returns (Team)"/>
+            <StringItem index="14" value="Timeclock entries (PID)"/>
+            <StringItem index="15" value="Timeclock entries (Team)"/>
           </StringArray>
         </Property>
       </Properties>
@@ -147,44 +151,21 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTable" name="jTable1">
+        <Component class="javax.swing.JTable" name="reportsTable">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="4" rowCount="0">
-                <Column editable="true" title="Title 1" type="java.lang.Object"/>
-                <Column editable="true" title="Title 2" type="java.lang.Object"/>
-                <Column editable="true" title="Title 3" type="java.lang.Object"/>
-                <Column editable="true" title="Title 4" type="java.lang.Object"/>
-              </Table>
+              <Table columnCount="0" rowCount="0"/>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
-              <TableColumnModel selectionModel="0">
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                  <Title/>
-                  <Editor/>
-                  <Renderer/>
-                </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                  <Title/>
-                  <Editor/>
-                  <Renderer/>
-                </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                  <Title/>
-                  <Editor/>
-                  <Renderer/>
-                </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                  <Title/>
-                  <Editor/>
-                  <Renderer/>
-                </Column>
-              </TableColumnModel>
+              <TableColumnModel selectionModel="0"/>
             </Property>
             <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
               <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
             </Property>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>
