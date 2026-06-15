@@ -15,6 +15,7 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
+
 DROP TABLE IF EXISTS `accessories`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
@@ -28,7 +29,7 @@ CREATE TABLE `accessories` (
   `price_usd` double DEFAULT NULL,
   `is_preorder` tinyint(1) DEFAULT NULL,
   `item_desc` text
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -56,7 +57,7 @@ CREATE TABLE `account_notes` (
   `account_number` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`note_id`),
   KEY `idx_account_notes_account_number` (`account_number`)
-);
+) ENGINE=InnoDB AUTO_INCREMENT=58764025 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -84,7 +85,7 @@ CREATE TABLE `acct_search_history` (
   `located_account_number` text,
   `is_sensitive_account` tinyint(1) DEFAULT NULL,
   `date_time_searched` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -93,7 +94,7 @@ CREATE TABLE `acct_search_history` (
 
 LOCK TABLES `acct_search_history` WRITE;
 /*!40000 ALTER TABLE `acct_search_history` DISABLE KEYS */;
-INSERT INTO `acct_search_history` VALUES (0,1,'Phone Number',1,'PENDING',0,'2026-03-22 14:02:48'),(0,1,'Phone Number',1,'PENDING',0,'2026-06-14 13:20:05'),(0,1,'Phone Number',1,'PENDING',0,'2026-06-14 13:20:18');
+INSERT INTO `acct_search_history` VALUES (0,1,'Phone Number',1,'PENDING',0,'2026-03-22 14:02:48'),(0,1,'Phone Number',1,'PENDING',0,'2026-06-14 13:20:05'),(0,1,'Phone Number',1,'PENDING',0,'2026-06-14 13:20:18'),(0,2,'Phone Number',1,'PENDING',0,'2026-06-15 10:04:41'),(0,2,'Phone Number',1,'PENDING',0,'2026-06-15 13:42:10'),(0,2,'Phone Number',1,'PENDING',0,'2026-06-15 14:41:11'),(0,2,'Phone Number',1,'PENDING',0,'2026-06-15 14:42:25');
 /*!40000 ALTER TABLE `acct_search_history` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -116,7 +117,7 @@ CREATE TABLE `agent_feedback` (
   `needs_coaching` tinyint(1) DEFAULT NULL,
   `mgr_comments` text,
   `agent_comments` text
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -152,7 +153,7 @@ CREATE TABLE `company_logins` (
   `is_franchise_employee` tinyint(1) NOT NULL,
   `team_number` int DEFAULT NULL,
   PRIMARY KEY (`PID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -269,6 +270,7 @@ CREATE TABLE `customer_info` (
   `downpayment_needed` tinyint(1) DEFAULT NULL,
   `current_credits` double DEFAULT NULL,
   `is_sensitive` tinyint(1) DEFAULT NULL,
+  `requires_fraud_investigation` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `idx_customer_info_account_number` (`account_number`),
   KEY `idx_customer_info_name` (`lastName`,`firstName`),
@@ -282,7 +284,7 @@ CREATE TABLE `customer_info` (
 
 LOCK TABLES `customer_info` WRITE;
 /*!40000 ALTER TABLE `customer_info` DISABLE KEYS */;
-INSERT INTO `customer_info` VALUES (1,'Mr.','John','A','Doe',NULL,'john.doe@example.com',0,'123-45-6789','1985-06-15 00:00:00','D1234567','MO','2028-05-01 00:00:00','5125552000',NULL,NULL,'1500','Corporate Woods Dr',NULL,'Chesterfield','MO','63017','MegaCorp LLC',1,1,1,'Business','123-45-6789','A',5,'2025-12-14 14:12:42','Corporate','ACC-10001',0,0,100,NULL),(2,'Ms.','Jane',NULL,'Smith',NULL,'jane.smith@example.com',0,'987-65-4321','1990-02-20 00:00:00','S7654321','MO','2027-09-30 00:00:00','6365553333','REDACTED',NULL,'42','Market St','Apt 5','St. Louis','MO','63101','Acme Co',0,0,0,'Personal','987-65-4321','B',2,'2025-12-14 14:12:42','Consumer','ACC-20002',20,1,0,NULL);
+INSERT INTO `customer_info` VALUES (1,'Mr.','John','A','Doe',NULL,'john.doe@example.com',0,'123-45-6789','1985-06-15 00:00:00','D1234567','MO','2028-05-01 00:00:00','5125552000',NULL,NULL,'1500','Corporate Woods Dr',NULL,'Chesterfield','MO','63017','MegaCorp LLC',1,1,1,'Business','123-45-6789','A',5,'2025-12-14 14:12:42','Corporate','ACC-10001',0,0,100,NULL,0),(2,'Ms.','Jane',NULL,'Smith',NULL,'jane.smith@example.com',0,'987-65-4321','1990-02-20 00:00:00','S7654321','MO','2027-09-30 00:00:00','6365553333','REDACTED',NULL,'42','Market St','Apt 5','St. Louis','MO','63101','Acme Co',0,0,0,'Personal','987-65-4321','B',2,'2025-12-14 14:12:42','Consumer','ACC-20002',20,1,0,NULL,0);
 /*!40000 ALTER TABLE `customer_info` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -339,7 +341,7 @@ CREATE TABLE `devices` (
   `is_pending_shipment` tinyint(1) DEFAULT NULL,
   `is_refurb` tinyint(1) DEFAULT NULL,
   `return_eligable` tinyint(1) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -368,7 +370,7 @@ CREATE TABLE `discounts` (
   `discount_description` text,
   `discount_use` text,
   `is_active` tinyint(1) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -394,7 +396,7 @@ CREATE TABLE `homepage_news` (
   `content` text,
   `is_active` tinyint(1) DEFAULT NULL,
   `date_added` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -420,7 +422,7 @@ CREATE TABLE `manager_signoffs` (
   `for_assosiate_pid` int DEFAULT NULL,
   `mgr_pid` int DEFAULT NULL,
   `reason_for_signoff` text
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -594,7 +596,7 @@ CREATE TABLE `recycled_devices` (
   `status_desc` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `trade_in_date` datetime DEFAULT NULL,
   PRIMARY KEY (`rid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -628,7 +630,7 @@ CREATE TABLE `returns` (
   `method_of_return` text,
   `store_number` text,
   `email` text
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -637,7 +639,7 @@ CREATE TABLE `returns` (
 
 LOCK TABLES `returns` WRITE;
 /*!40000 ALTER TABLE `returns` DISABLE KEYS */;
-INSERT INTO `returns` VALUES (1,'2026-03-16 06:55:32','Other cable',1,1,1,1,1,1,1,'Unable to return','mail','na','test@test.com');
+INSERT INTO `returns` VALUES (1,'2026-03-16 06:55:32','Other cable',1,1,1,1,1,1,1,'Canceled','mail','na','test@test.com');
 /*!40000 ALTER TABLE `returns` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -692,7 +694,7 @@ CREATE TABLE `transactions_all` (
   `pid_of_assosiate` int DEFAULT NULL,
   `team_number_of_pid` int DEFAULT NULL,
   `cx_acct_number` text
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -717,12 +719,14 @@ CREATE TABLE `transactions_pending` (
   `order_number` text,
   `item_name` text,
   `item_price` double DEFAULT NULL,
+  `cost_per_month` double DEFAULT NULL,
+  `device_sku_imei` varchar(255) DEFAULT NULL,
   `quantity` int DEFAULT NULL,
   `is_activation` tinyint(1) DEFAULT NULL,
   `for_account_number` text,
   `handeling_agent_pid` int DEFAULT NULL,
   `status` text
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -732,6 +736,41 @@ CREATE TABLE `transactions_pending` (
 LOCK TABLES `transactions_pending` WRITE;
 /*!40000 ALTER TABLE `transactions_pending` DISABLE KEYS */;
 /*!40000 ALTER TABLE `transactions_pending` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `transactions_phones_pending`
+--
+
+DROP TABLE IF EXISTS `transactions_phones_pending`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `transactions_phones_pending` (
+  `phptid` varchar(50) DEFAULT NULL,
+  `order_number` varchar(50) DEFAULT NULL,
+  `phone_make` varchar(100) DEFAULT NULL,
+  `phone_model` varchar(100) DEFAULT NULL,
+  `paid_in_full` tinyint(1) DEFAULT NULL,
+  `cost_per_month_phone_only` double DEFAULT NULL,
+  `cost_today` double DEFAULT NULL,
+  `is_port_in` tinyint(1) DEFAULT NULL,
+  `area_code` varchar(10) DEFAULT NULL,
+  `phone_number` varchar(20) DEFAULT NULL,
+  `account_number` varchar(50) DEFAULT NULL,
+  `account_pin` varchar(20) DEFAULT NULL,
+  `account_zip_code` varchar(10) DEFAULT NULL,
+  `chosen_plan` varchar(100) DEFAULT NULL,
+  `status` varchar(50) DEFAULT NULL
+);
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `transactions_phones_pending`
+--
+
+LOCK TABLES `transactions_phones_pending` WRITE;
+/*!40000 ALTER TABLE `transactions_phones_pending` DISABLE KEYS */;
+/*!40000 ALTER TABLE `transactions_phones_pending` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -832,4 +871,27 @@ CREATE TABLE `vars` (
   `row_updated_date` date DEFAULT NULL,
   `is_in_beta` tinyint(1) DEFAULT NULL,
   `is_active` tinyint(1) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `vars`
+--
+
+LOCK TABLES `vars` WRITE;
+/*!40000 ALTER TABLE `vars` DISABLE KEYS */;
+INSERT INTO `vars` VALUES (1,'REDACTED','0.0.1','202512-0001-01','2025-12-18','2025-12-18',1,1);
+/*!40000 ALTER TABLE `vars` ENABLE KEYS */;
+UNLOCK TABLES;
+
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2026-06-15 14:59:33
