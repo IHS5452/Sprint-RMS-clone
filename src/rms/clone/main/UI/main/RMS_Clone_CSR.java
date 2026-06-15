@@ -2475,7 +2475,7 @@ String SQL =
     "employer, isNvp, assignToBusinessAccount, attachToHierarchy, " +      // 22-25
     "accountType, creditSsn, creditClass, approvedLines, lastDateChecked, "+// 26-30
     "typeOfAccount, groupId, account_number, downpay_perc, downpayment_needed, is_sensitive" +                             // 31-33
-    ") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+    ") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
                 
                 PreparedStatement ps = vars.conn.prepareStatement(SQL);
 
@@ -2589,6 +2589,7 @@ if (sensitive_cx_cb.isSelected()) {
     ps.setBoolean(34, false); // false for now, until UI e
 
 }
+ps.setBoolean(35, false);
 
 int rs = ps.executeUpdate();
 System.out.println(rs + " rows added.");

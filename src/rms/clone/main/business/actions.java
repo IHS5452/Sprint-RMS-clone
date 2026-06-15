@@ -603,33 +603,43 @@ Timeclock entries (Team)
     
     
     }
-    public static String generateAnyID(String TableName, String varName, boolean addAnyCharsBefore, char indicatorChar) {
+    
+    
+    
+   public static String generateAnyID(
+        String tableName,
+        String columnName,
+        boolean addAnyCharsBefore,
+        char indicatorChar
+) {
     Random rand = new Random();
 
     while (true) {
-        int TID = rand.nextInt(999999999);
+        int number = rand.nextInt(999999999);
 
-        String sql = "SELECT tid FROM " + TableName + " WHERE " + varName + "=?";
+        String generatedID;
 
-        try (
-            PreparedStatement ps = vars.conn.prepareStatement(sql)
-        ) {
-            ps.setInt(1, TID);
+        if (addAnyCharsBefore) {
+            generatedID = indicatorChar + Integer.toString(number);
+        } else {
+            generatedID = Integer.toString(number);
+        }
+
+        String sql = "SELECT 1 FROM " + tableName + " WHERE " + columnName + " = ? LIMIT 1";
+
+        try (PreparedStatement ps = vars.conn.prepareStatement(sql)) {
+
+            ps.setString(1, generatedID);
 
             try (ResultSet rs = ps.executeQuery()) {
                 if (!rs.next()) {
-                    
-                    if (addAnyCharsBefore) {
-                        return indicatorChar + Integer.toString(TID);
-                    } else {
-                    return Integer.toString(TID);
-                       }
-                    
+                    return generatedID;
                 }
             }
 
         } catch (SQLException ex) {
-
+           System.out.println("Error Generaitng ID.");
+           
         }
     }
 }

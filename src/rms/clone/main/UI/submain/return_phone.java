@@ -72,6 +72,7 @@ public class return_phone extends javax.swing.JFrame {
         status_cb = new javax.swing.JComboBox<>();
         jButton5 = new javax.swing.JButton();
         new_return_bttn = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -114,11 +115,16 @@ public class return_phone extends javax.swing.JFrame {
 
         jLabel6.setText("Are you able to go through the setup of the device without issues? ");
 
-        jLabel7.setText("Does the device look like it was opened or damaged in any way? ");
+        jLabel7.setText("Was the device opened or damaged in any other way? ");
 
         jLabel8.setText("Was the device dropped in liquid, according to the customer? ");
 
         jButton1.setText("Find Store to finalize return");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel9.setText("Is eligable to be refunded");
 
@@ -148,6 +154,11 @@ public class return_phone extends javax.swing.JFrame {
         });
 
         no_1.setText("No");
+        no_1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                no_1ItemStateChanged(evt);
+            }
+        });
 
         yes_1.setText("Yes");
         yes_1.addItemListener(new java.awt.event.ItemListener() {
@@ -157,42 +168,113 @@ public class return_phone extends javax.swing.JFrame {
         });
 
         no_2.setText("No");
+        no_2.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                no_2ItemStateChanged(evt);
+            }
+        });
 
         yes_2.setText("Yes");
+        yes_2.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                yes_2ItemStateChanged(evt);
+            }
+        });
 
         no_3.setText("No");
+        no_3.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                no_3ItemStateChanged(evt);
+            }
+        });
 
         yes_3.setText("Yes");
+        yes_3.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                yes_3ItemStateChanged(evt);
+            }
+        });
 
         no_4.setText("No");
+        no_4.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                no_4ItemStateChanged(evt);
+            }
+        });
 
         yes_4.setText("Yes");
+        yes_4.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                yes_4ItemStateChanged(evt);
+            }
+        });
 
         no_5.setText("No");
+        no_5.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                no_5ItemStateChanged(evt);
+            }
+        });
 
         yes_5.setText("Yes");
+        yes_5.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                yes_5ItemStateChanged(evt);
+            }
+        });
 
         no_6.setText("No");
+        no_6.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                no_6ItemStateChanged(evt);
+            }
+        });
 
         yes_6.setText("Yes");
+        yes_6.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                yes_6ItemStateChanged(evt);
+            }
+        });
 
         status_cb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Select a status--", "Draft", "In Progress - Heading to Store", "In Progress - At Store", "Complete - Accepted", "Completed - Denied", "Canceled", "Unable to return" }));
         status_cb.setEnabled(false);
 
         jButton5.setText("Email return lable");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         new_return_bttn.setText("New Return");
+        new_return_bttn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                new_return_bttnActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Suspected Fraud");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(search_clear_bttn, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(96, 96, 96)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -204,31 +286,21 @@ public class return_phone extends javax.swing.JFrame {
                                     .addComponent(jLabel3))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(yes_2)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(no_2))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(yes_1)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(no_1))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(yes_5)
-                                            .addComponent(yes_6))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(no_5, javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(no_6, javax.swing.GroupLayout.Alignment.TRAILING)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(yes_4)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(no_4))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(yes_3)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(no_3))))
-                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(yes_2)
+                                    .addComponent(yes_1)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(yes_5)
+                                        .addComponent(yes_6))
+                                    .addComponent(yes_4)
+                                    .addComponent(yes_3))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(no_3, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(no_4, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(no_5, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(no_6, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(no_2, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(no_1, javax.swing.GroupLayout.Alignment.TRAILING)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
@@ -244,20 +316,23 @@ public class return_phone extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(chnage_save_sttaus_bttn, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(status_cb, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                            .addComponent(status_cb, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
+                                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(rid_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(search_clear_bttn, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(new_return_bttn, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(new_return_bttn, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(rid_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -265,52 +340,60 @@ public class return_phone extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(rid_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(search_clear_bttn)
-                    .addComponent(new_return_bttn))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(rid_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(new_return_bttn)
+                            .addComponent(search_clear_bttn))
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(device_type_dd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel4))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(yes_1)
-                                    .addComponent(no_1))
+                                .addComponent(yes_1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(yes_2)
-                                    .addComponent(no_2))
+                                .addComponent(yes_2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(yes_3)
-                                    .addComponent(no_3)
                                     .addComponent(jLabel5))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(yes_4)
-                                    .addComponent(no_4)
                                     .addComponent(jLabel6))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(yes_5)
-                                    .addComponent(no_5)
                                     .addComponent(jLabel7))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(yes_6)
-                                    .addComponent(no_6)
-                                    .addComponent(jLabel8))))
-                        .addGap(42, 42, 42)
+                                    .addComponent(jLabel8)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(no_1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(no_2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(no_3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(no_4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(no_5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(no_6)))
+                        .addGap(36, 36, 36)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel9)
                             .addComponent(eligable_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -320,14 +403,16 @@ public class return_phone extends javax.swing.JFrame {
                             .addComponent(status_cb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(chnage_save_sttaus_bttn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 564, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                        .addGap(87, 87, 87)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton2))
+                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         pack();
@@ -353,6 +438,12 @@ public class return_phone extends javax.swing.JFrame {
 //email text);
     
     Component frame = null;
+    Boolean freeOfCracks = null;
+    Boolean freeOfDents = null;
+    Boolean deviceFormatted = null;
+    Boolean setupClear = null;
+    Boolean deviceLooksOpened = null;
+    Boolean liquidDamaged = null;
     
     
  
@@ -425,6 +516,9 @@ public class return_phone extends javax.swing.JFrame {
                 
                             search_clear_bttn.setText("Search");
                                                 device_type_dd.setSelectedIndex(0);
+                                                 
+        rid_txt.setEnabled(true);
+       new_return_bttn.setEnabled(true);
 
                   
               }
@@ -440,7 +534,60 @@ public class return_phone extends javax.swing.JFrame {
     }//GEN-LAST:event_search_clear_bttnActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        String SQL = "Insert into returns values(?,NOW(),?,?,?,?,?,?,?,?,?,?,?,?);";
 
+        
+        boolean free_of_cracks = false;
+        boolean free_of_dents = false;
+        boolean device_formatted = false;
+        boolean can_go_through_setup = false;
+        boolean looks_opened = false;
+        boolean looks_like_liquid_damage = false;
+        
+        
+        if (yes_1.isSelected()) {
+            free_of_cracks = true;
+        }
+        
+         if (yes_2.isSelected()) {
+            free_of_dents = true;
+        }
+         
+          if (yes_3.isSelected()) {
+            device_formatted = true;
+        }
+          
+           if (yes_4.isSelected()) {
+            can_go_through_setup = true;
+        }
+           
+            if (yes_5.isSelected()) {
+            looks_opened = true;
+        }
+        
+            
+             if (yes_6.isSelected()) {
+            looks_like_liquid_damage = true;
+        }
+        
+        
+        
+        
+//        
+//        PreparedStatement ps = vars.conn.prepareStatement(SQL);
+//        ps.setInt(1, Integer.parseInt(rid_txt.getText().toString()));
+//        ps.setString(2, device_type_dd.getSelectedItem().toString());
+//        ps.setBoolean(3, free_of_cracks);
+//        ps.setBoolean(4, free_of_dents);
+//        ps.setBoolean(5, device_formatted);
+//        ps.setBoolean(6, can_go_through_setup);
+//        ps.setBoolean(7, looks_opened);
+//        ps.setBoolean(8, looks_like_liquid_damage);
+//        ps.setString(9, eligable_txt.getText().toString());
+//        
+        
+        
+        
 
 
 
@@ -450,6 +597,10 @@ public class return_phone extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void yes_1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_yes_1ItemStateChanged
+
+        no_1.setSelected(false);
+        freeOfCracks = true;
+
         // TODO add your handling code here:
     }//GEN-LAST:event_yes_1ItemStateChanged
 
@@ -537,6 +688,137 @@ public class return_phone extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_chnage_save_sttaus_bttnActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void new_return_bttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_new_return_bttnActionPerformed
+
+
+
+        int returnID = Integer.parseInt(rms.clone.main.business.actions.generateAnyID("returns", "rid", false, 'x'));
+        
+        rid_txt.setText(Integer.toString(returnID));
+        rid_txt.setEnabled(false);
+       new_return_bttn.setEnabled(false);
+       search_clear_bttn.setText("Clear");
+       chnage_save_sttaus_bttn.setEnabled(false);
+       
+       
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_new_return_bttnActionPerformed
+
+    private void yes_2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_yes_2ItemStateChanged
+no_2.setSelected(false);        
+freeOfDents = true;
+// TODO add your handling code here:
+    }//GEN-LAST:event_yes_2ItemStateChanged
+
+    private void yes_3ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_yes_3ItemStateChanged
+no_3.setSelected(false);
+deviceFormatted = true;
+        canItBeReturned(freeOfCracks, freeOfDents, deviceFormatted, setupClear, deviceLooksOpened, liquidDamaged);
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_yes_3ItemStateChanged
+
+    private void yes_4ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_yes_4ItemStateChanged
+        no_4.setSelected(false);
+setupClear = true;
+        canItBeReturned(freeOfCracks, freeOfDents, deviceFormatted, setupClear, deviceLooksOpened, liquidDamaged);
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_yes_4ItemStateChanged
+
+    private void yes_5ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_yes_5ItemStateChanged
+
+no_5.setSelected(false);
+deviceLooksOpened = true;
+        canItBeReturned(freeOfCracks, freeOfDents, deviceFormatted, setupClear, deviceLooksOpened, liquidDamaged);
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_yes_5ItemStateChanged
+
+    private void yes_6ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_yes_6ItemStateChanged
+
+
+no_6.setSelected(false);
+liquidDamaged = true;
+        canItBeReturned(freeOfCracks, freeOfDents, deviceFormatted, setupClear, deviceLooksOpened, liquidDamaged);
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_yes_6ItemStateChanged
+
+    private void no_1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_no_1ItemStateChanged
+
+yes_1.setSelected(false);
+freeOfCracks = false;
+        canItBeReturned(freeOfCracks, freeOfDents, deviceFormatted, setupClear, deviceLooksOpened, liquidDamaged);
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_no_1ItemStateChanged
+
+    private void no_2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_no_2ItemStateChanged
+yes_2.setSelected(false);
+freeOfDents = false;
+        canItBeReturned(freeOfCracks, freeOfDents, deviceFormatted, setupClear, deviceLooksOpened, liquidDamaged);
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_no_2ItemStateChanged
+
+    private void no_3ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_no_3ItemStateChanged
+
+yes_3.setSelected(false);
+deviceFormatted = false;
+        canItBeReturned(freeOfCracks, freeOfDents, deviceFormatted, setupClear, deviceLooksOpened, liquidDamaged);
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_no_3ItemStateChanged
+
+    private void no_4ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_no_4ItemStateChanged
+
+yes_4.setSelected(false);
+setupClear = false;
+        canItBeReturned(freeOfCracks, freeOfDents, deviceFormatted, setupClear, deviceLooksOpened, liquidDamaged);
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_no_4ItemStateChanged
+
+    private void no_5ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_no_5ItemStateChanged
+
+yes_5.setSelected(false);
+deviceLooksOpened = false;
+        canItBeReturned(freeOfCracks, freeOfDents, deviceFormatted, setupClear, deviceLooksOpened, liquidDamaged);
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_no_5ItemStateChanged
+
+    private void no_6ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_no_6ItemStateChanged
+
+
+yes_6.setSelected(false);
+liquidDamaged = false;
+        canItBeReturned(freeOfCracks, freeOfDents, deviceFormatted, setupClear, deviceLooksOpened, liquidDamaged);
+
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_no_6ItemStateChanged
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+// this is for when the agent feels like the returned device might not be the device sold to them.
+
+    StolenDevicePopup.accountNumber = vars.selectedCx.getAccountNumber();
+    StolenDevicePopup.showDeviceCheck();
+
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -578,6 +860,7 @@ public class return_phone extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> device_type_dd;
     private javax.swing.JTextField eligable_txt;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
@@ -612,9 +895,44 @@ public class return_phone extends javax.swing.JFrame {
 
 public static Boolean canItBeReturned(Boolean freeOfCracks,Boolean freeOfDents,Boolean freeOfData,Boolean noIssuesDuringSetup,Boolean freeOfOtherDamageOrOpened,Boolean hasLiquidDamage) {
     
-    if ((freeOfCracks == true) || (freeOfOtherDamageOrOpened == true) || (hasLiquidDamage == true)) {
+        if ((freeOfCracks == null) || (freeOfOtherDamageOrOpened == null) || (hasLiquidDamage == null) || (noIssuesDuringSetup == null) || (freeOfDents == null) || (freeOfData == null)) {
+
+            System.out.println("Form not complete yet");
+        // do noting, as form is not complete yet
+
+        }
+    
+    //default if all of them are checked correclty for denial 
+        else if ((!freeOfCracks) || (!freeOfOtherDamageOrOpened) || (hasLiquidDamage) || (!noIssuesDuringSetup) || (!freeOfDents) || (!freeOfData)) {
     return false;
+    // defualt if all of them are checked correctly for acceptence 
+} else if ((freeOfCracks) || (freeOfOtherDamageOrOpened) || (!hasLiquidDamage) || (noIssuesDuringSetup) || (freeOfDents) || (freeOfData)) {
+    return true;
+    
+
+// if the device is damaged (screen and dents) but that is it. Will be denied
+} else if ((!freeOfCracks) && (!freeOfDents) && (!hasLiquidDamage) && (noIssuesDuringSetup) && (freeOfOtherDamageOrOpened) && (freeOfData)) {
+    return false;
+    
+    
+    // if the device is damaged (screen only) but that is it. Will be denied
+
+}else if ((!freeOfCracks) && (freeOfDents) && (!hasLiquidDamage) && (noIssuesDuringSetup) && (freeOfOtherDamageOrOpened) && (freeOfData)) {
+    return false;
+    
+    
+    // if the device's data is not wiped, but everything else is fine. Will be denied. 
+} else if ((freeOfCracks) && (freeOfDents) && (!hasLiquidDamage) && (noIssuesDuringSetup) && (freeOfOtherDamageOrOpened) && (!freeOfData)) {
+
+
+    return false;
+    
+    
+    
 }
+    
+    
+    
     
     
     
@@ -642,6 +960,11 @@ public static void setRadioButtonValue(JRadioButton yesButton, JRadioButton noBu
         }
 
     }
+
+
+
+
+
 
 
 
