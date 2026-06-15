@@ -67,7 +67,7 @@ public class new_activation extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         plans_cb = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        save_plan_and_number_info_bttn = new javax.swing.JButton();
         rest_of_number_txt = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -201,10 +201,10 @@ public class new_activation extends javax.swing.JFrame {
 
         jLabel9.setText("Chosen Plan");
 
-        jButton1.setText("Save");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        save_plan_and_number_info_bttn.setText("Save");
+        save_plan_and_number_info_bttn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                save_plan_and_number_info_bttnActionPerformed(evt);
             }
         });
 
@@ -247,7 +247,7 @@ public class new_activation extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(save_plan_and_number_info_bttn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel6)
@@ -288,7 +288,7 @@ public class new_activation extends javax.swing.JFrame {
                             .addComponent(plans_cb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel9))
                         .addGap(75, 75, 75)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(save_plan_and_number_info_bttn, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -299,6 +299,7 @@ public class new_activation extends javax.swing.JFrame {
    public static String typeOfDevice = "";
     
         public static PreparedStatement ps = null;
+     
 
     
     private void make_txtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_make_txtActionPerformed
@@ -384,9 +385,40 @@ public class new_activation extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_formWindowOpened
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void save_plan_and_number_info_bttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save_plan_and_number_info_bttnActionPerformed
+
+        try {
+            String SQL = "insert into transactions_pending VALUES (?,?,?,?,?,?,?,?,?,?,?);";
+            PreparedStatement ps = vars.conn.prepareStatement(SQL);
+            
+            
+            ps.setString(1, actions.generateAnyID("transactions_pending", "ptid", false, 'x'));
+            ps.setString(2, actions.generateAnyID("transactions_pending", "order_number", true, 'O'));
+            ps.setString(3, make_txt.getText() + " " + model_txt.getText());
+            ps.setDouble(4, Double.parseDouble(cost_today_txt.getText()));
+            ps.setDouble(5, Double.parseDouble(cost_per_month_txt.getText()));
+            ps.setString(6, imei_txt.getText());
+            ps.setInt(7, 1);
+            ps.setBoolean(8, true);
+            ps.setString(9, vars.selectedCx.getAccountNumber());
+            ps.setInt(10, Integer.parseInt(vars.loggedInUID));
+            ps.setString(11, "pending activation");
+            
+            
+  int rs = ps.executeUpdate();
+            
+            if (rs >0) {
+                this.dispose();
+            }
+            
+                        
+            
+            
+            // TODO add your handling code here:
+        } catch (SQLException ex) {
+            System.getLogger(new_activation.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+    }//GEN-LAST:event_save_plan_and_number_info_bttnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -431,7 +463,6 @@ public class new_activation extends javax.swing.JFrame {
     public static javax.swing.JTextField cost_per_month_txt;
     public static javax.swing.JTextField cost_today_txt;
     public static javax.swing.JTextField imei_txt;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -451,6 +482,7 @@ public class new_activation extends javax.swing.JFrame {
     public static javax.swing.JComboBox<String> plans_cb;
     private javax.swing.JRadioButton port_in_rb;
     private javax.swing.JTextField rest_of_number_txt;
+    private javax.swing.JButton save_plan_and_number_info_bttn;
     // End of variables declaration//GEN-END:variables
 
 public void launchWindowWithData(String imei, String make, String model, boolean isPiadUpFront, double price_today, double price_per_month, boolean requiresDownpayment, int downpaymentPerc) {

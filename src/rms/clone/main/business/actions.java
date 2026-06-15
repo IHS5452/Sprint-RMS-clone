@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -500,6 +501,8 @@ public static void launchNewActivationWindowWithData(String imei, String typeOfD
         
         
         
+        
+        
           
     }
     
@@ -600,7 +603,36 @@ Timeclock entries (Team)
     
     
     }
-    
+    public static String generateAnyID(String TableName, String varName, boolean addAnyCharsBefore, char indicatorChar) {
+    Random rand = new Random();
+
+    while (true) {
+        int TID = rand.nextInt(999999999);
+
+        String sql = "SELECT tid FROM " + TableName + " WHERE " + varName + "=?";
+
+        try (
+            PreparedStatement ps = vars.conn.prepareStatement(sql)
+        ) {
+            ps.setInt(1, TID);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                if (!rs.next()) {
+                    
+                    if (addAnyCharsBefore) {
+                        return indicatorChar + Integer.toString(TID);
+                    } else {
+                    return Integer.toString(TID);
+                       }
+                    
+                }
+            }
+
+        } catch (SQLException ex) {
+
+        }
+    }
+}
     
 
 
