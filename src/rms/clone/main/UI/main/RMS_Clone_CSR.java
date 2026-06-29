@@ -171,7 +171,7 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
         recycle_bttn = new javax.swing.JButton();
         discounts_bttn = new javax.swing.JButton();
         find_item_bttn = new javax.swing.JButton();
-        sales_bttn = new javax.swing.JButton();
+        trade_in_bttn = new javax.swing.JButton();
         nss_token_bttn = new javax.swing.JButton();
         tender_bttn = new javax.swing.JButton();
         pid_txt_main = new javax.swing.JTextField();
@@ -405,10 +405,10 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
             }
         });
 
-        sales_bttn.setText("Trade in");
-        sales_bttn.addActionListener(new java.awt.event.ActionListener() {
+        trade_in_bttn.setText("Trade in");
+        trade_in_bttn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sales_bttnActionPerformed(evt);
+                trade_in_bttnActionPerformed(evt);
             }
         });
 
@@ -489,7 +489,7 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(find_item_bttn, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(sales_bttn, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(trade_in_bttn, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(nss_token_bttn, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -508,7 +508,7 @@ public class RMS_Clone_CSR extends javax.swing.JFrame {
                     .addComponent(recycle_bttn, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(discounts_bttn, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(find_item_bttn, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(sales_bttn, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(trade_in_bttn, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(nss_token_bttn, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tender_bttn, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(pid_txt_main, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1950,9 +1950,13 @@ public static DefaultTableModel cart_model;
 // TODO add your handling code here:
     }//GEN-LAST:event_find_item_bttnActionPerformed
 
-    private void sales_bttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sales_bttnActionPerformed
+    private void trade_in_bttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_trade_in_bttnActionPerformed
+
+        
+
+
         // TODO add your handling code here:
-    }//GEN-LAST:event_sales_bttnActionPerformed
+    }//GEN-LAST:event_trade_in_bttnActionPerformed
 
     private void nss_token_bttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nss_token_bttnActionPerformed
 
@@ -3259,7 +3263,6 @@ new send_feedback_agent().setVisible(true);
     private javax.swing.JButton recheck_credit_bttn;
     public static javax.swing.JButton recycle_bttn;
     public static javax.swing.JButton reset_bttn;
-    public static javax.swing.JButton sales_bttn;
     private javax.swing.JPanel sales_pannnel;
     public static javax.swing.JButton search_bttn;
     private javax.swing.JButton search_zip_code_bttn;
@@ -3276,6 +3279,7 @@ new send_feedback_agent().setVisible(true);
     private javax.swing.JTextField street_number;
     private javax.swing.JComboBox<String> suffix_dd;
     public static javax.swing.JButton tender_bttn;
+    public static javax.swing.JButton trade_in_bttn;
     public static javax.swing.JComboBox<String> transType_dd;
     private javax.swing.JTextField zip_code_txt;
     // End of variables declaration//GEN-END:variables

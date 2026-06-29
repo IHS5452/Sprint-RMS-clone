@@ -547,7 +547,7 @@ if (rms.clone.main.business.vars.selectedCx == null) {
         RMS_Clone_CSR.add_note_bttn.setEnabled(true);
         RMS_Clone_CSR.setEnabledRecursive(jPanel3, true);
         RMS_Clone_CSR.pay_bill_bttn.setEnabled(true);
-                          RMS_Clone_CSR.sales_bttn.setEnabled(true);
+                          RMS_Clone_CSR.trade_in_bttn.setEnabled(true);
                   RMS_Clone_CSR.tender_bttn.setEnabled(true);
                   RMS_Clone_CSR.find_item_bttn.setEnabled(true);
 

@@ -221,7 +221,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="find_item_bttn" min="-2" pref="84" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="sales_bttn" min="-2" pref="84" max="-2" attributes="0"/>
+                  <Component id="trade_in_bttn" min="-2" pref="84" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="nss_token_bttn" min="-2" pref="78" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
@@ -242,7 +242,7 @@
                       <Component id="recycle_bttn" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
                       <Component id="discounts_bttn" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
                       <Component id="find_item_bttn" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
-                      <Component id="sales_bttn" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
+                      <Component id="trade_in_bttn" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
                       <Component id="nss_token_bttn" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
                       <Component id="tender_bttn" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
                       <Component id="pid_txt_main" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -312,12 +312,12 @@
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JButton" name="sales_bttn">
+        <Component class="javax.swing.JButton" name="trade_in_bttn">
           <Properties>
             <Property name="text" type="java.lang.String" value="Trade in"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="sales_bttnActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="trade_in_bttnActionPerformed"/>
           </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
