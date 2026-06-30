@@ -370,7 +370,7 @@ public class trade_in_phone extends javax.swing.JFrame {
                     setRadioButtonValue(yes_6, no_6, rs.getBoolean("liquid_damage"));
 
                     eligable_txt.setText(Boolean.toString(rs.getBoolean("is_eligable")));
-                    status_cb.setSelectedItem(rs.getString("status"));
+//                    status_cb.setSelectedItem(rs.getString("status"));
                     rid_txt.setEditable(false);
                     new_return_bttn.setEnabled(false);
                 }
@@ -394,7 +394,7 @@ public class trade_in_phone extends javax.swing.JFrame {
 
                 rid_txt.setEditable(false);
                 eligable_txt.setText("");
-                status_cb.setSelectedIndex(0);
+//                status_cb.setSelectedIndex(0);
                 rid_txt.setText("");
                 vars.hasManagerAuth = false;
                 new_return_bttn.setEnabled(true);
@@ -558,7 +558,7 @@ public class trade_in_phone extends javax.swing.JFrame {
         rid_txt.setEnabled(false);
         new_return_bttn.setEnabled(false);
         search_clear_bttn.setText("Clear");
-        chnage_save_sttaus_bttn.setEnabled(false);
+//        chnage_save_sttaus_bttn.setEnabled(false);
 
         // TODO add your handling code here:
     }//GEN-LAST:event_new_return_bttnActionPerformed

@@ -11,43 +11,6 @@
         </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/Users/ianschrauth/Documents/GitHub/Sprint-RMS-clone/src/rms/clone/main/UI/main/RMS_Clone_CSR.java</file>
-            <file>file:/Users/ianschrauth/Documents/GitHub/Sprint-RMS-clone/src/rms/clone/vars/db.java</file>
-            <file>file:/Users/ianschrauth/Documents/GitHub/Sprint-RMS-clone/src/rms/clone/vars/version.java</file>
-            <file>file:/Users/ianschrauth/Documents/GitHub/Sprint-RMS-clone/src/rms/clone/main/UI/manager/employee_managment.java</file>
-            <file>file:/Users/ianschrauth/Documents/GitHub/Sprint-RMS-clone/src/classes/Agents.java</file>
-            <file>file:/Users/ianschrauth/Documents/GitHub/Sprint-RMS-clone/src/rms/clone/main/UI/manager/discount_managment.java</file>
-            <file>file:/Users/ianschrauth/Documents/GitHub/Sprint-RMS-clone/src/rms/clone/main/UI/manager/order_summary.java</file>
-            <file>file:/Users/ianschrauth/Documents/GitHub/Sprint-RMS-clone/src/rms/clone/main/UI/manager/reports.java</file>
-            <file>file:/Users/ianschrauth/Documents/GitHub/Sprint-RMS-clone/src/rms/clone/main/UI/main/login.java</file>
-            <file>file:/Users/ianschrauth/Documents/GitHub/Sprint-RMS-clone/src/rms/clone/main/business/actions.java</file>
-            <file>file:/Users/ianschrauth/Documents/GitHub/Sprint-RMS-clone/src/rms/clone/main/system/starter.java</file>
-            <file>file:/Users/ianschrauth/Documents/GitHub/Sprint-RMS-clone/src/rms/clone/main/business/vars.java</file>
-            <file>file:/Users/ianschrauth/Documents/GitHub/Sprint-RMS-clone/src/rms/clone/main/UI/submain/tender.java</file>
-            <file>file:/Users/ianschrauth/Documents/GitHub/Sprint-RMS-clone/src/rms/clone/main/UI/manager/search_history_employees.java</file>
-            <file>file:/Users/ianschrauth/Documents/GitHub/Sprint-RMS-clone/src/rms/clone/business/database/actions.java</file>
-            <file>file:/Users/ianschrauth/Documents/GitHub/Sprint-RMS-clone/src/rms/clone/main/business/CartWatcher.java</file>
-            <file>file:/Users/ianschrauth/Documents/GitHub/Sprint-RMS-clone/src/rms/clone/resources/icon.png</file>
-            <file>file:/Users/ianschrauth/Documents/GitHub/Sprint-RMS-clone/src/rms/clone/resources/lists.java</file>
-            <file>file:/Users/ianschrauth/Documents/GitHub/Sprint-RMS-clone/src/rms/clone/softphone/UI/UI.java</file>
-            <file>file:/Users/ianschrauth/Documents/GitHub/Sprint-RMS-clone/src/rms/clone/softphone/UI/softphone_settings.java</file>
-            <file>file:/Users/ianschrauth/Documents/GitHub/Sprint-RMS-clone/src/rms/clone/main/UI/submain/mgr_auth.java</file>
-            <file>file:/Users/ianschrauth/Documents/GitHub/Sprint-RMS-clone/src/rms/clone/main/UI/submain/output_console.java</file>
-            <file>file:/Users/ianschrauth/Documents/GitHub/Sprint-RMS-clone/src/rms/clone/main/UI/submain/new_activation.java</file>
-            <file>file:/Users/ianschrauth/Documents/GitHub/Sprint-RMS-clone/src/rms/clone/main/UI/submain/discounts.java</file>
-            <file>file:/Users/ianschrauth/Documents/GitHub/Sprint-RMS-clone/src/rms/clone/main/UI/submain/send_feedback_agent.java</file>
-            <file>file:/Users/ianschrauth/Documents/GitHub/Sprint-RMS-clone/src/rms/clone/main/business/credit.java</file>
-            <file>file:/Users/ianschrauth/Documents/GitHub/Sprint-RMS-clone/src/rms/clone/main/UI/submain/return_phone.java</file>
-            <file>file:/Users/ianschrauth/Documents/GitHub/Sprint-RMS-clone/src/rms/clone/main/UI/submain/phone_conditions.java</file>
-            <file>file:/Users/ianschrauth/Documents/GitHub/Sprint-RMS-clone/src/rms/clone/main/UI/submain/pay_bill.java</file>
-            <file>file:/Users/ianschrauth/Documents/GitHub/Sprint-RMS-clone/src/rms/clone/main/UI/submain/search_for_service.java</file>
-            <file>file:/Users/ianschrauth/Documents/GitHub/Sprint-RMS-clone/src/rms/clone/main/UI/submain/find_item.java</file>
-            <file>file:/Users/ianschrauth/Documents/GitHub/Sprint-RMS-clone/src/rms/clone/main/UI/submain/recycle_device.java</file>
-            <file>file:/Users/ianschrauth/Documents/GitHub/Sprint-RMS-clone/src/classes/rms_clone.sql</file>
-            <file>file:/Users/ianschrauth/Documents/GitHub/Sprint-RMS-clone/src/rms/clone/main/UI/submain/StolenDevicePopup.java</file>
-            <file>file:/Users/ianschrauth/Documents/GitHub/Sprint-RMS-clone/src/rms/clone/main/UI/submain/search_customer.java</file>
-            <file>file:/Users/ianschrauth/Documents/GitHub/Sprint-RMS-clone/src/rms/clone/main/UI/submain/trade_in_phone.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>
