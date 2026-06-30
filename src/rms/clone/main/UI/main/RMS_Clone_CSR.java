@@ -2157,7 +2157,7 @@ public static DefaultTableModel cart_model;
         recycle_bttn.setEnabled(false);
         discounts_bttn.setEnabled(false);
         find_item_bttn.setEnabled(false);
-        sales_bttn.setEnabled(false);
+        trade_in_bttn.setEnabled(false);
         nss_token_bttn.setEnabled(false);
         tender_bttn.setEnabled(false);      
         
@@ -2844,7 +2844,7 @@ String input = dl_exp_txt.getText().trim();
         recycle_bttn.setEnabled(true);
         discounts_bttn.setEnabled(true);
         find_item_bttn.setEnabled(true);
-        sales_bttn.setEnabled(true);
+        trade_in_bttn.setEnabled(true);
         nss_token_bttn.setEnabled(true);
         tender_bttn.setEnabled(true);   
                 new_bttn.setEnabled(false);
@@ -3341,7 +3341,7 @@ public static void checkIfLoggedIn() {
         recycle_bttn.setEnabled(false);
         discounts_bttn.setEnabled(false);
         find_item_bttn.setEnabled(false);
-        sales_bttn.setEnabled(false);
+        trade_in_bttn.setEnabled(false);
         nss_token_bttn.setEnabled(false);
         tender_bttn.setEnabled(false);
         reset_bttn.setEnabled(false);
@@ -3889,7 +3889,7 @@ public  boolean isDateInCurrentYear(String dateString) {
         recycle_bttn.setEnabled(true);
         discounts_bttn.setEnabled(true);
         find_item_bttn.setEnabled(true);
-        sales_bttn.setEnabled(true);
+        trade_in_bttn.setEnabled(true);
         nss_token_bttn.setEnabled(true);
         tender_bttn.setEnabled(true);    
        new_bttn.setEnabled(true);
