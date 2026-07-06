@@ -4,10 +4,12 @@
  */
 package rms.clone.main.UI.manager;
 
+import java.awt.Component;
 import javax.swing.table.DefaultTableModel;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import rms.clone.main.business.vars;
 
 /**
@@ -108,7 +110,7 @@ public class search_history_employees extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     
-    
+    Component frame = null;
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
@@ -122,20 +124,29 @@ public class search_history_employees extends javax.swing.JFrame {
             ResultSet rs;
             PreparedStatement ps;
             
-            String SQL = "SELECT * FROM acct_search_history where employee_pid = ?";
+            String SQL = "SELECT     ash.*,    cl.team_number FROM acct_search_history AS ash JOIN company_logins AS cl    ON cl.PID = ash.employee_pid WHERE ash.employee_pid = ?";
             
             ps = vars.conn.prepareStatement(SQL);
             ps.setInt(1, Integer.parseInt(employee_pid_txt.getText().toString()));
             rs = ps.executeQuery();
             
             while (rs.next()) {
+                
+                if (rs.getInt("team_number") == vars.team_number) {
+                    JOptionPane.showMessageDialog(frame, "This user is not apart of your team.");
+                } else  {
+                
                   row = new Object[]{
                 rs.getDate("date_time_searched"),
                 rs.getString("search_method"),
                 rs.getString("located_account_number"),
                 rs.getBoolean("is_sensitive_account")
                   };
-            model.addRow(row);
+            model.addRow(row);     
+                }
+                
+                
+               
             
             }
             
